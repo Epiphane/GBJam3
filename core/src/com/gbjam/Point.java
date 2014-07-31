@@ -12,6 +12,10 @@ public class Point {
 		return new Point(x + other.x, y + other.y);
 	}
 	
+	public Point sub(Point other) {
+		return new Point(x - other.x, y - other.y);
+	}
+	
 	public float getX() { return x; }
 	public float getY() { return y; }
 }

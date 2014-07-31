@@ -13,7 +13,10 @@ public class PlayerInputComponent extends InputComponent {
 
 		public void execute(boolean press) {
 			Point _movement = Utility.pointFromDir(dir);
-			movement = movement.add(_movement);
+			if(press)
+				movement = movement.add(_movement);
+			else
+				movement = movement.sub(_movement);
 		}
 	}
 
@@ -28,6 +31,5 @@ public class PlayerInputComponent extends InputComponent {
 	public void update(GameObject player) {
 		player.setX(player.getX() + movement.getX());
 		player.setY(player.getY() + movement.getY());
-		movement = new Point(0, 0);
 	}
 }
