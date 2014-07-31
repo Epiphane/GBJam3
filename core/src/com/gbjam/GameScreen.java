@@ -5,21 +5,19 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen implements Screen {
-	private SpriteBatch batch;
 	private ArrayList<GameObject> entities;
 	
 	public void render(float delta) {
-		batch.begin();
+		GraphicsService.begin();
 		
 		Iterator<GameObject> iterator = entities.iterator();
 		while(iterator.hasNext()) {
 			iterator.next().update(delta);
 		}
 		
-		batch.end();
+		GraphicsService.end();
 	}
 
 	public void resize(int width, int height) {
@@ -28,12 +26,9 @@ public class GameScreen implements Screen {
 	}
 
 	public void show() {
-		batch = new SpriteBatch(10);
-		
 		entities = new ArrayList<GameObject>();
-		entities.add(new GameObject(new GraphicsComponent(batch, Art.character)));
-		
-		Gdx.app.log("Show", "GameScreen");
+		entities.add(new GameObject(new GraphicsComponent(Art.character),
+				new PhysicsComponent(), new PlayerInputComponent()));
 	}
 
 	public void hide() {

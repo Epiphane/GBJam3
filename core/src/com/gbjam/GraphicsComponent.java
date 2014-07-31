@@ -1,18 +1,15 @@
 package com.gbjam;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GraphicsComponent {
-	private SpriteBatch batch;
 	private Texture texture;
 	
-	GraphicsComponent(SpriteBatch _batch, Texture _texture) {
-		batch = _batch;
+	GraphicsComponent(Texture _texture) {
 		texture = _texture;
 	}
 	
-	public void render() {
-		batch.draw(texture, 0, 0, 100, 100);
+	public void render(GameObject object) {
+		GraphicsService.draw(texture, object.getX(), object.getY());
 	}
 }
