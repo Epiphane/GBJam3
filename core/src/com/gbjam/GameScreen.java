@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
 	private ArrayList<GameObject> entities;
+	
+	private class ExitCommand implements Command {
+		public void execute(boolean press) {
+			if(press)
+				Gdx.app.exit();
+		}
+	}
 	
 	public void render(float delta) {
 		GraphicsService.begin();
@@ -29,6 +37,8 @@ public class GameScreen implements Screen {
 		entities = new ArrayList<GameObject>();
 		entities.add(new GameObject(new GraphicsComponent(Art.character),
 				new PhysicsComponent(), new PlayerInputComponent()));
+		
+		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
 	}
 
 	public void hide() {
