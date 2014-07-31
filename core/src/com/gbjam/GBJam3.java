@@ -1,27 +1,31 @@
 package com.gbjam;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.io.IOException;
 
-public class GBJam3 extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+
+public class GBJam3 extends Game {
+	// Keep this constant since it's a gameboy and stuff...
+	public static final int GAME_WIDTH = 160;
+	public static final int GAME_HEIGHT = 144;
+
+	/**
+	 * Keeps track of all inputs
+	 */
+	private final Input input = new Input();
 	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
+	public void create() {
+		try {
+			Art.load();
+			Sounds.load();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		Gdx.input.setInputProcessor(input);
+		setScreen(new GameScreen());
 	}
 }
