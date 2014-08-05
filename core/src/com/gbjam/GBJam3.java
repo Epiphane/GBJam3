@@ -3,7 +3,6 @@ package com.gbjam;
 import java.io.IOException;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.resource_mgmt.Sounds;

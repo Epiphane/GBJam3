@@ -37,9 +37,14 @@ public class GameScreen implements Screen {
 
 	public void show() {
 		entities = new ArrayList<Entity>();
-		entities.add(new Entity(new GraphicsComponent(Art.character),
-				new PlayerPhysicsComponent(), new PlayerInputComponent()));
 		
+		// Main Character
+		Entity player = new Entity(new GraphicsComponent(Art.character),
+				new PlayerPhysicsComponent(), new PlayerInputComponent());
+		player.setY(14);
+		entities.add(player);
+		
+		// Base platform
 		Entity platform = new Entity(new GraphicsComponent(Art.platform),
 				new PlatformPhysicsComponent(), null);
 		entities.add(platform);

@@ -15,7 +15,7 @@ public class PlatformPhysicsComponent extends PhysicsComponent {
 		float xw[] = { x[0] + object.getW(), x[1] + other.getW() };
 		float yh[] = { y[0] + object.getH(), y[1] + other.getH() };
 		
-		if(xw[0] >= x[1] && x[0] <= xw[1] && yh[0] >= y[1] && y[0] <= yh[1]) {
+		if(xw[0] >= x[1] && x[0] < xw[1] && yh[0] >= y[1] && y[0] < yh[1]) {
 			return true;
 		}
 		
