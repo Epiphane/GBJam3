@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 public class GraphicsService {
 	private static SpriteBatch batch;
 	
@@ -18,13 +20,13 @@ public class GraphicsService {
 		batch.begin();
 	}
 	
-	public static void draw(Texture texture, int x, int y) {
+	public static void draw(TextureRegion texture, int x, int y) {
 		if(texture != null) {
 			batch.draw(texture, x, y);
 		}
 	}
 	
-	public static void draw(Texture texture, float x, float y) {
+	public static void draw(TextureRegion texture, float x, float y) {
 		if(texture != null) {
 			batch.draw(texture, x, y);
 		}
