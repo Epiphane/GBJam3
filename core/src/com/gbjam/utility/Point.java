@@ -18,4 +18,6 @@ public class Point {
 	
 	public float getX() { return x; }
 	public float getY() { return y; }
+	public float getW() { return x; }
+	public float getH() { return y; }
 }
