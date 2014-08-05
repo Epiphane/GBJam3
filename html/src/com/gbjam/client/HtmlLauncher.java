@@ -7,13 +7,16 @@ import com.gbjam.GBJam3;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+	public static final int GAME_WIDTH = 160*2;
+	public static final int GAME_HEIGHT = 144*2;
+	
+    @Override
+    public GwtApplicationConfiguration getConfig () {
+            return new GwtApplicationConfiguration(GAME_WIDTH, GAME_HEIGHT);
+    }
 
-        @Override
-        public ApplicationListener getApplicationListener () {
-                return new GBJam3();
-        }
+    @Override
+    public ApplicationListener getApplicationListener () {
+            return new GBJam3();
+    }
 }
