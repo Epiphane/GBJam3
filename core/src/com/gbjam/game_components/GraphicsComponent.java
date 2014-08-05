@@ -2,11 +2,12 @@ package com.gbjam.game_components;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.gbjam.Entity;
+import com.gbjam.resource_mgmt.AnimationSheet;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.utility.Point;
 
 public class GraphicsComponent {
-	private TextureRegion[][] texture;
+	private TextureRegion[][] textures;
 	/** Which frame the sprite is on. */
 	private int frame = 0;
 	/** Which 'state' the sprite is in - changes on direction change / hurt or not, etc */
@@ -16,17 +17,17 @@ public class GraphicsComponent {
 	/** How many frames make up each state of the player */
 	private int[] numFrames;
 	
-	public GraphicsComponent(TextureRegion[][] _texture, int[] _numFrames) {
-		texture = _texture;
-		numFrames = _numFrames;
+	public GraphicsComponent(AnimationSheet sheet) {
+		textures = sheet.textures;
+		numFrames = sheet.numFrames;
 	}
 	
 	public Point getTextureSize() {
-		return new Point(texture.getWidth(), texture.getHeight());
+		return new Point(textures[0][0].getRegionWidth(), textures[0][0].getRegionHeight());
 	}
 	
 	public void render(Entity object) {
-		GraphicsService.draw(texture[frame][state], object.getX(), object.getY());
+		GraphicsService.draw(textures[frame][state], object.getX(), object.getY());
 		ticksSinceLastFrame++;
 	}
 	
