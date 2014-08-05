@@ -1,16 +1,17 @@
 package com.gbjam;
 
-public class GameObject {
+public class Entity {
 	private GraphicsComponent graphics;
 	private PhysicsComponent physics;
 	private InputComponent input;
-	private float x, y;
+	private float x, y, dx, dy;
 	
-	GameObject(GraphicsComponent _graphics, PhysicsComponent _physics, InputComponent _input) {
+	Entity(GraphicsComponent _graphics, PhysicsComponent _physics, InputComponent _input) {
 		graphics = _graphics;
 		physics = _physics;
 		input = _input;
 		x = y = 50;
+		dx = dy = 0;
 	}
 	
 	public void update(float delta) {
@@ -29,7 +30,11 @@ public class GameObject {
 	
 	public float getX() { return x; }
 	public float getY() { return y; }
+	public float getDX() { return dx; }
+	public float getDY() { return dy; }
 
 	public void setX(float _x) { x = _x; }
 	public void setY(float _y) { y = _y; }
+	public void setDX(float _dx) { dx = _dx; }
+	public void setDY(float _dy) { dy = _dy; }
 }

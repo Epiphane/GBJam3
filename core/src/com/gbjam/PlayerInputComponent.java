@@ -28,8 +28,8 @@ public class PlayerInputComponent extends InputComponent {
 		movement = new Point(0, 0);
 	}
 	
-	public void update(GameObject player) {
-		player.setX(player.getX() + movement.getX());
-		player.setY(player.getY() + movement.getY());
+	public void update(Entity player) {
+		player.setDX(movement.getX());
+		player.setDY(movement.getY());
 	}
 }

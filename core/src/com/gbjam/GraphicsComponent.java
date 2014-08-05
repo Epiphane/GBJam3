@@ -9,7 +9,7 @@ public class GraphicsComponent {
 		texture = _texture;
 	}
 	
-	public void render(GameObject object) {
+	public void render(Entity object) {
 		GraphicsService.draw(texture, object.getX(), object.getY());
 	}
 }

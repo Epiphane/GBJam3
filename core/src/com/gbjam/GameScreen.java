@@ -8,7 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
-	private ArrayList<GameObject> entities;
+	private ArrayList<Entity> entities;
 	
 	private class ExitCommand implements Command {
 		public void execute(boolean press) {
@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		GraphicsService.begin();
 		
-		Iterator<GameObject> iterator = entities.iterator();
+		Iterator<Entity> iterator = entities.iterator();
 		while(iterator.hasNext()) {
 			iterator.next().update(delta);
 		}
@@ -34,9 +34,9 @@ public class GameScreen implements Screen {
 	}
 
 	public void show() {
-		entities = new ArrayList<GameObject>();
-		entities.add(new GameObject(new GraphicsComponent(Art.character),
-				new PhysicsComponent(), new PlayerInputComponent()));
+		entities = new ArrayList<Entity>();
+		entities.add(new Entity(new GraphicsComponent(Art.character),
+				new PlayerPhysicsComponent(), new PlayerInputComponent()));
 		
 		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
 	}
