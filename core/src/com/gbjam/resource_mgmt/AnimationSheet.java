@@ -1,9 +1,6 @@
 package com.gbjam.resource_mgmt;
 
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 
 public class AnimationSheet {
 	public TextureRegion[][] textures;
@@ -14,12 +11,11 @@ public class AnimationSheet {
 		int xSlices = 0;
 		for (int ndx = 0; ndx < _numFrames.length; ndx++) {
 			if (_numFrames[ndx] > xSlices) {
-				xSlices = 
+				xSlices = _numFrames[ndx];
 			}
 		}
 		
-		textures = Art.split(textureName);
+		textures = Art.split(textureName, xSlices, _numFrames.length);
 		numFrames = _numFrames;
 	}
-	
 }
