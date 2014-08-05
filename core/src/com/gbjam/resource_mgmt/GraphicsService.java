@@ -1,4 +1,5 @@
-package com.gbjam;
+package com.gbjam.resource_mgmt;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

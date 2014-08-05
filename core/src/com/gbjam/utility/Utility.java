@@ -1,4 +1,5 @@
-package com.gbjam;
+package com.gbjam.utility;
+
 
 public class Utility {
 	public static Point pointFromDir(int direction) {

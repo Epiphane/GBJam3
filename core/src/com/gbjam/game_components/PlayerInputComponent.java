@@ -1,6 +1,11 @@
-package com.gbjam;
+package com.gbjam.game_components;
 
 import com.badlogic.gdx.Input.Keys;
+import com.gbjam.Command;
+import com.gbjam.GameObject;
+import com.gbjam.InputService;
+import com.gbjam.utility.Point;
+import com.gbjam.utility.Utility;
 
 public class PlayerInputComponent extends InputComponent {
 	private Point movement;

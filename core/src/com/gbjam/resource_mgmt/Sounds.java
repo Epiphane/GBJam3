@@ -1,4 +1,4 @@
-package com.gbjam;
+package com.gbjam.resource_mgmt;
 
 import java.io.IOException;
 

@@ -1,5 +1,8 @@
 package com.gbjam;
 
+import com.gbjam.game_components.GraphicsComponent;
+import com.gbjam.game_components.InputComponent;
+
 public class GameObject {
 	private GraphicsComponent graphics;
 	private PhysicsComponent physics;
