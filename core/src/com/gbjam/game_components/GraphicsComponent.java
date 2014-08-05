@@ -11,10 +11,14 @@ public class GraphicsComponent {
 	private int frame = 0;
 	/** Which 'state' the sprite is in - changes on direction change / hurt or not, etc */
 	private int state = 0;
-	private int ticksSinceLastFrame = 0;
+	protected int ticksSinceLastFrame = 0;
 	
-	public GraphicsComponent(TextureRegion[][] _texture) {
+	/** How many frames make up each state of the player */
+	private int[] numFrames;
+	
+	public GraphicsComponent(TextureRegion[][] _texture, int[] _numFrames) {
 		texture = _texture;
+		numFrames = _numFrames;
 	}
 	
 	public Point getTextureSize() {
@@ -24,5 +28,26 @@ public class GraphicsComponent {
 	public void render(Entity object) {
 		GraphicsService.draw(texture[frame][state], object.getX(), object.getY());
 		ticksSinceLastFrame++;
+	}
+	
+	public void incrementFrame() {
+		ticksSinceLastFrame = 0;
+		this.frame++;
+		this.frame %= this.numFrames[state];
+	}
+	
+	public void setFrame(int frame) {
+		if (this.frame != frame) {
+			this.ticksSinceLastFrame = 0;
+			this.frame = frame;
+		}
+	}
+	
+	public void setState(int state) {
+		if (this.state != state) {
+			this.ticksSinceLastFrame = 0;
+			this.state = state;
+			this.frame = 0;
+		}
 	}
 }
