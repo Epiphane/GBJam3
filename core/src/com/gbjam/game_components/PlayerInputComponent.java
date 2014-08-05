@@ -1,6 +1,11 @@
-package com.gbjam;
+package com.gbjam.game_components;
 
 import com.badlogic.gdx.Input.Keys;
+import com.gbjam.Command;
+import com.gbjam.Entity;
+import com.gbjam.InputService;
+import com.gbjam.utility.Point;
+import com.gbjam.utility.Utility;
 
 public class PlayerInputComponent extends InputComponent {
 	private Point movement;
@@ -20,7 +25,7 @@ public class PlayerInputComponent extends InputComponent {
 		}
 	}
 
-	PlayerInputComponent() {
+	public PlayerInputComponent() {
 		InputService.setKeyCallback(Keys.DPAD_UP, new DirectionCommand(0));
 		InputService.setKeyCallback(Keys.DPAD_RIGHT, new DirectionCommand(2));
 		InputService.setKeyCallback(Keys.DPAD_DOWN, new DirectionCommand(4));

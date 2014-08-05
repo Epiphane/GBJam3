@@ -6,6 +6,10 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.gbjam.game_components.GraphicsComponent;
+import com.gbjam.game_components.PlayerInputComponent;
+import com.gbjam.resource_mgmt.Art;
+import com.gbjam.resource_mgmt.GraphicsService;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities;
