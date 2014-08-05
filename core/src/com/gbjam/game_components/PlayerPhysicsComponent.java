@@ -10,12 +10,20 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 		object.setX(object.getX() + object.getDX());
 		object.setY(object.getY() + object.getDY());
 		
-		boolean canMove = true;
+		Entity collided = null;
 		Iterator<Entity> it = entities.iterator();
-		while(it.hasNext()) {
+		while(collided == null && it.hasNext()) {
 			Entity other = it.next();
-			if(other.getPhysicsComponent().collide(object, other)) {
-				canMove = false;
+			if(object != other && other.getPhysicsComponent().collide(object, other)) {
+				collided = other;
+			}
+		}
+		
+		// Step back 
+		if(collided != null) {
+			while(collided.getPhysicsComponent().collide(object, collided)) {
+				object.setX(object.getX() - object.getDX());
+				object.setY(object.getY() - object.getDY());
 			}
 		}
 	}
