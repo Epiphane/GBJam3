@@ -6,10 +6,8 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.gbjam.game_components.GraphicsComponent;
-import com.gbjam.game_components.PlayerInputComponent;
-import com.gbjam.resource_mgmt.Art;
-import com.gbjam.resource_mgmt.GraphicsService;
+import com.gbjam.game_components.*;
+import com.gbjam.resource_mgmt.*;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities;
@@ -26,7 +24,7 @@ public class GameScreen implements Screen {
 		
 		Iterator<Entity> iterator = entities.iterator();
 		while(iterator.hasNext()) {
-			iterator.next().update(delta);
+			iterator.next().update(delta, entities);
 		}
 		
 		GraphicsService.end();
@@ -41,6 +39,10 @@ public class GameScreen implements Screen {
 		entities = new ArrayList<Entity>();
 		entities.add(new Entity(new GraphicsComponent(Art.character),
 				new PlayerPhysicsComponent(), new PlayerInputComponent()));
+		
+		Entity platform = new Entity(new GraphicsComponent(Art.platform),
+				new PlatformPhysicsComponent(), null);
+		entities.add(platform);
 		
 		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
 	}
