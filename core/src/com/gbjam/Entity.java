@@ -2,6 +2,7 @@ package com.gbjam;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.*;
 import com.gbjam.utility.Point;
 
@@ -13,6 +14,7 @@ public class Entity {
 	private GeneratorComponent generator;
 	
 	/** Physics-related values */
+	private Polygon polygon;
 	private float x, y, dx, dy;
 	private Point size;
 	
@@ -71,19 +73,38 @@ public class Entity {
 	public InputComponent getInputComponent() { return input; }
 	public GeneratorComponent getGeneratorComponent() { return generator; }
 	
-	public float getX() { return x; }
-	public float getY() { return y; }
+	public float getX() { return polygon != null ? polygon.getX() : x; }
+	public float getY() { return polygon != null ? polygon.getY() : y; }
 	public float getW() { return size.getW(); }
 	public float getH() { return size.getH(); }
 	public float getDX() { return dx; }
 	public float getDY() { return dy; }
 	public boolean generate() { return generate; }
 
-	public void setX(float _x) { x = _x; }
-	public void setY(float _y) { y = _y; }
+	public void setX(float _x) {
+		x = _x; 
+		if (polygon != null)
+			polygon.setPosition(x, y);
+	}
+	public void setY(float _y) { 
+		y = _y;
+		if (polygon != null)
+			polygon.setPosition(x, y);
+	}
 	public void setW(float _w) { size = new Point(_w, size.getH()); }
 	public void setH(float _h) { size = new Point(size.getW(), _h); }
 	public void setDX(float _dx) { dx = _dx; }
 	public void setDY(float _dy) { dy = _dy; }
 	public void setGenerate(boolean _generate) { generate = _generate; }
+
+	public void setPolygon(Polygon poly) {
+		this.polygon = poly;
+		x = poly.getOriginX();
+		y = poly.getOriginY();
+		size = new Point(poly.getBoundingRectangle().width, poly.getBoundingRectangle().height);
+	}
+
+	public Polygon getPolygon() {
+		return this.polygon;
+	}
 }
