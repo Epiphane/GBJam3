@@ -26,4 +26,9 @@ public class GBJam3 extends Game {
 
 		setScreen(new GameScreen());
 	}
+	
+	public void dispose () {
+		super.dispose();
+		Sounds.dispose();
+	}
 }
