@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.GraphicsComponent;
 import com.gbjam.game_components.PlatformPhysicsComponent;
@@ -22,8 +24,9 @@ public class GameScreen implements Screen {
 	
 	private class ExitCommand implements Command {
 		public void execute(boolean press) {
-			if(press)
+			if(press) {
 				Gdx.app.exit();
+			}
 		}
 	}
 	
@@ -45,12 +48,9 @@ public class GameScreen implements Screen {
 		GraphicsService.end();
 	}
 
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void show() {
+		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+		
 		entities = new ArrayList<Entity>();
 		newEntities = new ArrayList<Entity>();
 		
@@ -79,7 +79,14 @@ public class GameScreen implements Screen {
 		platform.setPolygon(debugPolyPlatform);
 		platform.setY(0);
 		
-		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
+		GraphicsService.loadMapRenderer(new MapRenderer(map, 1 / 16.0f));
+		
+	}
+
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
 	}
 	
 	public void addEntity(Entity entity) {
