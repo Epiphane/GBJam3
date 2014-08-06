@@ -14,4 +14,8 @@ public class PhysicsComponent {
 	public boolean collide(Entity object, Entity other) {
 		return Intersector.overlapConvexPolygons(object.getPolygon(), other.getPolygon());
 	}
+	
+	public boolean bottomFoot(Entity object) {
+		return false;
+	}
 }

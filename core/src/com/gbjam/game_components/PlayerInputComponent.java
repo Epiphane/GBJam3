@@ -10,6 +10,7 @@ import com.gbjam.utility.Utility;
 public class PlayerInputComponent extends InputComponent {
 	private Point movement;
 	private boolean shoot;
+	private boolean jumping;
 	
 	private class DirectionCommand implements Command {
 		private int dir;
@@ -18,12 +19,20 @@ public class PlayerInputComponent extends InputComponent {
 			dir = _dir;
 		}
 
+		@Override
 		public void execute(boolean press) {
 			Point _movement = Utility.pointFromDir(dir);
 			if(press)
 				movement = movement.add(_movement);
 			else
 				movement = movement.sub(_movement);
+		}
+	}
+	
+	private class JumpCommand implements Command {
+		@Override
+		public void execute(boolean press) {
+			jumping = press;
 		}
 	}
 
@@ -38,7 +47,8 @@ public class PlayerInputComponent extends InputComponent {
 		InputService.setKeyCallback(Keys.DPAD_RIGHT, new DirectionCommand(2));
 		InputService.setKeyCallback(Keys.DPAD_DOWN, new DirectionCommand(4));
 		InputService.setKeyCallback(Keys.DPAD_LEFT, new DirectionCommand(6));
-		InputService.setKeyCallback(Keys.Z, new ShootCommand());
+		InputService.setKeyCallback(Keys.X, new ShootCommand());
+		InputService.setKeyCallback(Keys.Z, new JumpCommand());
 		movement = new Point(0, 0);
 	}
 	
@@ -46,5 +56,9 @@ public class PlayerInputComponent extends InputComponent {
 		player.setDX(movement.getX());
 		player.setDY(movement.getY());
 		player.setGenerate(shoot);
+		
+		if (jumping && player.getCanJump()) {
+			player.setDY(5);
+		}
 	}
 }

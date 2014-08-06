@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.gbjam.Entity;
 
-public class PlayerPhysicsComponent extends PhysicsComponent {
+public class PlayerPhysicsComponent extends CharacterPhysicsComponent {
 	public void update(Entity object, ArrayList<Entity> entities) {
 		object.setX(object.getX() + object.getDX());
 		object.setY(object.getY() + object.getDY());
@@ -22,8 +22,11 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 		// Step back 
 		if(collided != null) {
 			while(collided.getPhysicsComponent().collide(object, collided)) {
-				object.setX(object.getX() - object.getDX());
-				object.setY(object.getY() - object.getDY());
+				if (object.getDX() == 0 && object.getDY() == 0) 
+					break; // You're going nowhere sonny
+				
+				object.setX(object.getX() - object.getDX() * 0.05f);
+				object.setY(object.getY() - object.getDY() * 0.05f);
 			}
 		}
 	}

@@ -22,6 +22,10 @@ public class Entity {
 	private boolean generate;
 	private int genTime;
 	
+	/** Is the user tryna jump? */
+	private boolean jumping;
+	private boolean canJump;
+	
 	public Entity(GraphicsComponent _graphics, PhysicsComponent _physics, InputComponent _input, 
 			GeneratorComponent _generator) {
 		graphics = _graphics;
@@ -84,6 +88,7 @@ public class Entity {
 	public float getDX() { return dx; }
 	public float getDY() { return dy; }
 	public boolean generate() { return generate; }
+	public boolean getCanJump() { return canJump; }
 
 	public void setX(float _x) {
 		x = _x; 
@@ -100,6 +105,8 @@ public class Entity {
 	public void setDX(float _dx) { dx = _dx; }
 	public void setDY(float _dy) { dy = _dy; }
 	public void setGenerate(boolean _generate) { generate = _generate; }
+	public void setTrynaJump(boolean _jumping) { jumping = _jumping; }
+	public void setCanJump(boolean _canJump) { canJump = _canJump; }
 
 	public void setPolygon(Polygon poly) {
 		this.polygon = poly;

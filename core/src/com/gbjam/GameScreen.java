@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
 		debugPolyPlayer.setOrigin(0, 0);
 		player.setPolygon(debugPolyPlayer);
-		player.setY(14);
+		player.setY(18);
 		
 		// Base platform
 		Entity platform = new Entity(new GraphicsComponent(Art.platform),
