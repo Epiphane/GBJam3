@@ -6,8 +6,16 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.gbjam.game_components.*;
-import com.gbjam.resource_mgmt.*;
+import com.badlogic.gdx.math.Polygon;
+import com.gbjam.game_components.BulletPhysicsComponent;
+import com.gbjam.game_components.GraphicsComponent;
+import com.gbjam.game_components.PlatformPhysicsComponent;
+import com.gbjam.game_components.PlayerGraphicsComponent;
+import com.gbjam.game_components.PlayerInputComponent;
+import com.gbjam.game_components.PlayerPhysicsComponent;
+import com.gbjam.game_components.WeaponGeneratorComponent;
+import com.gbjam.resource_mgmt.Art;
+import com.gbjam.resource_mgmt.GraphicsService;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities, newEntities;
@@ -54,13 +62,22 @@ public class GameScreen implements Screen {
 		Entity player = new Entity(new PlayerGraphicsComponent(Art.character),
 				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
 				new WeaponGeneratorComponent(this, bullet, 20));
-		player.setY(14);
 		addEntity(player);
+		
+		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
+		debugPolyPlayer.setOrigin(0, 0);
+		player.setPolygon(debugPolyPlayer);
+		player.setY(14);
 		
 		// Base platform
 		Entity platform = new Entity(new GraphicsComponent(Art.platform),
 				new PlatformPhysicsComponent(), null, null);
 		addEntity(platform);
+		
+		Polygon debugPolyPlatform = new Polygon(new float[]{0, 0, 160, 0, 160, 14, 0, 14});
+		debugPolyPlatform.setOrigin(0, 0);
+		platform.setPolygon(debugPolyPlatform);
+		platform.setY(0);
 		
 		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
 	}

@@ -3,6 +3,7 @@ package com.gbjam.game_components;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Intersector;
 import com.gbjam.Entity;
 
 public class PhysicsComponent {
@@ -11,6 +12,6 @@ public class PhysicsComponent {
 	}
 	
 	public boolean collide(Entity object, Entity other) {
-		return false;
+		return Intersector.overlapConvexPolygons(object.getPolygon(), other.getPolygon());
 	}
 }
