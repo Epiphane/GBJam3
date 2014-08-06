@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
 	public static AnimationSheet character, platform;
-	public static AnimationSheet fly;
+	public static AnimationSheet fly, bullet;
 	
 	static public void load() throws IOException {
-		character = new AnimationSheet("character.png", 1);
+		character = new AnimationSheet("knight.png", 1, 1);
+		bullet = new AnimationSheet("bullet.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);

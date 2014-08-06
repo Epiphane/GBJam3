@@ -9,6 +9,8 @@ import com.gbjam.utility.Utility;
 
 public class PlayerInputComponent extends InputComponent {
 	private Point movement;
+	private boolean shoot;
+	
 	private class DirectionCommand implements Command {
 		private int dir;
 		
@@ -25,16 +27,24 @@ public class PlayerInputComponent extends InputComponent {
 		}
 	}
 
+	private class ShootCommand implements Command {
+		public void execute(boolean press) {
+			shoot = press;
+		}
+	}
+
 	public PlayerInputComponent() {
 		InputService.setKeyCallback(Keys.DPAD_UP, new DirectionCommand(0));
 		InputService.setKeyCallback(Keys.DPAD_RIGHT, new DirectionCommand(2));
 		InputService.setKeyCallback(Keys.DPAD_DOWN, new DirectionCommand(4));
 		InputService.setKeyCallback(Keys.DPAD_LEFT, new DirectionCommand(6));
+		InputService.setKeyCallback(Keys.Z, new ShootCommand());
 		movement = new Point(0, 0);
 	}
 	
 	public void update(Entity player) {
 		player.setDX(movement.getX());
 		player.setDY(movement.getY());
+		player.setGenerate(shoot);
 	}
 }

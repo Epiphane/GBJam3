@@ -10,7 +10,7 @@ import com.gbjam.game_components.*;
 import com.gbjam.resource_mgmt.*;
 
 public class GameScreen implements Screen {
-	private ArrayList<Entity> entities;
+	private ArrayList<Entity> entities, newEntities;
 	
 	private class ExitCommand implements Command {
 		public void execute(boolean press) {
@@ -22,9 +22,16 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		GraphicsService.begin();
 		
+		// Add new entities to list of entities to compute
+		// (To avoid Concurrent Modification)
+		while(newEntities.size() > 0) {
+			entities.add(newEntities.remove(0));
+		}
+		
 		Iterator<Entity> iterator = entities.iterator();
 		while(iterator.hasNext()) {
-			iterator.next().update(delta, entities);
+			Entity entity = iterator.next();
+			entity.update(delta, entities);
 		}
 		
 		GraphicsService.end();
@@ -37,19 +44,29 @@ public class GameScreen implements Screen {
 
 	public void show() {
 		entities = new ArrayList<Entity>();
+		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity player = new Entity(new PlayerGraphicsComponent(Art.fly),
-				new PlayerPhysicsComponent(), new PlayerInputComponent());
+		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), new BulletPhysicsComponent(),
+				null, null);
+		bullet.setDX(3);
+		
+		Entity player = new Entity(new PlayerGraphicsComponent(Art.character),
+				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
+				new WeaponGeneratorComponent(this, bullet, 20));
 		player.setY(14);
-		entities.add(player);
+		addEntity(player);
 		
 		// Base platform
 		Entity platform = new Entity(new GraphicsComponent(Art.platform),
-				new PlatformPhysicsComponent(), null);
-		entities.add(platform);
+				new PlatformPhysicsComponent(), null, null);
+		addEntity(platform);
 		
 		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+	}
+	
+	public void addEntity(Entity entity) {
+		newEntities.add(entity);
 	}
 
 	public void hide() {
