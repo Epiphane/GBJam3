@@ -6,6 +6,10 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.GraphicsComponent;
@@ -22,8 +26,9 @@ public class GameScreen implements Screen {
 	
 	private class ExitCommand implements Command {
 		public void execute(boolean press) {
-			if(press)
+			if(press) {
 				Gdx.app.exit();
+			}
 		}
 	}
 	
@@ -45,12 +50,9 @@ public class GameScreen implements Screen {
 		GraphicsService.end();
 	}
 
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void show() {
+		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+		
 		entities = new ArrayList<Entity>();
 		newEntities = new ArrayList<Entity>();
 		
@@ -72,14 +74,28 @@ public class GameScreen implements Screen {
 		// Base platform
 		Entity platform = new Entity(new GraphicsComponent(Art.platform),
 				new PlatformPhysicsComponent(), null, null);
-		addEntity(platform);
+		//addEntity(platform);
 		
 		Polygon debugPolyPlatform = new Polygon(new float[]{0, 0, 160, 0, 160, 14, 0, 14});
 		debugPolyPlatform.setOrigin(0, 0);
 		platform.setPolygon(debugPolyPlatform);
 		platform.setY(0);
 		
-		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
+		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
+		
+		platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
+		for(MapObject object : map.getLayers().get(1).getObjects()) {
+			if(object instanceof PolygonMapObject) {
+				platform.setPolygon(((PolygonMapObject) object).getPolygon());
+				addEntity(platform);
+			}
+		}
+	}
+
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
 	}
 	
 	public void addEntity(Entity entity) {
