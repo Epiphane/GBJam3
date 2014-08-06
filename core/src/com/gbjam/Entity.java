@@ -33,7 +33,10 @@ public class Entity {
 		genTime = 0;
 		x = y = 0;
 		dx = dy = 0;
-		size = graphics.getTextureSize();
+		
+		if(graphics != null) {
+			size = graphics.getTextureSize();
+		}
 	}
 	
 	public Entity clone() {
@@ -46,6 +49,7 @@ public class Entity {
 		newEntity.size = size;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
+		newEntity.polygon = polygon;
 		
 		return newEntity;
 	}
