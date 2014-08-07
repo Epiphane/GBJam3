@@ -40,6 +40,7 @@ public class Entity {
 		
 		if(graphics != null) {
 			size = graphics.getTextureSize();
+			polygon = new Polygon(new float[] {0, 0, size.getW(), 0, size.getW(), size.getH(), 0, size.getH()});
 		}
 	}
 	
@@ -53,7 +54,8 @@ public class Entity {
 		newEntity.size = size;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
-		newEntity.polygon = polygon;
+		newEntity.polygon = new Polygon(polygon.getVertices());
+		newEntity.polygon.setPosition(x, y);
 		
 		return newEntity;
 	}
@@ -91,7 +93,7 @@ public class Entity {
 	public boolean getCanJump() { return canJump; }
 
 	public void setX(float _x) {
-		x = _x; 
+		x = _x;
 		if (polygon != null)
 			polygon.setPosition(x, y);
 	}
