@@ -14,6 +14,9 @@ public class Entity {
 	private InputComponent input;
 	private GeneratorComponent generator;
 	
+	/** Is this entity's life over? Then end it swiftly */
+	private boolean dead;
+	
 	/** Physics-related values */
 	private Polygon polygon;
 	private float x, y, dx, dy;
@@ -38,6 +41,7 @@ public class Entity {
 		input = _input;
 		generator = _generator;
 
+		dead = false;
 		generate = false;
 		genTime = 0;
 		x = y = 0;
@@ -102,6 +106,7 @@ public class Entity {
 	public boolean generate() { return generate; }
 	public boolean getCanJump() { return canJump; }
 	public boolean getOnGround() { return onGround; }
+	public boolean dead() { return dead; }
 
 	public void setX(float _x) {
 		x = _x;
@@ -121,6 +126,7 @@ public class Entity {
 	public void setTrynaJump(boolean _jumping) { jumping = _jumping; }
 	public void setCanJump(boolean _canJump) { canJump = _canJump; }
 	public void setOnGround(boolean _onGround) { onGround = _onGround; canJump = true; }
+	public void setDead(boolean _dead) { dead = _dead; }
 
 	public void setPolygon(Polygon poly) {
 		this.polygon = poly;

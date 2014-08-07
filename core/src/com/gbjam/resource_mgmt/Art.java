@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
-	public static AnimationSheet character, platform;
+	public static AnimationSheet character, platform, slime;
 	public static AnimationSheet fly, bullet;
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 1, 1);
+		slime = new AnimationSheet("slime.png", 1, 1);
 		bullet = new AnimationSheet("bullet.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
 		

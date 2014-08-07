@@ -10,10 +10,10 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.CollisionComponent;
 import com.gbjam.game_components.CollisionComponent.ColliderType;
+import com.gbjam.game_components.EnemyInputComponent;
 import com.gbjam.game_components.GraphicsComponent;
 import com.gbjam.game_components.PlatformPhysicsComponent;
 import com.gbjam.game_components.PlayerCollisionComponent;
@@ -43,13 +43,21 @@ public class GameScreen implements Screen {
 		// Add new entities to list of entities to compute
 		// (To avoid Concurrent Modification)
 		while(newEntities.size() > 0) {
-			entities.add(newEntities.remove(0));
+			entities.add(0, newEntities.remove(0));
 		}
 		
+		ArrayList<Entity> toRemove = new ArrayList<Entity>();
 		Iterator<Entity> iterator = entities.iterator();
 		while(iterator.hasNext()) {
 			Entity entity = iterator.next();
 			entity.update(delta, entities);
+			if(entity.dead()) {
+				toRemove.add(entity);
+			}
+		}
+		
+		for(Entity e : toRemove) {
+			entities.remove(e);
 		}
 		
 		GraphicsService.end();
@@ -72,10 +80,16 @@ public class GameScreen implements Screen {
 				new WeaponGeneratorComponent(this, bullet, 20));
 		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
 		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
+		player.setX(50);
+		player.setY(8.01f);
 		addEntity(player);
 		
-		player.setX(50);
-		player.setY(18);
+		Entity slime = new Entity(new PlayerGraphicsComponent(Art.slime),
+				new PlayerCollisionComponent(ColliderType.PLAYER),
+				new PlayerPhysicsComponent(), new EnemyInputComponent(), null);
+		slime.setX(130);
+		slime.setY(8.01f);
+		addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
