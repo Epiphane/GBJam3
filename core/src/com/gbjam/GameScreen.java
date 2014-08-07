@@ -80,6 +80,8 @@ public class GameScreen implements Screen {
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
+				platform.setX(Float.parseFloat(object.getProperties().get("x").toString()));
+				platform.setY(Float.parseFloat(object.getProperties().get("y").toString()));
 				addEntity(platform.clone());
 			}
 		}
