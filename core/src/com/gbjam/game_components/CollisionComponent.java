@@ -22,8 +22,7 @@ public class CollisionComponent {
 		PLATFORM,
 		ENEMY,
 		PLAYER,
-		POWERUP,
-		NUM_COLLIDERS
+		POWERUP
 	}
 	
 	protected boolean[] filter;

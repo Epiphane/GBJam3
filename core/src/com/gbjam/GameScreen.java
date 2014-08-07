@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.AIInputComponent;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.CollisionComponent;
@@ -81,6 +82,7 @@ public class GameScreen implements Screen {
 				new WeaponGeneratorComponent(this, bullet, 20));
 		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
 		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
+		player.setPolygon(new Polygon(new float[] {6, 0, 6, 20, 18, 20, 18, 0}));
 		player.setX(50);
 		player.setY(8.01f);
 		addEntity(player);
@@ -88,6 +90,7 @@ public class GameScreen implements Screen {
 		Entity slime = new Entity(new PlayerGraphicsComponent(Art.slime),
 				new WalkingCollisionComponent(ColliderType.ENEMY),
 				new PlayerPhysicsComponent(), new AIInputComponent(), null);
+		slime.setPolygon(new Polygon(new float[] {1, 0, 1, 12, 15, 12, 15, 0}));
 		slime.setX(130);
 		slime.setY(8.01f);
 		addEntity(slime);

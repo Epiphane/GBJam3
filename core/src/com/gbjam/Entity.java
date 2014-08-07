@@ -118,8 +118,6 @@ public class Entity {
 		if (polygon != null)
 			polygon.setPosition(x, y);
 	}
-	public void setW(float _w) { size = new Point(_w, size.getH()); }
-	public void setH(float _h) { size = new Point(size.getW(), _h); }
 	public void setDX(float _dx) { dx = _dx; }
 	public void setDY(float _dy) { dy = _dy; }
 	public void setGenerate(boolean _generate) { generate = _generate; }
