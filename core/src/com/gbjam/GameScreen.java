@@ -10,10 +10,10 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.gbjam.game_components.AIInputComponent;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.CollisionComponent;
 import com.gbjam.game_components.CollisionComponent.ColliderType;
-import com.gbjam.game_components.EnemyInputComponent;
 import com.gbjam.game_components.GraphicsComponent;
 import com.gbjam.game_components.PlatformPhysicsComponent;
 import com.gbjam.game_components.PlayerCollisionComponent;
@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
 		
 		Entity slime = new Entity(new PlayerGraphicsComponent(Art.slime),
 				new PlayerCollisionComponent(ColliderType.PLAYER),
-				new PlayerPhysicsComponent(), new EnemyInputComponent(), null);
+				new PlayerPhysicsComponent(), new AIInputComponent(), null);
 		slime.setX(130);
 		slime.setY(8.01f);
 		addEntity(slime);
