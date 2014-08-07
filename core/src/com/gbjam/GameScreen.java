@@ -70,6 +70,9 @@ public class GameScreen implements Screen {
 		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
 		addEntity(player);
 		
+		player.setX(50);
+		player.setY(18);
+		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		
