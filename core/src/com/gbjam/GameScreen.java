@@ -70,29 +70,14 @@ public class GameScreen implements Screen {
 		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
 		addEntity(player);
 		
-		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
-		debugPolyPlayer.setOrigin(0, 0);
-		player.setPolygon(debugPolyPlayer);
-		player.setY(18);
-		
-		// Base platform
-		Entity platform = new Entity(new GraphicsComponent(Art.platform),
-				new PlatformPhysicsComponent(), null, null);
-		//addEntity(platform);
-		
-		Polygon debugPolyPlatform = new Polygon(new float[]{0, 0, 160, 0, 160, 14, 0, 14});
-		debugPolyPlatform.setOrigin(0, 0);
-		platform.setPolygon(debugPolyPlatform);
-		platform.setY(0);
-		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		
-		platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
+		Entity platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
-				addEntity(platform);
+				addEntity(platform.clone());
 			}
 		}
 	}
