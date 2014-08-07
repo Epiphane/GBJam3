@@ -15,23 +15,17 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 	public void render(Entity object) {
 		// Do check here to see what state the entity is in (hurt, moving, star-power, whatever)
 		super.render(object);
-		
+
+		setState(0, (int) object.getDX());
 		if (object.getDX() == 0) {
-			setState(0);
-			
 			if (this.ticksSinceLastFrame >= TICKS_PER_IDLE)
 				incrementFrame();
 		}
 		else if (object.getDX() > 0) {
-			
-			setState(1);
-			
 			if (this.ticksSinceLastFrame >= TICKS_PER_WALK)
 				incrementFrame();
 		}
 		else if (object.getDX() < 0) {
-			setState(0);
-			
 			if (this.ticksSinceLastFrame >= TICKS_PER_WALK) 
 				incrementFrame();
 		}

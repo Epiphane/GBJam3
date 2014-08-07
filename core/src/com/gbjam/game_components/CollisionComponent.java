@@ -1,6 +1,7 @@
 package com.gbjam.game_components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.gbjam.Entity;
 
@@ -17,7 +18,6 @@ import com.gbjam.Entity;
  * it at all.
  */
 public class CollisionComponent {
-
 	public enum ColliderType {
 		PLATFORM,
 		ENEMY,
@@ -25,10 +25,15 @@ public class CollisionComponent {
 		POWERUP
 	}
 	
+	protected boolean[] filter;
+	
 	public ColliderType type;
 	
 	public CollisionComponent(ColliderType type_) {
 		type = type_;
+		filter = new boolean[ColliderType.values().length];
+		// By default, a component collides with everything! yayyyy
+		Arrays.fill(filter, true);
 	}
 	
 	public void update(Entity entity, ArrayList<Entity>entities) {
