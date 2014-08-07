@@ -20,6 +20,8 @@ import com.gbjam.game_components.PlayerPhysicsComponent;
 import com.gbjam.game_components.WeaponGeneratorComponent;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.GraphicsService;
+import com.gbjam.resource_mgmt.Sounds;
+import com.gbjam.utility.Point;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities, newEntities;
@@ -64,6 +66,8 @@ public class GameScreen implements Screen {
 		Entity player = new Entity(new PlayerGraphicsComponent(Art.character),
 				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
 				new WeaponGeneratorComponent(this, bullet, 20));
+		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
+		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
 		addEntity(player);
 		
 		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
