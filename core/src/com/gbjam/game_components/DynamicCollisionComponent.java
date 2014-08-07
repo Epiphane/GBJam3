@@ -20,8 +20,11 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		Polygon myPolygon = entity.getPolygon();
 		
 		for (Entity collider : entities) {
-			if (entity == collider)
+			if (entity == collider || collider.getCollisionComponent() == null)
 				continue; // Onanism is discouraged
+			
+			if (!filter[collider.getCollisionComponent().type.ordinal()])
+				continue;
 			
 			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 				// You're inside someone.  How rude.  Back out slowly.

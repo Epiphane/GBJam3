@@ -20,6 +20,7 @@ import com.gbjam.game_components.PlayerCollisionComponent;
 import com.gbjam.game_components.PlayerGraphicsComponent;
 import com.gbjam.game_components.PlayerInputComponent;
 import com.gbjam.game_components.PlayerPhysicsComponent;
+import com.gbjam.game_components.WalkingCollisionComponent;
 import com.gbjam.game_components.WeaponGeneratorComponent;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.GraphicsService;
@@ -85,7 +86,7 @@ public class GameScreen implements Screen {
 		addEntity(player);
 		
 		Entity slime = new Entity(new PlayerGraphicsComponent(Art.slime),
-				new PlayerCollisionComponent(ColliderType.PLAYER),
+				new WalkingCollisionComponent(ColliderType.ENEMY),
 				new PlayerPhysicsComponent(), new AIInputComponent(), null);
 		slime.setX(130);
 		slime.setY(8.01f);
