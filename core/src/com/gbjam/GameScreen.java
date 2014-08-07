@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), null, new BulletPhysicsComponent(),
+		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), new CollisionComponent(ColliderType.BULLET), new BulletPhysicsComponent(),
 				null, null);
 		bullet.setDX(3);
 		
