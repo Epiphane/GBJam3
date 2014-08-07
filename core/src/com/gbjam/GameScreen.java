@@ -69,6 +69,7 @@ public class GameScreen implements Screen {
 		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
 		debugPolyPlayer.setOrigin(0, 0);
 		player.setPolygon(debugPolyPlayer);
+		player.setX(50);
 		player.setY(18);
 		
 		// Base platform
@@ -88,7 +89,7 @@ public class GameScreen implements Screen {
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
-				addEntity(platform);
+				addEntity(platform.clone());
 			}
 		}
 	}
