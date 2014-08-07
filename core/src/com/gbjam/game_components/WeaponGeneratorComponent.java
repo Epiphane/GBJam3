@@ -5,8 +5,12 @@ import com.gbjam.GameScreen;
 
 public class WeaponGeneratorComponent extends GeneratorComponent {
 
-	public WeaponGeneratorComponent(GameScreen gameScreen, Entity bullet, int genTime) {
-		super(gameScreen, bullet, genTime);
+	public WeaponGeneratorComponent(GameScreen gameScreen, Entity bullet, int gen) {
+		super(gameScreen, bullet, gen);
+	}
+
+	public WeaponGeneratorComponent(GameScreen gameScreen, Entity bullet, int gen, int sound) {
+		super(gameScreen, bullet, gen, sound);
 	}
 
 	public void update(Entity other) {
@@ -18,5 +22,9 @@ public class WeaponGeneratorComponent extends GeneratorComponent {
 			template.setY(other.getY());
 		}
 		super.update(other);
+	}
+	
+	public void generate() {
+		super.generate();
 	}
 }

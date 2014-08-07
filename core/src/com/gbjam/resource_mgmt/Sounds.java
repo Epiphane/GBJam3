@@ -6,7 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public class Sounds {
-	public static final int GUN_SOUND = 0;
+	public static final int NO_SOUND = 0;
+	public static final int GUN_SOUND = 1;
 	
 	static private Sound gunSound;
 	
