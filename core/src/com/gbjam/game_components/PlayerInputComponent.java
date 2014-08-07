@@ -53,8 +53,7 @@ public class PlayerInputComponent extends InputComponent {
 	}
 	
 	public void update(Entity player) {
-		player.setDX(movement.getX());
-		player.setDY(movement.getY());
+		player.setDX(movement.getX() * 3);
 		player.setGenerate(shoot);
 		
 		if (jumping && player.getCanJump()) {

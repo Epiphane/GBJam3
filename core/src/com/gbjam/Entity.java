@@ -101,6 +101,7 @@ public class Entity {
 	public float getDY() { return dy; }
 	public boolean generate() { return generate; }
 	public boolean getCanJump() { return canJump; }
+	public boolean getOnGround() { return onGround; }
 
 	public void setX(float _x) {
 		x = _x;

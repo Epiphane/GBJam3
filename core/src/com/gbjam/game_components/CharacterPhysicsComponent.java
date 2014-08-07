@@ -7,7 +7,9 @@ public class CharacterPhysicsComponent extends PhysicsComponent {
 	@Override
 	public void update(Entity object) {
 		// If our love's insanity, why are you my gravity?
-//		object.setDY(object.getDY() - 1);
+		if (!object.getOnGround()) {
+			object.setDY(object.getDY() - 0.5f);
+		}
 		
 		object.setX(object.getX() + object.getDX());
 		object.setY(object.getY() + object.getDY());
