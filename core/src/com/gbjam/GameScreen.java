@@ -21,6 +21,7 @@ import com.gbjam.game_components.WeaponGeneratorComponent;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.resource_mgmt.Sounds;
+import com.gbjam.utility.Point;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities, newEntities;
@@ -64,23 +65,34 @@ public class GameScreen implements Screen {
 		
 		Entity player = new Entity(new PlayerGraphicsComponent(Art.character),
 				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
-				new WeaponGeneratorComponent(this, bullet, 20, Sounds.GUN_SOUND));
+				new WeaponGeneratorComponent(this, bullet, 20));
+		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
+		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
 		addEntity(player);
 		
 		Polygon debugPolyPlayer = new Polygon(new float[]{0, 0, 19, 0, 19, 27, 0, 27});
 		debugPolyPlayer.setOrigin(0, 0);
 		player.setPolygon(debugPolyPlayer);
-		player.setX(50);
 		player.setY(18);
+		
+		// Base platform
+		Entity platform = new Entity(new GraphicsComponent(Art.platform),
+				new PlatformPhysicsComponent(), null, null);
+		//addEntity(platform);
+		
+		Polygon debugPolyPlatform = new Polygon(new float[]{0, 0, 160, 0, 160, 14, 0, 14});
+		debugPolyPlatform.setOrigin(0, 0);
+		platform.setPolygon(debugPolyPlatform);
+		platform.setY(0);
 		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		
-		Entity platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
+		platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
-				addEntity(platform.clone());
+				addEntity(platform);
 			}
 		}
 	}

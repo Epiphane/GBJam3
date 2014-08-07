@@ -3,6 +3,7 @@ package com.gbjam.game_components;
 import com.gbjam.Entity;
 import com.gbjam.GameScreen;
 import com.gbjam.resource_mgmt.Sounds;
+import com.gbjam.utility.Point;
 
 /**
  * Generator Component
@@ -15,6 +16,7 @@ public class GeneratorComponent {
 	protected Entity template;
 	private int genTime, timer;
 	private int soundToPlay;
+	private Point offset;
 	
 	/**
 	 * Stores two references: the world that we'll be generating entities to,
@@ -36,6 +38,10 @@ public class GeneratorComponent {
 		soundToPlay = _soundToPlay;
 	}
 	
+	public void setOffset(Point _offset) {
+		offset = _offset;
+	}
+	
 	public void update(Entity other) {
 		if(other.generate()) {
 			if(timer <= 0) {
@@ -52,7 +58,10 @@ public class GeneratorComponent {
 		if(soundToPlay != Sounds.NO_SOUND) {
 			Sounds.playSound(soundToPlay);
 		}
-		world.addEntity(template.clone());
+		Entity clone = template.clone();
+		clone.setX(clone.getX() + offset.getX());
+		clone.setY(clone.getY() + offset.getY());
+		world.addEntity(clone);
 		timer = genTime;
 	}
 }
