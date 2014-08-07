@@ -12,8 +12,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.BulletPhysicsComponent;
+import com.gbjam.game_components.CollisionComponent;
+import com.gbjam.game_components.CollisionComponent.ColliderType;
 import com.gbjam.game_components.GraphicsComponent;
 import com.gbjam.game_components.PlatformPhysicsComponent;
+import com.gbjam.game_components.PlayerCollisionComponent;
 import com.gbjam.game_components.PlayerGraphicsComponent;
 import com.gbjam.game_components.PlayerInputComponent;
 import com.gbjam.game_components.PlayerPhysicsComponent;
@@ -59,11 +62,12 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), new BulletPhysicsComponent(),
+		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), null, new BulletPhysicsComponent(),
 				null, null);
 		bullet.setDX(3);
 		
 		Entity player = new Entity(new PlayerGraphicsComponent(Art.character),
+				new PlayerCollisionComponent(ColliderType.PLAYER),
 				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
 				new WeaponGeneratorComponent(this, bullet, 20));
 		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
@@ -76,7 +80,7 @@ public class GameScreen implements Screen {
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		
-		Entity platform = new Entity(null, new PlatformPhysicsComponent(), null, null);
+		Entity platform = new Entity(null, new CollisionComponent(ColliderType.PLATFORM), new PlatformPhysicsComponent(), null, null);
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
