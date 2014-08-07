@@ -1,11 +1,9 @@
 package com.gbjam.game_components;
 
-import java.util.ArrayList;
-
 import com.gbjam.Entity;
 
 public class BulletPhysicsComponent extends PhysicsComponent {
-	public void update(Entity object, ArrayList<Entity> entities) {
+	public void update(Entity object) {
 		object.setX(object.getX() + object.getDX());
 	}
 	
