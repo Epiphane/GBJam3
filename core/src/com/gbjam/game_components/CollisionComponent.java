@@ -29,6 +29,8 @@ public class CollisionComponent {
 	protected boolean[] filter;
 	
 	public ColliderType type;
+
+	public boolean blockedLeft, blockedRight;
 	
 	public CollisionComponent(ColliderType type_) {
 		type = type_;

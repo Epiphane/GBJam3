@@ -28,4 +28,11 @@ public class WalkingCollisionComponent extends DynamicCollisionComponent {
 			me.setDY(0);
 		}
 	}
+	
+	@Override
+	protected void bangedHeadOn(Entity me, Entity other) {
+		if (other.getCollisionComponent().type == ColliderType.PLATFORM) {
+			me.setDY(0);
+		}
+	}
 }
