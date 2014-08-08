@@ -1,9 +1,9 @@
-package com.gbjam.game_components;
+package com.gbjam.game_components.collision;
 
 import java.util.ArrayList;
 
 import com.gbjam.Entity;
-import com.gbjam.game_components.CollisionComponent.ColliderType;
+import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 
 /***
  * WOAH HUGE NOTE HERE:

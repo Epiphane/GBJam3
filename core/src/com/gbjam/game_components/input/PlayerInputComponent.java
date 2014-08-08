@@ -1,4 +1,4 @@
-package com.gbjam.game_components;
+package com.gbjam.game_components.input;
 
 import com.badlogic.gdx.Input.Keys;
 import com.gbjam.Command;

@@ -1,4 +1,4 @@
-package com.gbjam.game_components;
+package com.gbjam.game_components.physics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;

@@ -1,4 +1,4 @@
-package com.gbjam.game_components;
+package com.gbjam.game_components.collision;
 
 import java.util.ArrayList;
 
