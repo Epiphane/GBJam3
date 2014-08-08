@@ -46,6 +46,22 @@ public class DynamicCollisionComponent extends CollisionComponent {
 							entity.setY(entity.getY() - entity.getDY() * 0.05f);
 						}
 					}
+					else {
+						// Guess the Y value was our problem!
+						entity.setY(entity.getY() + entity.getDY());
+						int steps = 100;
+						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+						}
+					}
+				}
+				else {
+					// Guess the X value was our problem!
+					entity.setX(entity.getX() + entity.getDX());
+					int steps = 100;
+					while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+						entity.setX(entity.getX() - entity.getDX() * 0.05f);
+					}
 				}
 
 				// Check for unconditional collisions that don't care what direction
