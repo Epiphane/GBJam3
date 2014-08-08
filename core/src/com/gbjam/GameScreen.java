@@ -93,7 +93,7 @@ public class GameScreen implements Screen {
 		slime.setPolygon(new Polygon(new float[] {1, 0, 1, 12, 15, 12, 15, 0}));
 		slime.setX(130);
 		slime.setY(8.01f);
-		addEntity(slime);
+//		addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));

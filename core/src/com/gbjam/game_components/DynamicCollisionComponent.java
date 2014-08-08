@@ -27,11 +27,25 @@ public class DynamicCollisionComponent extends CollisionComponent {
 				continue;
 			
 			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-				// You're inside someone.  How rude.  Back out slowly.
-				int steps = 100;
-				while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-					entity.setX(entity.getX() - entity.getDX() * 0.05f);
-					entity.setY(entity.getY() - entity.getDY() * 0.05f);
+				// You're inside someone.  How rude.  Find a way out
+				
+				// First, check if we can escape horizontally and be just fine
+				entity.setX(entity.getX() - entity.getDX());
+				if (Intersector.overlapConvexPolygons(entity.getPolygon(), collider.getPolygon())) {
+					// No? Maybe we can escape vertically and be just fine
+					entity.setX(entity.getX() + entity.getDX());
+					
+					entity.setY(entity.getY() - entity.getDY());
+					if (Intersector.overlapConvexPolygons(entity.getPolygon(), collider.getPolygon())) {
+						// We're stuck doing both at a time :(
+						entity.setY(entity.getY() + entity.getDY());
+						int steps = 100;
+						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+							entity.setX(entity.getX() - entity.getDX() * 0.05f);
+							System.out.println("Bumping you back with dx of " + entity.getDX() + " And a dy of " + entity.getDY());
+							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+						}
+					}
 				}
 
 				// Check for unconditional collisions that don't care what direction
@@ -55,8 +69,8 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		float smidge = 0.2f;
 		
 		// BOTTOM
-		Point bottomRight = new Point(rect.x + rect.width, rect.y - smidge);
-		Point bottomLeft = new Point(rect.x, rect.y - smidge);
+		Point bottomRight = new Point(rect.x + rect.width - smidge, rect.y - smidge);
+		Point bottomLeft = new Point(rect.x + smidge, rect.y - smidge);
 		
 		// LEFT
 		Point leftBottom = new Point(rect.x - smidge, rect.y);

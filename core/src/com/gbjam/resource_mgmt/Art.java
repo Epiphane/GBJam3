@@ -2,6 +2,7 @@ package com.gbjam.resource_mgmt;
 
 import java.io.IOException;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -12,6 +13,7 @@ public class Art {
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 1, 1);
 		slime = new AnimationSheet("slime.png", 1, 1);
+		Gdx.app.log("AssetPath", Gdx.files.internal("slime.png").file().getAbsolutePath());
 		bullet = new AnimationSheet("bullet.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
 		
