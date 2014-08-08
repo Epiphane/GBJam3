@@ -26,7 +26,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 			if (!filter[collider.getCollisionComponent().type.ordinal()])
 				continue;
 			
-			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {\
+			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 				// You're inside someone.  How rude.  Find a way out
 				
 				// First, check if we can escape horizontally and be just fine
