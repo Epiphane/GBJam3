@@ -30,9 +30,6 @@ public class DynamicCollisionComponent extends CollisionComponent {
 			if (!filter[collider.getCollisionComponent().type.ordinal()])
 				continue;
 			
-			if(collider.getCollisionComponent().type != ColliderType.PLATFORM)
-				continue;
-			
 			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 				// You're inside someone.  How rude.  Find a way out
 				
