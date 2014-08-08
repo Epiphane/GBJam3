@@ -26,12 +26,42 @@ public class DynamicCollisionComponent extends CollisionComponent {
 			if (!filter[collider.getCollisionComponent().type.ordinal()])
 				continue;
 			
-			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-				// You're inside someone.  How rude.  Back out slowly.
-				int steps = 100;
-				while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-					entity.setX(entity.getX() - entity.getDX() * 0.05f);
-					entity.setY(entity.getY() - entity.getDY() * 0.05f);
+			if (Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {\
+				// You're inside someone.  How rude.  Find a way out
+				
+				// First, check if we can escape horizontally and be just fine
+				entity.setX(entity.getX() - entity.getDX());
+				if (Intersector.overlapConvexPolygons(entity.getPolygon(), collider.getPolygon())) {
+					// No? Maybe we can escape vertically and be just fine
+					entity.setX(entity.getX() + entity.getDX());
+					
+					entity.setY(entity.getY() - entity.getDY());
+					if (Intersector.overlapConvexPolygons(entity.getPolygon(), collider.getPolygon())) {
+						// We're stuck doing both at a time :(
+						entity.setY(entity.getY() + entity.getDY());
+						int steps = 100;
+						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+							entity.setX(entity.getX() - entity.getDX() * 0.05f);
+							System.out.println("Bumping you back with dx of " + entity.getDX() + " And a dy of " + entity.getDY());
+							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+						}
+					}
+					else {
+						// Guess the Y value was our problem!
+						entity.setY(entity.getY() + entity.getDY());
+						int steps = 100;
+						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+						}
+					}
+				}
+				else {
+					// Guess the X value was our problem!
+					entity.setX(entity.getX() + entity.getDX());
+					int steps = 100;
+					while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
+						entity.setX(entity.getX() - entity.getDX() * 0.05f);
+					}
 				}
 
 				// Check for unconditional collisions that don't care what direction
