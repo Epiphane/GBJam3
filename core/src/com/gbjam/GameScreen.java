@@ -10,23 +10,8 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.gbjam.game_components.collision.BulletCollisionComponent;
-import com.gbjam.game_components.collision.CollisionComponent;
-import com.gbjam.game_components.collision.PlayerCollisionComponent;
-import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
-import com.gbjam.game_components.generator.WeaponGeneratorComponent;
-import com.gbjam.game_components.graphics.GraphicsComponent;
-import com.gbjam.game_components.graphics.PlayerGraphicsComponent;
-import com.gbjam.game_components.input.PlayerInputComponent;
-import com.gbjam.game_components.physics.BulletPhysicsComponent;
-import com.gbjam.game_components.physics.PlatformPhysicsComponent;
-import com.gbjam.game_components.physics.PlayerPhysicsComponent;
-import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.EntityFactory;
-import com.gbjam.resource_mgmt.EntityFactory.EntityInfo;
 import com.gbjam.resource_mgmt.GraphicsService;
-import com.gbjam.resource_mgmt.Sounds;
-import com.gbjam.utility.Point;
 
 public class GameScreen implements Screen {
 	private ArrayList<Entity> entities, newEntities;
@@ -72,25 +57,20 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity bullet = new Entity(new GraphicsComponent(Art.bullet), new BulletCollisionComponent(ColliderType.BULLET), 
-				new BulletPhysicsComponent(), null, null);
-		bullet.setDX(3);
-
-		EntityInfo playerInfo = EntityFactory.getEntityInfo("player");
-		Entity player = new Entity(new PlayerGraphicsComponent(Art.getArt(playerInfo.type)),
-				new PlayerCollisionComponent(playerInfo.colliderType),
-				new PlayerPhysicsComponent(), new PlayerInputComponent(), 
-				new WeaponGeneratorComponent(this, bullet, 20));
-		player.getGeneratorComponent().setOffset(new Point(player.getW() / 2, 7));
-		player.getGeneratorComponent().setSoundToPlay(Sounds.GUN_SOUND);
+		Entity player = EntityFactory.generate("player", this);
 		player.setX(50);
-		player.setY(8.01f);
+		player.setY(8);
 		addEntity(player);
+
+		Entity slime = EntityFactory.generate("slime", this);
+		slime.setX(130);
+		slime.setY(8);
+		addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
-		
-		Entity platform = new Entity(null, new CollisionComponent(ColliderType.PLATFORM), new PlatformPhysicsComponent(), null, null);
+
+		Entity platform = EntityFactory.generate("platform", this);
 		for(MapObject object : map.getLayers().get(1).getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());

@@ -4,6 +4,76 @@
 		"colliderType": "PLAYER",
 		"type": "player",
 		"health": 150,
-		"polygon": [ 6, 0, 6, 20, 18, 20, 18, 0 ]
+		"polygon": [ 6, 0, 6, 20, 16, 20, 16, 0 ],
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.PlayerGraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.PlayerCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.PlayerPhysicsComponent"
+		},
+		"input": {
+			"class": "com.gbjam.game_components.input.PlayerInputComponent"
+		},
+		"generator": {
+			"class": "com.gbjam.game_components.generator.WeaponGeneratorComponent",
+			"genTime": 15,
+			"timer": 0,
+			"soundName": "GUN_SOUND",
+			"offset": {
+				"x": 11,
+				"y": 7
+			}
+		},
+		"template": "bullet"
+	},
+	{
+		"class": "entity",
+		"colliderType": "BULLET",
+		"type": "bullet",
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.BulletPhysicsComponent"
+		},
+		"entity": {
+			"dx": 5
+		}
+	},
+	{
+		"class": "entity",
+		"colliderType": "PLATFORM",
+		"type": "platform",
+		"collision": {
+			"class": "com.gbjam.game_components.collision.CollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.PlatformPhysicsComponent"
+		}
+	},
+	{
+		"class": "entity",
+		"colliderType": "ENEMY",
+		"type": "slime",
+		"health": 25,
+		"polygon": [ 1, 0, 1, 12, 15, 12, 15, 0 ],
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.PlayerGraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.PlayerCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.PlayerPhysicsComponent"
+		},
+		"input": {
+			"class": "com.gbjam.game_components.input.AIInputComponent"
+		}
 	}
 ]

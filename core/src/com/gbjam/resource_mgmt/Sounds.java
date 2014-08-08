@@ -22,4 +22,9 @@ public class Sounds {
 	static public void dispose() {
 		gunSound.dispose();
 	}
+
+	public static int getSound(String soundName) {
+		// TODO Auto-generated method stub
+		return GUN_SOUND;
+	}
 }

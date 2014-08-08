@@ -41,7 +41,14 @@ public class Art {
 	}
 
 	public static AnimationSheet getArt(String type) {
-		// TODO Auto-generated method stub
-		return Art.character;
+		// TODO: MAKE IT BETTER
+		if(type.equals("player"))
+			return Art.character;
+		else if(type.equals("slime"))
+			return Art.slime;
+		else if(type.equals("bullet"))
+			return Art.bullet;
+		else
+			return Art.fly;
 	}
 }

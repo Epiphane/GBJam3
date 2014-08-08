@@ -9,10 +9,6 @@ import com.gbjam.Entity;
  * i.e. subscribes to Gravity. 
  */
 public class WalkingCollisionComponent extends DynamicCollisionComponent {
-
-	public WalkingCollisionComponent(ColliderType type_) {
-		super(type_);
-	}
 	
 	@Override
 	public void update(Entity entity, ArrayList<Entity>entities) {

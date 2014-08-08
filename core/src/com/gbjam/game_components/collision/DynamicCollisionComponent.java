@@ -9,15 +9,16 @@ import com.gbjam.Entity;
 import com.gbjam.utility.Point;
 
 public class DynamicCollisionComponent extends CollisionComponent {
-	
 	private static final float TINY_FACTOR = 0.02f;
 	
-	public DynamicCollisionComponent(ColliderType type_) {
-		super(type_);
-	}
+	public DynamicCollisionComponent() {
 	
+	}
+
 	@Override
 	public void update(Entity entity, ArrayList<Entity> entities) {
+		super.update(entity, entities);
+		
 		blockedLeft = blockedRight = false;
 		
 		// Check if the entity is currently inside anything
@@ -65,6 +66,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 					while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 						entity.setX(entity.getX() - entity.getDX() * TINY_FACTOR);
 					}
+					System.out.println("STOP IT");
 				}
 
 				// Check for unconditional collisions that don't care what direction
@@ -78,7 +80,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		
 		// Check feet to see if we are stomping on someone / brushing up against them
 		checkFeet(entity, entities);
-	}	
+	}
 	
 	private void checkFeet(Entity entity, ArrayList<Entity>entities) {
 		Rectangle rect = entity.getPolygon().getBoundingRectangle();
@@ -146,18 +148,18 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	protected void bumpedWithRightSide(Entity me, Entity collider) {
 		// override me!
 		blockedRight = true;
-//		System.out.println("hit right");
+		System.out.println("hit right");
 	}
 
 	protected void bangedHeadOn(Entity me, Entity collider) {
 		// override me!
-//		System.out.println("hit head");
+		System.out.println("hit head");
 	}
 
 	protected void bumpedWithLeftSide(Entity me, Entity collider) {
 		// override me!
 		blockedLeft = true;
-//		System.out.println("head left");
+		System.out.println("head left");
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {

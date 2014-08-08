@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.*;
 import com.gbjam.game_components.collision.CollisionComponent;
-import com.gbjam.game_components.graphics.GeneratorComponent;
+import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
@@ -25,7 +25,6 @@ public class Entity {
 	/** Physics-related values */
 	private Polygon polygon;
 	private float x, y, dx, dy;
-	private Point size;
 
 	/** Used by GeneratorComponent - do we need to generate an object? */
 	private boolean generate;
@@ -37,8 +36,13 @@ public class Entity {
 
 	/** Standing on platform (so not affected by gravity) */
 	private boolean onGround;
+	
+	private boolean initialized;
+	
+	public Entity() {
+	}
 
-	public Entity(GraphicsComponent _graphics, CollisionComponent _collision,
+	public void init(GraphicsComponent _graphics, CollisionComponent _collision,
 			PhysicsComponent _physics, InputComponent _input,
 			GeneratorComponent _generator) {
 		graphics = _graphics;
@@ -47,32 +51,31 @@ public class Entity {
 		input = _input;
 		generator = _generator;
 
-		dead = false;
-		generate = false;
-		genTime = 0;
-		x = y = 0;
-		dx = dy = 0;
-
-		if (graphics != null) {
-			size = graphics.getTextureSize();
+		if (graphics != null && polygon == null) {
+			Point size = graphics.getTextureSize();
 			polygon = new Polygon(new float[] { 0, 0, size.getW(), 0,
 					size.getW(), size.getH(), 0, size.getH() });
 		}
+		
+		initialized = true;
 	}
+	
+	public boolean initialized() { return initialized; }
 
 	public Entity clone() {
-		Entity newEntity = new Entity(graphics, collision, physics, input,
-				generator);
+		Entity newEntity = new Entity();
+		newEntity.init(graphics, collision, physics, input, generator);
 
 		newEntity.x = x;
 		newEntity.y = y;
 		newEntity.dx = dx;
 		newEntity.dy = dy;
-		newEntity.size = size;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
-		newEntity.polygon = new Polygon(polygon.getVertices());
-		newEntity.polygon.setPosition(x, y);
+		if(polygon != null) {
+			newEntity.polygon = new Polygon(polygon.getVertices());
+			newEntity.polygon.setPosition(x, y);
+		}
 
 		return newEntity;
 	}
@@ -125,14 +128,6 @@ public class Entity {
 
 	public float getY() {
 		return polygon != null ? polygon.getY() : y;
-	}
-
-	public float getW() {
-		return size.getW();
-	}
-
-	public float getH() {
-		return size.getH();
 	}
 
 	public float getDX() {
@@ -202,10 +197,11 @@ public class Entity {
 
 	public void setPolygon(Polygon poly) {
 		this.polygon = poly;
-		x = poly.getOriginX();
-		y = poly.getOriginY();
-		size = new Point(poly.getBoundingRectangle().width,
-				poly.getBoundingRectangle().height);
+
+		if(graphics != null) {
+			float vertices[] = poly.getVertices();
+			graphics.setTextureOffset(new Point(vertices[0], vertices[1]));
+		}
 	}
 
 	public Polygon getPolygon() {

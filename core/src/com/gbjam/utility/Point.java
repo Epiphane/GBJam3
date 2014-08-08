@@ -3,6 +3,10 @@ package com.gbjam.utility;
 public class Point {
 	private float x, y;
 	
+	public Point() {
+	
+	}
+	
 	public Point(float _x, float _y) {
 		x = _x;
 		y = _y;
@@ -20,4 +24,5 @@ public class Point {
 	public float getY() { return y; }
 	public float getW() { return x; }
 	public float getH() { return y; }
+	public String toString() { return x + ", " + y; }
 }

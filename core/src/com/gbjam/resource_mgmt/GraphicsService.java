@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Polygon;
 import com.gbjam.GBJam3;
 import com.gbjam.MapRenderer;
 
@@ -14,6 +17,7 @@ public class GraphicsService {
 	
 	private static OrthographicCamera camera;
 	private static MapRenderer renderer;
+	private static ShapeRenderer shapeRenderer;
 	
 	public static void load() {
 		batch = new SpriteBatch(10);
@@ -21,6 +25,9 @@ public class GraphicsService {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GBJam3.GAME_WIDTH, GBJam3.GAME_HEIGHT);
 		camera.update();
+
+		shapeRenderer = new ShapeRenderer(20);
+		shapeRenderer.setColor(1, 0, 0, 1);
 	}
 	
 	public static void loadMapRenderer(MapRenderer _renderer) {
@@ -38,6 +45,8 @@ public class GraphicsService {
 		renderer.setView(camera);
 		renderer.render();
 		batch.begin();
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Line);
 	}
 	
 	public static void draw(TextureRegion texture, int x, int y) {
@@ -52,12 +61,17 @@ public class GraphicsService {
 		}
 	}
 	
+	public static void drawRect(float[] v) {
+		shapeRenderer.rect(v[0], v[1], v[2] - v[0], v[3] - v[1]);
+	}
+	
 	public OrthographicCamera getCamera() {
 		return camera;
 	}
 
 	public static void end() {
 		batch.end();
+		shapeRenderer.end();
 	}
 }
 
