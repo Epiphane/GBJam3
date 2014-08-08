@@ -16,6 +16,8 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	
 	@Override
 	public void update(Entity entity, ArrayList<Entity> entities) {
+		blockedLeft = blockedRight = false;
+		
 		// Check if the entity is currently inside anything
 		Polygon myPolygon = entity.getPolygon();
 		
@@ -42,7 +44,6 @@ public class DynamicCollisionComponent extends CollisionComponent {
 						int steps = 100;
 						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 							entity.setX(entity.getX() - entity.getDX() * 0.05f);
-							System.out.println("Bumping you back with dx of " + entity.getDX() + " And a dy of " + entity.getDY());
 							entity.setY(entity.getY() - entity.getDY() * 0.05f);
 						}
 					}
@@ -93,14 +94,17 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		Point leftTop = new Point(rect.x - smidge, rect.y + rect.height);
 		
 		// TOP
-		Point topLeft = new Point(rect.x, rect.y + rect.height + smidge);
-		Point topRight = new Point(rect.x + rect.width, rect.y + rect.height + smidge);
+		Point topLeft = new Point(rect.x + smidge, rect.y + rect.height + smidge);
+		Point topRight = new Point(rect.x + rect.width - smidge, rect.y + rect.height + smidge);
 		
 		// RIGHT
 		Point rightTop = new Point(rect.x + rect.width + smidge, rect.y + rect.height);
 		Point rightBottom = new Point(rect.x + rect.width + smidge, rect.y);
 		
 		for (Entity collider : entities) {
+			if (entity == collider || collider.getCollisionComponent() == null)
+				continue;
+			
 			Polygon collideGon = collider.getPolygon();
 			
 			// BUTT
@@ -138,6 +142,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	
 	protected void bumpedWithRightSide(Entity me, Entity collider) {
 		// override me!
+		blockedRight = true;
 	}
 
 	protected void bangedHeadOn(Entity me, Entity collider) {
@@ -146,6 +151,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 
 	protected void bumpedWithLeftSide(Entity me, Entity collider) {
 		// override me!
+		blockedLeft = true;
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {
