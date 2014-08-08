@@ -10,8 +10,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Polygon;
-import com.gbjam.game_components.AIInputComponent;
 import com.gbjam.game_components.BulletCollisionComponent;
 import com.gbjam.game_components.BulletPhysicsComponent;
 import com.gbjam.game_components.CollisionComponent;
@@ -22,7 +20,6 @@ import com.gbjam.game_components.PlayerCollisionComponent;
 import com.gbjam.game_components.PlayerGraphicsComponent;
 import com.gbjam.game_components.PlayerInputComponent;
 import com.gbjam.game_components.PlayerPhysicsComponent;
-import com.gbjam.game_components.WalkingCollisionComponent;
 import com.gbjam.game_components.WeaponGeneratorComponent;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.EntityFactory;
@@ -89,14 +86,6 @@ public class GameScreen implements Screen {
 		player.setX(50);
 		player.setY(8.01f);
 		addEntity(player);
-		
-		Entity slime = new Entity(new PlayerGraphicsComponent(Art.slime),
-				new WalkingCollisionComponent(ColliderType.ENEMY),
-				new PlayerPhysicsComponent(), new AIInputComponent(), null);
-		slime.setPolygon(new Polygon(new float[] {1, 0, 1, 12, 15, 12, 15, 0}));
-		slime.setX(130);
-		slime.setY(8.01f);
-		//addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
