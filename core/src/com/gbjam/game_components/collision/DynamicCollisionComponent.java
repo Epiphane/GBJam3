@@ -83,27 +83,25 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	}
 	
 	private void checkFeet(Entity entity, ArrayList<Entity>entities) {
-		Rectangle rect = entity.getPolygon().getBoundingRectangle();
-		rect.setX(entity.getPolygon().getX());
-		rect.setY(entity.getPolygon().getY());
+		float v[] = entity.getPolygon().getTransformedVertices();
 		
 		float smidge = 0.2f;
 		
 		// BOTTOM
-		Point bottomRight = new Point(rect.x + rect.width - smidge, rect.y - smidge);
-		Point bottomLeft = new Point(rect.x + smidge, rect.y - smidge);
+		Point bottomRight = new Point(v[4] - smidge, v[1] - smidge);
+		Point bottomLeft = new Point(v[0] + smidge, v[1] - smidge);
 		
 		// LEFT
-		Point leftBottom = new Point(rect.x - smidge, rect.y);
-		Point leftTop = new Point(rect.x - smidge, rect.y + rect.height);
+		Point leftBottom = new Point(v[0] - smidge, v[1]);
+		Point leftTop = new Point(v[0] - smidge, v[5]);
 		
 		// TOP
-		Point topLeft = new Point(rect.x + smidge, rect.y + rect.height + smidge);
-		Point topRight = new Point(rect.x + rect.width - smidge, rect.y + rect.height + smidge);
+		Point topLeft = new Point(v[0] + smidge, v[5] + smidge);
+		Point topRight = new Point(v[4] - smidge, v[5] + smidge);
 		
 		// RIGHT
-		Point rightTop = new Point(rect.x + rect.width + smidge, rect.y + rect.height);
-		Point rightBottom = new Point(rect.x + rect.width + smidge, rect.y);
+		Point rightTop = new Point(v[4] + smidge, v[5]);
+		Point rightBottom = new Point(v[4] + smidge, v[1]);
 		
 		for (Entity collider : entities) {
 			if (entity == collider || collider.getCollisionComponent() == null)
