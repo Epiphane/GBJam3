@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.*;
+import com.gbjam.game_components.collision.CollisionComponent;
+import com.gbjam.game_components.graphics.GeneratorComponent;
+import com.gbjam.game_components.graphics.GraphicsComponent;
+import com.gbjam.game_components.input.InputComponent;
+import com.gbjam.game_components.physics.PhysicsComponent;
 import com.gbjam.utility.Point;
 
 public class Entity {

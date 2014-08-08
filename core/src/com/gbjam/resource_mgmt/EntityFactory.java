@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-import com.gbjam.game_components.CollisionComponent.ColliderType;
+import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 
 
 public class EntityFactory {
