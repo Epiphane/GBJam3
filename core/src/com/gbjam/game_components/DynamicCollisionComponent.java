@@ -10,6 +10,8 @@ import com.gbjam.utility.Point;
 
 public class DynamicCollisionComponent extends CollisionComponent {
 	
+	private static final float TINY_FACTOR = 0.02f;
+	
 	public DynamicCollisionComponent(ColliderType type_) {
 		super(type_);
 	}
@@ -43,8 +45,8 @@ public class DynamicCollisionComponent extends CollisionComponent {
 						entity.setY(entity.getY() + entity.getDY());
 						int steps = 100;
 						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-							entity.setX(entity.getX() - entity.getDX() * 0.05f);
-							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+							entity.setX(entity.getX() - entity.getDX() * TINY_FACTOR);
+							entity.setY(entity.getY() - entity.getDY() * TINY_FACTOR);
 						}
 					}
 					else {
@@ -52,7 +54,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 						entity.setY(entity.getY() + entity.getDY());
 						int steps = 100;
 						while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-							entity.setY(entity.getY() - entity.getDY() * 0.05f);
+							entity.setY(entity.getY() - entity.getDY() * TINY_FACTOR);
 						}
 					}
 				}
@@ -61,7 +63,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 					entity.setX(entity.getX() + entity.getDX());
 					int steps = 100;
 					while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
-						entity.setX(entity.getX() - entity.getDX() * 0.05f);
+						entity.setX(entity.getX() - entity.getDX() * TINY_FACTOR);
 					}
 				}
 
@@ -138,20 +140,24 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	
 	protected void stomped(Entity me, Entity stompedGuy) {
 		// override me!
+//		System.out.println("hit butt");
 	}
 	
 	protected void bumpedWithRightSide(Entity me, Entity collider) {
 		// override me!
 		blockedRight = true;
+//		System.out.println("hit right");
 	}
 
 	protected void bangedHeadOn(Entity me, Entity collider) {
 		// override me!
+//		System.out.println("hit head");
 	}
 
 	protected void bumpedWithLeftSide(Entity me, Entity collider) {
 		// override me!
 		blockedLeft = true;
+//		System.out.println("head left");
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {
