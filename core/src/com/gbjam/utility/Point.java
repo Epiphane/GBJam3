@@ -3,6 +3,10 @@ package com.gbjam.utility;
 public class Point {
 	private float x, y;
 	
+	public Point() {
+	
+	}
+	
 	public Point(float _x, float _y) {
 		x = _x;
 		y = _y;

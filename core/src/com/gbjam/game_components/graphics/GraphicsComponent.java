@@ -17,7 +17,12 @@ public class GraphicsComponent {
 	/** How many frames make up each state of the player */
 	private int[] numFrames;
 	
-	public GraphicsComponent(AnimationSheet sheet) {
+	/** This is just for EntityFactory */
+	public GraphicsComponent() {
+	}
+	
+	/** Same here. Cause JSON can't call special constructors */
+	public void init(AnimationSheet sheet) {
 		textures = sheet.textures;
 		numFrames = sheet.numFrames;
 	}

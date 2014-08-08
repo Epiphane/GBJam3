@@ -3,7 +3,6 @@ package com.gbjam.game_components.collision;
 import java.util.ArrayList;
 
 import com.gbjam.Entity;
-import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 
 /***
  * WOAH HUGE NOTE HERE:
@@ -32,7 +31,7 @@ public class CollisionComponent {
 
 	public boolean blockedLeft, blockedRight;
 	
-	public CollisionComponent(ColliderType type_) {
+	public void init(ColliderType type_) {
 		type = type_;
 		filter = new boolean[ColliderType.values().length];
 		// By default, a component collides with just platforms

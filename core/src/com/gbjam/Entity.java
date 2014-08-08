@@ -37,8 +37,13 @@ public class Entity {
 
 	/** Standing on platform (so not affected by gravity) */
 	private boolean onGround;
+	
+	private boolean initialized;
+	
+	public Entity() {
+	}
 
-	public Entity(GraphicsComponent _graphics, CollisionComponent _collision,
+	public void init(GraphicsComponent _graphics, CollisionComponent _collision,
 			PhysicsComponent _physics, InputComponent _input,
 			GeneratorComponent _generator) {
 		graphics = _graphics;
@@ -47,22 +52,20 @@ public class Entity {
 		input = _input;
 		generator = _generator;
 
-		dead = false;
-		generate = false;
-		genTime = 0;
-		x = y = 0;
-		dx = dy = 0;
-
 		if (graphics != null) {
 			size = graphics.getTextureSize();
 			polygon = new Polygon(new float[] { 0, 0, size.getW(), 0,
 					size.getW(), size.getH(), 0, size.getH() });
 		}
+		
+		initialized = true;
 	}
+	
+	public boolean initialized() { return initialized; }
 
 	public Entity clone() {
-		Entity newEntity = new Entity(graphics, collision, physics, input,
-				generator);
+		Entity newEntity = new Entity();
+		newEntity.init(graphics, collision, physics, input, generator);
 
 		newEntity.x = x;
 		newEntity.y = y;
@@ -71,8 +74,10 @@ public class Entity {
 		newEntity.size = size;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
-		newEntity.polygon = new Polygon(polygon.getVertices());
-		newEntity.polygon.setPosition(x, y);
+		if(polygon != null) {
+			newEntity.polygon = new Polygon(polygon.getVertices());
+			newEntity.polygon.setPosition(x, y);
+		}
 
 		return newEntity;
 	}

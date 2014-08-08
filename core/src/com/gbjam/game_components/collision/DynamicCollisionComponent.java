@@ -9,12 +9,7 @@ import com.gbjam.Entity;
 import com.gbjam.utility.Point;
 
 public class DynamicCollisionComponent extends CollisionComponent {
-	
 	private static final float TINY_FACTOR = 0.02f;
-	
-	public DynamicCollisionComponent(ColliderType type_) {
-		super(type_);
-	}
 	
 	@Override
 	public void update(Entity entity, ArrayList<Entity> entities) {

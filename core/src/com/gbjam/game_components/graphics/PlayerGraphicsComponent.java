@@ -1,15 +1,10 @@
 package com.gbjam.game_components.graphics;
 
 import com.gbjam.Entity;
-import com.gbjam.resource_mgmt.AnimationSheet;
 
 public class PlayerGraphicsComponent extends GraphicsComponent {
 	private static final int TICKS_PER_WALK = 7;
 	private static final int TICKS_PER_IDLE = 14;
-	
-	public PlayerGraphicsComponent(AnimationSheet sheet) {
-		super(sheet);
-	}
 
 	@Override
 	public void render(Entity object) {

@@ -16,22 +16,26 @@ public class GeneratorComponent {
 	protected Entity template;
 	private int genTime, timer;
 	private int soundToPlay;
+	public String soundName;
 	private Point offset;
 	
 	/**
 	 * Stores two references: the world that we'll be generating entities to,
 	 * and a "template entity" that we will clone.
 	 */
-	public GeneratorComponent(GameScreen _world, Entity _template, int _genTime) {
-		this(_world, _template, _genTime, Sounds.NO_SOUND);
+	public GeneratorComponent() {
+		soundToPlay = Sounds.NO_SOUND;
 	}
-	
-	public GeneratorComponent(GameScreen _world, Entity _template, int _genTime, int _soundToPlay) {
+
+	public void setWorld(GameScreen _world) {
 		world = _world;
+		if(template.getGeneratorComponent() != null) {
+			template.getGeneratorComponent().setWorld(_world);
+		}
+	}
+
+	public void setTemplate(Entity _template) {
 		template = _template;
-		genTime = _genTime;
-		timer = 0;
-		soundToPlay = _soundToPlay;
 	}
 	
 	public void setSoundToPlay(int _soundToPlay) {
