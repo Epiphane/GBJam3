@@ -3,6 +3,7 @@ package com.gbjam.resource_mgmt;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.Json;
 import com.gbjam.Entity;
 import com.gbjam.GameScreen;
@@ -98,8 +99,11 @@ public class EntityFactory {
 				if(e.generator != null)
 					e.generator.setWorld(world);
 				
-				if(!e.entity.initialized())
+				if(!e.entity.initialized()) {
 					e.entity.init(e.graphics, e.collision, e.physics, e.input, e.generator);
+					if(e.polygon != null)
+						e.entity.setPolygon(new Polygon(e.polygon));
+				}
 				
 				return e.entity.clone();
 			}

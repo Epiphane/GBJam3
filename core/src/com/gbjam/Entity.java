@@ -197,8 +197,11 @@ public class Entity {
 
 	public void setPolygon(Polygon poly) {
 		this.polygon = poly;
-		x = poly.getOriginX();
-		y = poly.getOriginY();
+
+		if(graphics != null) {
+			float vertices[] = poly.getVertices();
+			graphics.setTextureOffset(new Point(vertices[0], vertices[1]));
+		}
 	}
 
 	public Polygon getPolygon() {

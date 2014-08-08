@@ -1,7 +1,10 @@
 package com.gbjam.game_components.graphics;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.gbjam.Entity;
+import com.gbjam.GBJam3;
 import com.gbjam.resource_mgmt.AnimationSheet;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.utility.Point;
@@ -17,6 +20,8 @@ public class GraphicsComponent {
 	/** How many frames make up each state of the player */
 	private int[] numFrames;
 	
+	private Point textureOffset;
+	
 	/** This is just for EntityFactory */
 	public GraphicsComponent() {
 	}
@@ -25,6 +30,7 @@ public class GraphicsComponent {
 	public void init(AnimationSheet sheet) {
 		textures = sheet.textures;
 		numFrames = sheet.numFrames;
+		setTextureOffset(new Point(0, 0));
 	}
 	
 	public Point getTextureSize() {
@@ -32,7 +38,7 @@ public class GraphicsComponent {
 	}
 	
 	public void render(Entity object) {
-		GraphicsService.draw(textures[frame][state], object.getX(), object.getY());
+		GraphicsService.draw(textures[frame][state], object.getX() - textureOffset.getX(), object.getY() - textureOffset.getY());
 		ticksSinceLastFrame++;
 	}
 	
@@ -67,5 +73,13 @@ public class GraphicsComponent {
 			this.state = state * 2 + direction;
 			this.frame = 0;
 		}
+	}
+
+	public Point getTextureOffset() {
+		return textureOffset;
+	}
+
+	public void setTextureOffset(Point textureOffset) {
+		this.textureOffset = textureOffset;
 	}
 }

@@ -24,4 +24,5 @@ public class Point {
 	public float getY() { return y; }
 	public float getW() { return x; }
 	public float getH() { return y; }
+	public String toString() { return x + ", " + y; }
 }
