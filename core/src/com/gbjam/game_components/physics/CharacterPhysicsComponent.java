@@ -19,6 +19,5 @@ public class CharacterPhysicsComponent extends PhysicsComponent {
 		
 		object.setX(object.getX() + object.getDX());
 		object.setY(object.getY() + object.getDY());
-//		System.out.println(" to " + object.getY());
 	}
 }
