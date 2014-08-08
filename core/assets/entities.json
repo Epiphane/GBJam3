@@ -1,0 +1,9 @@
+[
+	{
+		"class": "entity",
+		"colliderType": "PLAYER",
+		"type": "player",
+		"health": 150,
+		"polygon": [ 6, 0, 6, 20, 18, 20, 18, 0 ]
+	}
+]

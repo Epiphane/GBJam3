@@ -1,6 +1,5 @@
 package com.gbjam.game_components;
 
-import com.gbjam.Entity;
 
 public class PlayerCollisionComponent extends WalkingCollisionComponent {
 
