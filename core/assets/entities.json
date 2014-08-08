@@ -56,5 +56,24 @@
 		"physics": {
 			"class": "com.gbjam.game_components.PlatformPhysicsComponent"
 		}
+	},
+	{
+		"class": "entity",
+		"colliderType": "ENEMY",
+		"type": "slime",
+		"health": 25,
+		"polygon": [ 1, 0, 1, 12, 15, 12, 15, 0 ],
+		"graphics": {
+			"class": "com.gbjam.game_components.PlayerGraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.PlayerCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.PlayerPhysicsComponent"
+		},
+		"input": {
+			"class": "com.gbjam.game_components.AIInputComponent"
+		}
 	}
 ]

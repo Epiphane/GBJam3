@@ -11,6 +11,10 @@ import com.gbjam.utility.Point;
 public class DynamicCollisionComponent extends CollisionComponent {
 	private static final float TINY_FACTOR = 0.02f;
 	
+	public DynamicCollisionComponent() {
+	
+	}
+
 	@Override
 	public void update(Entity entity, ArrayList<Entity> entities) {
 		blockedLeft = blockedRight = false;
@@ -73,7 +77,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		
 		// Check feet to see if we are stomping on someone / brushing up against them
 		checkFeet(entity, entities);
-	}	
+	}
 	
 	private void checkFeet(Entity entity, ArrayList<Entity>entities) {
 		Rectangle rect = entity.getPolygon().getBoundingRectangle();
