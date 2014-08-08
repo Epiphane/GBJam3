@@ -1,4 +1,4 @@
-package com.gbjam.game_components.graphics;
+package com.gbjam.game_components.generator;
 
 import com.gbjam.Entity;
 import com.gbjam.GameScreen;

@@ -1,7 +1,6 @@
 package com.gbjam.game_components.generator;
 
 import com.gbjam.Entity;
-import com.gbjam.game_components.graphics.GeneratorComponent;
 
 public class WeaponGeneratorComponent extends GeneratorComponent {
 	public void update(Entity other) {

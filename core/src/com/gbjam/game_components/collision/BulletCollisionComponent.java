@@ -10,7 +10,8 @@ public class BulletCollisionComponent extends DynamicCollisionComponent {
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {
-		collider.setDead(true);
+		if(collider.getCollisionComponent().type == ColliderType.ENEMY)
+			collider.setDead(true);
 		me.setDead(true);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.*;
 import com.gbjam.game_components.collision.CollisionComponent;
-import com.gbjam.game_components.graphics.GeneratorComponent;
+import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
@@ -25,7 +25,6 @@ public class Entity {
 	/** Physics-related values */
 	private Polygon polygon;
 	private float x, y, dx, dy;
-	private Point size;
 
 	/** Used by GeneratorComponent - do we need to generate an object? */
 	private boolean generate;
@@ -52,8 +51,8 @@ public class Entity {
 		input = _input;
 		generator = _generator;
 
-		if (graphics != null) {
-			size = graphics.getTextureSize();
+		if (graphics != null && polygon == null) {
+			Point size = graphics.getTextureSize();
 			polygon = new Polygon(new float[] { 0, 0, size.getW(), 0,
 					size.getW(), size.getH(), 0, size.getH() });
 		}
@@ -71,7 +70,6 @@ public class Entity {
 		newEntity.y = y;
 		newEntity.dx = dx;
 		newEntity.dy = dy;
-		newEntity.size = size;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
 		if(polygon != null) {
@@ -130,14 +128,6 @@ public class Entity {
 
 	public float getY() {
 		return polygon != null ? polygon.getY() : y;
-	}
-
-	public float getW() {
-		return size.getW();
-	}
-
-	public float getH() {
-		return size.getH();
 	}
 
 	public float getDX() {
@@ -209,8 +199,6 @@ public class Entity {
 		this.polygon = poly;
 		x = poly.getOriginX();
 		y = poly.getOriginY();
-		size = new Point(poly.getBoundingRectangle().width,
-				poly.getBoundingRectangle().height);
 	}
 
 	public Polygon getPolygon() {

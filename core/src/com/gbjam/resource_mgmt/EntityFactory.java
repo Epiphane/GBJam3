@@ -8,7 +8,7 @@ import com.gbjam.Entity;
 import com.gbjam.GameScreen;
 import com.gbjam.game_components.collision.CollisionComponent;
 import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
-import com.gbjam.game_components.graphics.GeneratorComponent;
+import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
