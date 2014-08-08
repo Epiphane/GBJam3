@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Game;
 import com.gbjam.resource_mgmt.Art;
+import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.resource_mgmt.RandomizerService;
 import com.gbjam.resource_mgmt.Sounds;
@@ -20,6 +21,7 @@ public class GBJam3 extends Game {
 			Sounds.load();
 			GraphicsService.load();
 			InputService.load();
+			EntityFactory.load();
 			RandomizerService.load();
 		}
 		catch (IOException e) {

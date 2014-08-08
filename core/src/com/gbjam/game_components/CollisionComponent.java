@@ -1,9 +1,9 @@
 package com.gbjam.game_components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.gbjam.Entity;
+import com.gbjam.game_components.CollisionComponent.ColliderType;
 
 /***
  * WOAH HUGE NOTE HERE:
@@ -22,7 +22,8 @@ public class CollisionComponent {
 		PLATFORM,
 		ENEMY,
 		PLAYER,
-		POWERUP
+		POWERUP,
+		BULLET
 	}
 	
 	protected boolean[] filter;
@@ -32,8 +33,8 @@ public class CollisionComponent {
 	public CollisionComponent(ColliderType type_) {
 		type = type_;
 		filter = new boolean[ColliderType.values().length];
-		// By default, a component collides with everything! yayyyy
-		Arrays.fill(filter, true);
+		// By default, a component collides with just platforms
+		filter[ColliderType.PLATFORM.ordinal()] = true;
 	}
 	
 	public void update(Entity entity, ArrayList<Entity>entities) {

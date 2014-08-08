@@ -37,4 +37,9 @@ public class Art {
 		}
 		return region;
 	}
+
+	public static AnimationSheet getArt(String type) {
+		// TODO Auto-generated method stub
+		return Art.character;
+	}
 }
