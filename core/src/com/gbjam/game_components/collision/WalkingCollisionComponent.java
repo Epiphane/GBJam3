@@ -26,6 +26,8 @@ public class WalkingCollisionComponent extends DynamicCollisionComponent {
 		if (other.getCollisionComponent().type == ColliderType.PLATFORM) {
 			me.setOnGround(true);
 			me.setDY(0);
+			
+			System.out.println("Stomp'd");
 		}
 	}
 	
