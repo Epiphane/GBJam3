@@ -9,6 +9,7 @@ public class EnemyCollisionComponent extends WalkingCollisionComponent {
 		// HAH. DIE, PLAYER SCUM
 		if(collider.getCollisionComponent().type == ColliderType.PLAYER) {
 			collider.inflictStatus(StatusType.HURT, me.getAttribute(AttribType.ATTACK));
+			collider.setX(collider.getX() - 50);
 		}
 	}
 }

@@ -99,7 +99,8 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 25 }
+			{ "type": "HEALTH", "val": 25 },
+			{ "type": "ATTACK", "val": 40 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"

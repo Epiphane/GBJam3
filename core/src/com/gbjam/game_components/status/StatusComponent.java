@@ -31,19 +31,17 @@ public class StatusComponent {
 	}
 	
 	public void update(Entity object) {
-		
+		for(int i = 0; i < statuses.length; i ++)
+			if(statuses[i] > 0)
+				statuses[i] --;
 	}
 	
 	public void setStatus(StatusType status, boolean state) {
+		System.out.println(statusTicks[status.ordinal()]);
 		statuses[status.ordinal()] = state ? statusTicks[status.ordinal()] : 0;
 	}
 	
 	public boolean is(StatusType status) {
 		return statuses[status.ordinal()] != 0;
-	}
-
-	public void tickStatus(StatusType _status) {
-		if(statuses[_status.ordinal()] > 0)
-			statuses[_status.ordinal()] --;
 	}
 }

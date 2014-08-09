@@ -220,6 +220,7 @@ public class Entity {
 			if(status == StatusType.HURT && attributes != null) {
 				int health = attributes.getAttribute(AttribType.HEALTH) - extent;
 				attributes.setAttribute(AttribType.HEALTH, health);
+				this.status.setStatus(StatusType.HURT, true);
 				if(health <= 0)
 					this.status.setStatus(StatusType.DEAD, true);
 			}
@@ -228,11 +229,6 @@ public class Entity {
 	
 	public boolean is(StatusType _status) {
 		return status != null ? status.is(_status) : false;
-	}
-
-	public void tickStatus(StatusType _status) {
-		if(status != null)
-			status.tickStatus(_status);
 	}
 	
 	public void setStatus(StatusType _status, boolean state) {

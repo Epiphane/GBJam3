@@ -53,10 +53,6 @@ public class GeneratorComponent {
 				other.setStatus(StatusType.RECOIL, true);
 			}
 		}
-		
-		if(other.is(StatusType.RECOIL)){
-			other.tickStatus(StatusType.RECOIL);
-		}
 	}
 	
 	public void generate() {
