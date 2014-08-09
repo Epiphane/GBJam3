@@ -69,9 +69,11 @@ public class GraphicsComponent {
 		if(direction < 0) direction = 0;
 		
 		if (this.state != state * 2 + direction) {
-			this.ticksSinceLastFrame = 0;
+			if(this.state != state * 2 + (1 - direction)) {
+				this.ticksSinceLastFrame = 0;
+				this.frame = 0;
+			}
 			this.state = state * 2 + direction;
-			this.frame = 0;
 		}
 	}
 
