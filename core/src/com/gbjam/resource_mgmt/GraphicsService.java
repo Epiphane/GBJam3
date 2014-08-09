@@ -41,10 +41,13 @@ public class GraphicsService {
 	}
 	
 	public static void begin() {
+		camera.update();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		renderer.setView(camera);
 		renderer.render();
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		renderer.setView(camera);
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Line);
 	}
@@ -65,7 +68,7 @@ public class GraphicsService {
 		shapeRenderer.rect(v[0], v[1], v[2] - v[0], v[3] - v[1]);
 	}
 	
-	public OrthographicCamera getCamera() {
+	public static OrthographicCamera getCamera() {
 		return camera;
 	}
 
