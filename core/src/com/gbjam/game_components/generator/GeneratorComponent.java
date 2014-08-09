@@ -13,11 +13,11 @@ import com.gbjam.utility.Point;
  * like the character's gun that spawns bullets.
  */
 public class GeneratorComponent {
-	private GameScreen world;
+	protected GameScreen world;
 	protected Entity template;
-	private int soundToPlay;
+	protected int soundToPlay;
 	public String soundName;
-	private Point offset;
+	protected Point offset;
 	
 	/**
 	 * Stores two references: the world that we'll be generating entities to,

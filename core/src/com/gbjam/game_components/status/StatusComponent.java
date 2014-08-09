@@ -6,6 +6,7 @@ public class StatusComponent {
 	public enum StatusType {
 		HURT,
 		RECOIL,
+		ALIVE,
 		DEAD
 	}
 	
@@ -18,6 +19,9 @@ public class StatusComponent {
 		statusTicks[StatusType.HURT.ordinal()] = 75;
 		statusTicks[StatusType.RECOIL.ordinal()] = 15;
 		statusTicks[StatusType.DEAD.ordinal()] = -1;
+
+		statusTicks[StatusType.ALIVE.ordinal()] = -1;
+		statuses[StatusType.ALIVE.ordinal()] = -1;
 	}
 	
 	public StatusComponent clone() {
@@ -34,10 +38,12 @@ public class StatusComponent {
 		for(int i = 0; i < statuses.length; i ++)
 			if(statuses[i] > 0)
 				statuses[i] --;
+		
+		if(statuses[StatusType.ALIVE.ordinal()] == 0)
+			statuses[StatusType.DEAD.ordinal()] = -1;
 	}
 	
 	public void setStatus(StatusType status, boolean state) {
-		System.out.println(statusTicks[status.ordinal()]);
 		statuses[status.ordinal()] = state ? statusTicks[status.ordinal()] : 0;
 	}
 	
