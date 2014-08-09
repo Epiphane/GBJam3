@@ -3,12 +3,13 @@ package com.gbjam;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Polygon;
-import com.gbjam.game_components.*;
 import com.gbjam.game_components.collision.CollisionComponent;
 import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
+import com.gbjam.game_components.status.StatusComponent;
+import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.utility.Point;
 
 public class Entity {
@@ -16,11 +17,11 @@ public class Entity {
 	private GraphicsComponent graphics;
 	private CollisionComponent collision;
 	private PhysicsComponent physics;
+	private StatusComponent status;
 	private InputComponent input;
 	private GeneratorComponent generator;
-
-	/** Is this entity's life over? Then end it swiftly */
-	private boolean dead;
+	
+	private boolean statuses[];
 
 	/** Physics-related values */
 	private Polygon polygon;
@@ -40,14 +41,16 @@ public class Entity {
 	private boolean initialized;
 	
 	public Entity() {
+		statuses = new boolean[StatusComponent.StatusType.values().length];
 	}
 
 	public void init(GraphicsComponent _graphics, CollisionComponent _collision,
-			PhysicsComponent _physics, InputComponent _input,
+			PhysicsComponent _physics, InputComponent _input, StatusComponent _status,
 			GeneratorComponent _generator) {
 		graphics = _graphics;
 		collision = _collision;
 		physics = _physics;
+		status = _status;
 		input = _input;
 		generator = _generator;
 
@@ -64,7 +67,7 @@ public class Entity {
 
 	public Entity clone() {
 		Entity newEntity = new Entity();
-		newEntity.init(graphics, collision, physics, input, generator);
+		newEntity.init(graphics, collision, physics, input, status, generator);
 
 		newEntity.x = x;
 		newEntity.y = y;
@@ -118,6 +121,10 @@ public class Entity {
 		return generator;
 	}
 
+	public StatusComponent getStatusComponent() {
+		return status;
+	}
+
 	public CollisionComponent getCollisionComponent() {
 		return collision;
 	}
@@ -149,9 +156,9 @@ public class Entity {
 	public boolean getOnGround() {
 		return onGround;
 	}
-
-	public boolean dead() {
-		return dead;
+	
+	public boolean is(StatusType status) {
+		return statuses[status.ordinal()];
 	}
 
 	public void setX(float _x) {
@@ -190,9 +197,9 @@ public class Entity {
 		onGround = _onGround;
 		canJump = true;
 	}
-
-	public void setDead(boolean _dead) {
-		dead = _dead;
+	
+	public void setStatus(StatusType status, boolean state) {
+		statuses[status.ordinal()] = state;
 	}
 
 	public void setPolygon(Polygon poly) {

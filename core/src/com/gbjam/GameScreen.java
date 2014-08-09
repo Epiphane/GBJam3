@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
 
@@ -38,7 +39,7 @@ public class GameScreen implements Screen {
 		while(iterator.hasNext()) {
 			Entity entity = iterator.next();
 			entity.update(delta, entities);
-			if(entity.dead()) {
+			if(entity.is(StatusType.DEAD)) {
 				toRemove.add(entity);
 			}
 		}
