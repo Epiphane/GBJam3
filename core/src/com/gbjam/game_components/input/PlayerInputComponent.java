@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.gbjam.Command;
 import com.gbjam.Entity;
 import com.gbjam.InputService;
+import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.utility.Point;
 import com.gbjam.utility.Utility;
 
@@ -53,7 +54,9 @@ public class PlayerInputComponent extends InputComponent {
 	}
 	
 	public void update(Entity player) {
-		player.setDX(movement.getX() * 2);
+		if(!player.is(StatusType.KNOCKBACK))
+			player.setDX(movement.getX() * 2);
+		
 		player.setGenerate(shoot);
 		
 		if (jumping && player.getCanJump()) {
