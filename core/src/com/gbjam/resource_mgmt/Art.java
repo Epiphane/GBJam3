@@ -8,12 +8,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
 	public static AnimationSheet character, platform, slime;
-	public static AnimationSheet fly, bullet;
+	public static AnimationSheet fly, bullet, fire;
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 1, 1);
 		slime = new AnimationSheet("slime.png", 1, 1);
 		bullet = new AnimationSheet("bullet.png", 1);
+		fire = new AnimationSheet("fire.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
@@ -47,6 +48,8 @@ public class Art {
 			return Art.slime;
 		else if(type.equals("bullet"))
 			return Art.bullet;
+		else if(type.equals("fire"))
+			return Art.fire;
 		else
 			return Art.fly;
 	}

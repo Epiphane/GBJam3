@@ -15,6 +15,7 @@ public class WeaponGeneratorComponent extends GeneratorComponent {
 		super.update(other);
 	}
 	
+	@Override
 	public void generate() {
 		super.generate();
 	}

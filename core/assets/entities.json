@@ -18,7 +18,7 @@
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
 		},
 		"generator": {
-			"class": "com.gbjam.game_components.generator.WeaponGeneratorComponent",
+			"class": "com.gbjam.game_components.generator.ShotgunGeneratorComponent",
 			"genTime": 15,
 			"timer": 0,
 			"soundName": "GUN_SOUND",
@@ -28,6 +28,23 @@
 			}
 		},
 		"template": "bullet"
+	},
+	{
+		"class": "entity",
+		"colliderType": "BULLET",
+		"type": "bullet",
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.BulletPhysicsComponent"
+		},
+		"entity": {
+			"dx": 5
+		}
 	},
 	{
 		"class": "entity",

@@ -31,7 +31,7 @@ public class EntityFactory {
 		public GeneratorComponent generator;
 		public String template;
 		
-		public ArrayList<EntityInfo> subTypes;
+//		public ArrayList<EntityInfo> subTypes;
 	}
 	
 	public static ArrayList<EntityInfo> entityInfos;
