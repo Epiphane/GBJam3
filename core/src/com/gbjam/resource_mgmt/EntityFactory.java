@@ -13,6 +13,7 @@ import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
+import com.gbjam.game_components.status.StatusComponent;
 
 
 public class EntityFactory {
@@ -26,6 +27,7 @@ public class EntityFactory {
 
 		public GraphicsComponent graphics;
 		public InputComponent input;
+		public StatusComponent status;
 		public CollisionComponent collision;
 		public PhysicsComponent physics;
 		public GeneratorComponent generator;
@@ -100,7 +102,7 @@ public class EntityFactory {
 					e.generator.setWorld(world);
 				
 				if(!e.entity.initialized()) {
-					e.entity.init(e.graphics, e.collision, e.physics, e.input, e.generator);
+					e.entity.init(e.graphics, e.collision, e.physics, e.input, e.status, e.generator);
 					if(e.polygon != null)
 						e.entity.setPolygon(new Polygon(e.polygon));
 				}
