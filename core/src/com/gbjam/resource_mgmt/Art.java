@@ -13,8 +13,8 @@ public class Art {
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 1, 1);
 		slime = new AnimationSheet("slime.png", 1, 1);
-		bullet = new AnimationSheet("bullet.png", 1);
-		fire = new AnimationSheet("fire.png", 1);
+		bullet = new AnimationSheet("weapon/bullet.png", 1);
+		fire = new AnimationSheet("weapon/fire.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
