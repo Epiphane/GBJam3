@@ -17,7 +17,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "RECOIL", "tick": 15 }
+			{ "type": "RECOIL", "tick": 3 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -29,14 +29,14 @@
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
 		},
 		"generator": {
-			"class": "com.gbjam.game_components.generator.ShotgunGeneratorComponent",
-			"soundName": "GUN_SOUND",
+			"class": "com.gbjam.game_components.generator.FireGeneratorComponent",
+			"soundName": "FIRE_SOUND",
 			"offset": {
 				"x": 11,
-				"y": 7
+				"y": 4
 			}
 		},
-		"template": "bullet"
+		"template": "fire"
 	},
 	{
 		"class": "entity",
@@ -67,7 +67,7 @@
 	{
 		"class": "entity",
 		"colliderType": "BULLET",
-		"type": "bullet",
+		"type": "fire",
 		"graphics": {
 			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},
@@ -75,10 +75,10 @@
 			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
 		},
 		"physics": {
-			"class": "com.gbjam.game_components.physics.BulletPhysicsComponent"
+			"class": "com.gbjam.game_components.physics.FirePhysicsComponent"
 		},
 		"entity": {
-			"dx": 5
+			"dx": 1
 		}
 	},
 	{

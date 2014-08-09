@@ -16,13 +16,13 @@ public class ShotgunGeneratorComponent extends WeaponGeneratorComponent {
 		Entity clone = template.clone();
 		clone.setX(clone.getX() + offset.getX());
 		clone.setY(clone.getY() + offset.getY());
-		clone.setDY(1);
+		clone.setDY((float) (Math.random() * 2) - 1);
 		world.addEntity(clone);
 		
 		Entity clone2 = template.clone();
 		clone2.setX(clone2.getX() + offset.getX());
 		clone2.setY(clone2.getY() + offset.getY());
-		clone2.setDY(-1);
+		clone2.setDY((float) (Math.random() * 2) - 1);
 		world.addEntity(clone2);
 	}
 }

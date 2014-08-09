@@ -41,6 +41,8 @@ public class Entity {
 	
 	private boolean initialized;
 	
+	private int lifespan;
+	
 	public Entity() {
 	}
 
@@ -60,7 +62,8 @@ public class Entity {
 			polygon = new Polygon(new float[] { 0, 0, size.getW(), 0,
 					size.getW(), size.getH(), 0, size.getH() });
 		}
-		
+	
+		setLifespan(-1); // immortal
 		initialized = true;
 	}
 	
@@ -81,6 +84,7 @@ public class Entity {
 		newEntity.dy = dy;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
+		newEntity.lifespan = lifespan;
 		if(polygon != null) {
 			newEntity.polygon = new Polygon(polygon.getVertices());
 			newEntity.polygon.setPosition(x, y);
@@ -243,5 +247,13 @@ public class Entity {
 
 	public void setAttribute(AttribType attrib, int val) {
 		attributes.setAttribute(attrib, val);
+	}
+
+	public int getLifespan() {
+		return lifespan;
+	}
+
+	public void setLifespan(int lifespan) {
+		this.lifespan = lifespan;
 	}
 }
