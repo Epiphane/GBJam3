@@ -87,6 +87,8 @@ public class Entity {
 		// Update according to input
 		if (input != null)
 			input.update(this);
+		if (status != null)
+			status.update(this);
 
 		// Then game logic
 		if (physics != null)
