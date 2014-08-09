@@ -2,6 +2,7 @@ package com.gbjam.game_components.generator;
 
 import com.gbjam.Entity;
 import com.gbjam.GameScreen;
+import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.Sounds;
 import com.gbjam.utility.Point;
 
@@ -14,7 +15,6 @@ import com.gbjam.utility.Point;
 public class GeneratorComponent {
 	private GameScreen world;
 	protected Entity template;
-	private int genTime, timer;
 	private int soundToPlay;
 	public String soundName;
 	private Point offset;
@@ -48,13 +48,14 @@ public class GeneratorComponent {
 	
 	public void update(Entity other) {
 		if(other.generate()) {
-			if(timer <= 0) {
+			if(!other.is(StatusType.RECOIL)) {
 				generate();
+				other.setStatus(StatusType.RECOIL, true);
 			}
-			timer --;
 		}
-		else {
-			timer = 0;
+		
+		if(other.is(StatusType.RECOIL)){
+			other.tickStatus(StatusType.RECOIL);
 		}
 	}
 	
@@ -66,6 +67,5 @@ public class GeneratorComponent {
 		clone.setX(clone.getX() + offset.getX());
 		clone.setY(clone.getY() + offset.getY());
 		world.addEntity(clone);
-		timer = genTime;
 	}
 }

@@ -8,6 +8,8 @@ import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
+import com.gbjam.game_components.status.AttributeComponent;
+import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.utility.Point;
@@ -18,10 +20,9 @@ public class Entity {
 	private CollisionComponent collision;
 	private PhysicsComponent physics;
 	private StatusComponent status;
+	private AttributeComponent attributes;
 	private InputComponent input;
 	private GeneratorComponent generator;
-	
-	private boolean statuses[];
 
 	/** Physics-related values */
 	private Polygon polygon;
@@ -41,16 +42,16 @@ public class Entity {
 	private boolean initialized;
 	
 	public Entity() {
-		statuses = new boolean[StatusComponent.StatusType.values().length];
 	}
 
 	public void init(GraphicsComponent _graphics, CollisionComponent _collision,
-			PhysicsComponent _physics, InputComponent _input, StatusComponent _status,
+			PhysicsComponent _physics, InputComponent _input, StatusComponent _status, AttributeComponent _attributes,
 			GeneratorComponent _generator) {
 		graphics = _graphics;
 		collision = _collision;
 		physics = _physics;
 		status = _status;
+		attributes = _attributes;
 		input = _input;
 		generator = _generator;
 
@@ -67,7 +68,12 @@ public class Entity {
 
 	public Entity clone() {
 		Entity newEntity = new Entity();
-		newEntity.init(graphics, collision, physics, input, status, generator);
+		newEntity.init(graphics, collision, physics, input, status, attributes, generator);
+		
+		if(status != null) // Clone one for myself
+			status = status.clone();
+		if(attributes != null)
+			attributes = attributes.clone();
 
 		newEntity.x = x;
 		newEntity.y = y;
@@ -158,10 +164,6 @@ public class Entity {
 	public boolean getOnGround() {
 		return onGround;
 	}
-	
-	public boolean is(StatusType status) {
-		return statuses[status.ordinal()];
-	}
 
 	public void setX(float _x) {
 		x = _x;
@@ -199,10 +201,6 @@ public class Entity {
 		onGround = _onGround;
 		canJump = true;
 	}
-	
-	public void setStatus(StatusType status, boolean state) {
-		statuses[status.ordinal()] = state;
-	}
 
 	public void setPolygon(Polygon poly) {
 		this.polygon = poly;
@@ -215,5 +213,39 @@ public class Entity {
 
 	public Polygon getPolygon() {
 		return this.polygon;
+	}
+
+	public void inflictStatus(StatusType status, int extent) {
+		if(this.status != null) {
+			if(status == StatusType.HURT && attributes != null) {
+				int health = attributes.getAttribute(AttribType.HEALTH) - extent;
+				attributes.setAttribute(AttribType.HEALTH, health);
+				if(health <= 0)
+					this.status.setStatus(StatusType.DEAD, true);
+			}
+		}
+	}
+	
+	public boolean is(StatusType _status) {
+		return status != null ? status.is(_status) : false;
+	}
+
+	public void tickStatus(StatusType _status) {
+		if(status != null)
+			status.tickStatus(_status);
+	}
+	
+	public void setStatus(StatusType _status, boolean state) {
+		if(status != null) {
+			status.setStatus(_status, state);
+		}
+	}
+
+	public int getAttribute(AttribType attrib) {
+		return attributes.getAttribute(attrib);
+	}
+
+	public void setAttribute(AttribType attrib, int val) {
+		attributes.setAttribute(attrib, val);
 	}
 }

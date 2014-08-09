@@ -3,7 +3,6 @@
 		"class": "entity",
 		"colliderType": "PLAYER",
 		"type": "player",
-		"health": 150,
 		"polygon": [ 6, 0, 6, 20, 16, 20, 16, 0 ],
 		"graphics": {
 			"class": "com.gbjam.game_components.graphics.PlayerGraphicsComponent"
@@ -14,13 +13,23 @@
 		"physics": {
 			"class": "com.gbjam.game_components.physics.PlayerPhysicsComponent"
 		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"statusTicks": [
+			{ "type": "RECOIL", "tick": 15 }
+		],
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "HEALTH", "val": 100 }
+		],
 		"input": {
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
 		},
 		"generator": {
 			"class": "com.gbjam.game_components.generator.WeaponGeneratorComponent",
-			"genTime": 15,
-			"timer": 0,
 			"soundName": "GUN_SOUND",
 			"offset": {
 				"x": 11,
@@ -39,6 +48,15 @@
 		"collision": {
 			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
 		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "ATTACK", "val": 15 }
+		],
 		"physics": {
 			"class": "com.gbjam.game_components.physics.BulletPhysicsComponent"
 		},
@@ -61,19 +79,30 @@
 		"class": "entity",
 		"colliderType": "ENEMY",
 		"type": "slime",
-		"health": 25,
 		"polygon": [ 1, 0, 1, 12, 15, 12, 15, 0 ],
 		"graphics": {
-			"class": "com.gbjam.game_components.graphics.PlayerGraphicsComponent"
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},
 		"collision": {
-			"class": "com.gbjam.game_components.collision.PlayerCollisionComponent",
+			"class": "com.gbjam.game_components.collision.EnemyCollisionComponent",
 		},
 		"physics": {
 			"class": "com.gbjam.game_components.physics.PlayerPhysicsComponent"
 		},
 		"input": {
 			"class": "com.gbjam.game_components.input.AIInputComponent"
+		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "HEALTH", "val": 25 }
+		],
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
 		}
 	}
 ]

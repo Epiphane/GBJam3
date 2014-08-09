@@ -13,7 +13,10 @@ import com.gbjam.game_components.generator.GeneratorComponent;
 import com.gbjam.game_components.graphics.GraphicsComponent;
 import com.gbjam.game_components.input.InputComponent;
 import com.gbjam.game_components.physics.PhysicsComponent;
+import com.gbjam.game_components.status.AttributeComponent;
+import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent;
+import com.gbjam.game_components.status.StatusComponent.StatusType;
 
 
 public class EntityFactory {
@@ -21,19 +24,32 @@ public class EntityFactory {
 		public Entity entity;
 		
 		public String type;
-		public int id, health;
+		public int id;
 		public float[] polygon;
 		public ColliderType colliderType;
 
 		public GraphicsComponent graphics;
 		public InputComponent input;
 		public StatusComponent status;
+		public ArrayList<StatusTick> statusTicks;
+		public AttributeComponent attributes;
+		public ArrayList<Attrib> attribs;
 		public CollisionComponent collision;
 		public PhysicsComponent physics;
 		public GeneratorComponent generator;
 		public String template;
 		
 		public ArrayList<EntityInfo> subTypes;
+	}
+	
+	public static class StatusTick {
+		StatusType type;
+		int tick;
+	}
+	
+	public static class Attrib {
+		AttribType type;
+		int val;
 	}
 	
 	public static ArrayList<EntityInfo> entityInfos;
@@ -102,7 +118,17 @@ public class EntityFactory {
 					e.generator.setWorld(world);
 				
 				if(!e.entity.initialized()) {
-					e.entity.init(e.graphics, e.collision, e.physics, e.input, e.status, e.generator);
+					e.entity.init(e.graphics, e.collision, e.physics, e.input, e.status, e.attributes, e.generator);
+
+					if(e.statusTicks != null)
+						for(StatusTick statusTick : e.statusTicks) {
+							e.entity.getStatusComponent().statusTicks[statusTick.type.ordinal()] = statusTick.tick;
+						}
+					if(e.attribs != null)
+						for(Attrib attrib : e.attribs) {
+							e.entity.setAttribute(attrib.type, attrib.val);
+						}
+					
 					if(e.polygon != null)
 						e.entity.setPolygon(new Polygon(e.polygon));
 				}
