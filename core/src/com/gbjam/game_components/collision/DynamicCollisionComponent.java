@@ -66,7 +66,6 @@ public class DynamicCollisionComponent extends CollisionComponent {
 					while (steps-- > 0 && Intersector.overlapConvexPolygons(myPolygon, collider.getPolygon())) {
 						entity.setX(entity.getX() - entity.getDX() * TINY_FACTOR);
 					}
-					System.out.println("STOP IT");
 				}
 
 				// Check for unconditional collisions that don't care what direction
@@ -146,18 +145,18 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	protected void bumpedWithRightSide(Entity me, Entity collider) {
 		// override me!
 		blockedRight = true;
-		System.out.println("hit right");
+//		System.out.println("hit right");
 	}
 
 	protected void bangedHeadOn(Entity me, Entity collider) {
 		// override me!
-		System.out.println("hit head");
+//		System.out.println("hit head");
 	}
 
 	protected void bumpedWithLeftSide(Entity me, Entity collider) {
 		// override me!
 		blockedLeft = true;
-		System.out.println("head left");
+//		System.out.println("head left");
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {
