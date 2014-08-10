@@ -74,9 +74,11 @@ public class MapGenerator {
 					for (int y = 0; y < chunkSizeHeight && doneWithSize; y++) {
 						// Go through each of the points of the platform and see if they fit
 						boolean foundHome = true;
+						int randomX = Utility.random(0, chunkSizeWidth);
+						int randomY = Utility.random(0, chunkSizeHeight);
 						for (int tilesChecked = 0; tilesChecked < platformOffsets.size(); tilesChecked++) {
 							PointM pointToCheck = platformOffsets.get(tilesChecked).clone();
-							pointToCheck.addPoint(x, y);
+							pointToCheck.addPoint(randomX, randomY);
 							if (!Utility.pointInBounds(pointToCheck, baseX, chunkSizeWidth, baseY, chunkSizeHeight) || 
 									occupiedCells[(int) pointToCheck.x][(int) pointToCheck.y]) {
 								foundHome = false;
@@ -93,7 +95,7 @@ public class MapGenerator {
 								// Occupy the two tiles above and below you lel
 								PointM pointToAdd = platformOffsets.get(tilesPlaced).clone();
 								PointM above = pointToAdd.clone();
-								pointToAdd.addPoint(x, y);
+								pointToAdd.addPoint(randomX, randomY);
 								if(lastY != pointToAdd.y) {
 									horizLength = 1;
 									lastY = pointToAdd.y;
