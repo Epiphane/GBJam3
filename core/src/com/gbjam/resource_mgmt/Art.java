@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire;
-	public static AnimationSheet dungeonBrix;
 	
 	public static Texture healthbar, health, weapons[];
 	
@@ -19,9 +18,7 @@ public class Art {
 		slime = new AnimationSheet("slime.png", 1, 1);
 		bullet = new AnimationSheet("weapon/bullet.png", 1);
 		fire = new AnimationSheet("weapon/fire.png", 1);
-		platform = new AnimationSheet("platform.png", 1);
-		
-		dungeonBrix = new AnimationSheet("bg/brick_bg.png", 6, 6, 6);
+		platform = new AnimationSheet("bg/platform.png", 4, 4);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
 		

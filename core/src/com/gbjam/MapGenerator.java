@@ -21,9 +21,14 @@ public class MapGenerator {
 			int chunkSizeWidth, int chunkSizeHeight,
 			PointM playerPos, GameScreen world) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
-		TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-		cell.setTile(new StaticTiledMapTile(Art.dungeonBrix.textures[0][0]));
-
+		TiledMapTileLayer.Cell cells[][] = new TiledMapTileLayer.Cell[4][2];
+		for (int x = 0; x < cells.length; x++) {
+			for (int y = 0; y < cells[0].length; y++) {
+				cells[x][y] = new TiledMapTileLayer.Cell();
+				cells[x][y].setTile(new StaticTiledMapTile(Art.platform.textures[x][y]));
+			}
+		}
+		
 		TiledMapTileLayer drawingLayer = (TiledMapTileLayer) map.getLayers()
 				.get("Foreground");
 		MapLayer wallLayer = map.getLayers().get("Walls");
@@ -87,6 +92,7 @@ public class MapGenerator {
 							for (int tilesPlaced = 0; tilesPlaced < platformOffsets.size(); tilesPlaced++) {
 								// Occupy the two tiles above and below you lel
 								PointM pointToAdd = platformOffsets.get(tilesPlaced).clone();
+								PointM above = pointToAdd.clone();
 								pointToAdd.addPoint(x, y);
 								if(lastY != pointToAdd.y) {
 									horizLength = 1;
@@ -113,12 +119,15 @@ public class MapGenerator {
 								
 								objects.add(wallObject);
 
-								int textureX = Utility.keepInRange(pointToAdd.x, 3) + 3;
-								int textureY = Utility.keepInRange(pointToAdd.y, 3);
-								System.out.println("Point at " + pointToAdd.x + ", " + pointToAdd.y + " with texture " + textureX + ", " + textureY);
+								int textureX = Utility.random(0, 4), textureY = 0;
 								
-								cell.setTile(new StaticTiledMapTile(Art.dungeonBrix.textures[pointToAdd.x % 3 + 3][pointToAdd.y % 3]));
-								drawingLayer.setCell(pointToAdd.x, pointToAdd.y, cell);
+								above.addPoint(0, 1);
+								
+								if (platformOffsets.indexOf(above) != -1) {
+									textureY = 1;
+								}
+								
+								drawingLayer.setCell(pointToAdd.x, pointToAdd.y, cells[textureX][textureY]);
 							}
 						}
 							

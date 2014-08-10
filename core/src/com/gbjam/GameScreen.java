@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
 		
 		TiledMap map = new TmxMapLoader().load("maps/corridor.tmx");
 		
-		MapGenerator.initSection(map, 1, 3, 25, 12, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
+		MapGenerator.initSection(map, 2, 2, 100, 13, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
 		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);

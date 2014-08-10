@@ -96,4 +96,14 @@ public class Utility {
 			}
 		}
 	}
+	
+	public static boolean get(boolean[][] cells, int x, int y) {
+		int height = cells[0].length;
+		int width = cells.length;
+		
+		if (x >= 0 && x < width && y >= 0 && y < height)
+			return cells[x][y];
+		
+		return false;
+	}
 }
