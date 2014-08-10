@@ -17,6 +17,7 @@ import com.gbjam.game_components.status.AttributeComponent;
 import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
+import com.gbjam.utility.Point;
 
 
 public class EntityFactory {
@@ -27,6 +28,8 @@ public class EntityFactory {
 		public int id;
 		public float[] polygon;
 		public ColliderType colliderType;
+		
+		public Point graphicOffset;
 
 		public GraphicsComponent graphics;
 		public InputComponent input;
@@ -67,6 +70,9 @@ public class EntityFactory {
 		for(EntityInfo entityInfo : entityInfos) {
 			if(entityInfo.graphics != null)
 				entityInfo.graphics.init(Art.getArt(entityInfo.type));
+			if(entityInfo.graphicOffset != null)
+				entityInfo.graphics.setTextureOffset(entityInfo.graphicOffset);
+			
 			if(entityInfo.collision != null)
 				entityInfo.collision.init(entityInfo.colliderType);
 			

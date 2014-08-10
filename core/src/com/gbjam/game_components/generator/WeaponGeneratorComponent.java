@@ -8,7 +8,7 @@ public class WeaponGeneratorComponent extends GeneratorComponent {
 		if((other.getDX() > 0) != (template.getDX() > 0) && other.getDX() != 0) {
 			template.setDX(template.getDX() * -1);
 			
-			offset = new Point(-offset.getX(), offset.getY()); 
+			offset = new Point(other.getPolygon().getBoundingRectangle().width-offset.getX(), offset.getY()); 
 		}
 		
 		if(other.generate()) {
@@ -19,7 +19,7 @@ public class WeaponGeneratorComponent extends GeneratorComponent {
 	}
 	
 	@Override
-	public void generate() {
-		super.generate();
+	public void generate(Entity other) {
+		super.generate(other);
 	}
 }

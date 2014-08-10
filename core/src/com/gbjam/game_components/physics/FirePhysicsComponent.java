@@ -16,10 +16,5 @@ public class FirePhysicsComponent extends BulletPhysicsComponent {
 		if(object.getX() + object.getPolygon().getBoundingRectangle().width < 0 || object.getX() > GBJam3.GAME_WIDTH) {
 			object.setStatus(StatusType.DEAD, true);
 		}
-		
-		object.setLifespan(object.getLifespan() - 1);
-		if (object.getLifespan() == 0) {
-			object.setStatus(StatusType.DEAD, true);
-		}
 	}
 }

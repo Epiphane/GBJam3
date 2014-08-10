@@ -9,8 +9,8 @@ public class ShotgunGeneratorComponent extends WeaponGeneratorComponent {
 	}
 	
 	@Override
-	public void generate() {
-		super.generate();
+	public void generate(Entity me) {
+		super.generate(me);
 
 		// Gimme two more and randomize their DY
 		Entity clone = template.clone();

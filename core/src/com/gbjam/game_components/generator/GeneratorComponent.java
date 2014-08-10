@@ -46,20 +46,25 @@ public class GeneratorComponent {
 		offset = _offset;
 	}
 	
+	public Point getOffset() {
+		return offset;
+	}
+	
 	public void update(Entity other) {
 		if(other.generate()) {
 			if(!other.is(StatusType.RECOIL)) {
-				generate();
+				generate(other);
 				other.setStatus(StatusType.RECOIL, true);
 			}
 		}
 	}
 	
-	public void generate() {
+	public void generate(Entity other) {
 		if(soundToPlay != Sounds.NO_SOUND) {
 			Sounds.playSound(soundToPlay);
 		}
 		Entity clone = template.clone();
+			
 		clone.setX(clone.getX() + offset.getX());
 		clone.setY(clone.getY() + offset.getY());
 		world.addEntity(clone);

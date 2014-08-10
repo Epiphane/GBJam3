@@ -17,6 +17,7 @@ public class GraphicsService {
 	
 	private static OrthographicCamera camera;
 	private static MapRenderer renderer;
+	private static int mapWidth, mapHeight;
 	private static ShapeRenderer shapeRenderer;
 	
 	public static void load() {
@@ -25,9 +26,20 @@ public class GraphicsService {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GBJam3.GAME_WIDTH, GBJam3.GAME_HEIGHT);
 		camera.update();
+		
+		mapWidth = 160;
+		mapHeight = 144;
 
 		shapeRenderer = new ShapeRenderer(20);
 		shapeRenderer.setColor(1, 0, 0, 1);
+	}
+	
+	public static void setMapWidth(int _mapWidth) {
+		mapWidth = _mapWidth;
+	}
+	
+	public static void setMapHeight(int _mapHeight) {
+		mapHeight = _mapHeight;
 	}
 	
 	public static void loadMapRenderer(MapRenderer _renderer) {
@@ -72,9 +84,27 @@ public class GraphicsService {
 		return camera;
 	}
 
+	public static void setCamera(float x, float y) {
+		camera.position.x = x;
+		camera.position.y = y;
+		
+		if(camera.position.x < GBJam3.GAME_WIDTH / 2)
+			camera.position.x = GBJam3.GAME_WIDTH / 2;
+		if(camera.position.x > mapWidth - GBJam3.GAME_WIDTH / 2)
+			camera.position.x = mapWidth - GBJam3.GAME_WIDTH / 2;
+		if(camera.position.y < GBJam3.GAME_HEIGHT / 2)
+			camera.position.y = GBJam3.GAME_HEIGHT / 2;
+		if(camera.position.y > mapHeight - GBJam3.GAME_HEIGHT / 2)
+			camera.position.y = mapHeight - GBJam3.GAME_HEIGHT / 2;
+	}
+
 	public static void end() {
 		batch.end();
 		shapeRenderer.end();
+	}
+
+	public static void drawLine(float[] vertices) {
+		shapeRenderer.line(vertices[0], vertices[1], vertices[2], vertices[3]);
 	}
 }
 

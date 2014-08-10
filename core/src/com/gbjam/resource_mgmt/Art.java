@@ -2,16 +2,16 @@ package com.gbjam.resource_mgmt;
 
 import java.io.IOException;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
-	public static AnimationSheet character, platform, slime;
+	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire;
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 8, 8, 2, 2, 2, 2, 2, 2);
+		dragon = new AnimationSheet("dragon.png", 4, 1);
 		slime = new AnimationSheet("slime.png", 1, 1);
 		bullet = new AnimationSheet("weapon/bullet.png", 1);
 		fire = new AnimationSheet("weapon/fire.png", 1);
@@ -46,10 +46,12 @@ public class Art {
 			return Art.character;
 		else if(type.equals("slime"))
 			return Art.slime;
-		else if(type.equals("bullet"))
+		else if(type.equals("bullet") || type.equals("enemyBullet"))
 			return Art.bullet;
 		else if(type.equals("fire"))
 			return Art.fire;
+		else if(type.equals("dragon"))
+			return Art.dragon;
 		else
 			return Art.fly;
 	}

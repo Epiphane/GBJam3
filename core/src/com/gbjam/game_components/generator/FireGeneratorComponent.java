@@ -12,8 +12,13 @@ public class FireGeneratorComponent extends WeaponGeneratorComponent {
 	public void update(Entity me) {
 		super.update(me);
 		
+		template.setDX(me.getDX() + (me.getFacingRight() ? 1 : -1));
 		template.setDY((float) Math.random() - 0.5f);
-		template.setLifespan(50);
 	}
 
+	@Override
+	public void generate(Entity me) {
+		
+		super.generate(me);
+	}
 }

@@ -19,8 +19,6 @@ public class PlayerCollisionComponent extends WalkingCollisionComponent {
 	public void update(Entity me, ArrayList<Entity> entities) {
 		super.update(me, entities);
 
-		OrthographicCamera cam = GraphicsService.getCamera();
-		cam.position.x = me.getX();
-		cam.position.y = me.getY();
+		GraphicsService.setCamera(me.getX(), me.getY());
 	}
 }
