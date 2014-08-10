@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire;
+	public static AnimationSheet dungeonBrix;
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 8, 8, 2, 2, 2, 2, 2, 2);
@@ -16,6 +17,8 @@ public class Art {
 		bullet = new AnimationSheet("weapon/bullet.png", 1);
 		fire = new AnimationSheet("weapon/fire.png", 1);
 		platform = new AnimationSheet("platform.png", 1);
+		
+		dungeonBrix = new AnimationSheet("bg/brick_bg.png", 6, 6, 6);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
 	}

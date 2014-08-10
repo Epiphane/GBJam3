@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
 		dragon.setY(50);
 		addEntity(dragon);
 		
-		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
+		TiledMap map = new TmxMapLoader().load("maps/corridor.tmx");
 		
 		MapGenerator.initSection(map, 2, 2, 6, 13, new PointM((int) player.getX() / 16, (int) player.getY() / 16));
 		

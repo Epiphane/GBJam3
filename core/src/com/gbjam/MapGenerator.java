@@ -21,7 +21,7 @@ public class MapGenerator {
 			PointM playerPos) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-		cell.setTile(new StaticTiledMapTile(Art.platform.textures[0][0]));
+		cell.setTile(new StaticTiledMapTile(Art.dungeonBrix.textures[0][0]));
 
 		TiledMapTileLayer drawingLayer = (TiledMapTileLayer) map.getLayers()
 				.get("Foreground");
@@ -96,7 +96,12 @@ public class MapGenerator {
 								props.put("y", pointToAdd.y*16);
 								
 								objects.add(wallObject);
+
+								int textureX = Utility.keepInRange(pointToAdd.x, 3) + 3;
+								int textureY = Utility.keepInRange(pointToAdd.y, 3);
+								System.out.println("Point at " + pointToAdd.x + ", " + pointToAdd.y + " with texture " + textureX + ", " + textureY);
 								
+								cell.setTile(new StaticTiledMapTile(Art.dungeonBrix.textures[pointToAdd.x % 3 + 3][pointToAdd.y % 3]));
 								drawingLayer.setCell(pointToAdd.x, pointToAdd.y, cell);
 							}
 						}
