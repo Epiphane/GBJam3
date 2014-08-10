@@ -46,7 +46,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		checkFeet(entity, entities);
 	}
 	
-	private void checkFeet(Entity entity, ArrayList<Entity>entities) {
+	protected void checkFeet(Entity entity, ArrayList<Entity>entities) {
 		float v[] = entity.getPolygon().getTransformedVertices();
 		
 		float smidge = 0.2f;
@@ -104,7 +104,7 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	}
 
 	/** Returns true if EITHER point a OR point b are in the polygon */
-	private boolean polygonContainsPoints(Polygon poly, Point a, Point b) {
+	protected boolean polygonContainsPoints(Polygon poly, Point a, Point b) {
 		return poly.contains(a.getX(), a.getY()) || poly.contains(b.getX(), b.getY());
 	}
 	

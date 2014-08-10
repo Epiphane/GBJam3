@@ -4,8 +4,8 @@ import com.gbjam.Entity;
 import com.gbjam.GameScreen;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.EntityFactory;
-import com.gbjam.resource_mgmt.RandomizerService;
 import com.gbjam.utility.Point;
+import com.gbjam.utility.Utility;
 
 public class DragonGeneratorComponent extends MultiGeneratorComponent {
 	@Override
@@ -52,7 +52,7 @@ public class DragonGeneratorComponent extends MultiGeneratorComponent {
 
 	@Override
 	public void generate(Entity other) {
-		float y = RandomizerService.random() * 6 + 1;
+		float y = Utility.random(1, 8);
 		template.setY(other.getY() + y);
 
 		super.generate(other);

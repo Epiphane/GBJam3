@@ -7,4 +7,8 @@ public class InputComponent {
 	public void update(Entity object) {
 		Gdx.app.log("ERROR", "Input not implemented!");
 	}
+	
+	public InputComponent clone() {
+		return this;
+	}
 }

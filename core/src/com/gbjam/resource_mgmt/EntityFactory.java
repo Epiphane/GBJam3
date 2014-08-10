@@ -18,6 +18,7 @@ import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.utility.Point;
+import com.gbjam.utility.Utility;
 
 
 public class EntityFactory {
@@ -144,5 +145,14 @@ public class EntityFactory {
 		}
 		Gdx.app.log("WARNING", "Entity type " + name + " not found.");
 		return null;
+	}
+	
+	public static Entity getRandomEnemy(int maxDifficulty, GameScreen world) {
+		ArrayList<String> enemies = new ArrayList<String>();
+		
+		enemies.add("slime");
+		
+		int newEnemy = Utility.random(0, enemies.size());
+		return generate(enemies.get(newEnemy), world);
 	}
 }
