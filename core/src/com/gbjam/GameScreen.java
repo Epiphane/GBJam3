@@ -60,9 +60,9 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		player = EntityFactory.generate("player", this);
-		player.setX(50);
-		player.setY(8);
+		Entity player = EntityFactory.generate("player", this);
+		player.setX(19*8);
+		player.setY(15*8);
 		addEntity(player);
 
 		Entity dragon = EntityFactory.generate("dragon", this);
@@ -70,13 +70,16 @@ public class GameScreen implements Screen {
 		dragon.setY(50);
 		addEntity(dragon);
 		
-		TiledMap map = new TmxMapLoader().load("maps/boss.tmx");
+		TiledMap map = new TmxMapLoader().load("maps/test_rando.tmx");
+		
+		MapGenerator.initMap(map);
+		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 8);
 		GraphicsService.setMapHeight(((Integer) map.getProperties().get("height")) * 8);
 
 		Entity platform = EntityFactory.generate("platform", this);
-		for(MapObject object : map.getLayers().get(1).getObjects()) {
+		for(MapObject object : map.getLayers().get("Walls").getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
 				platform.setX(Float.parseFloat(object.getProperties().get("x").toString()));

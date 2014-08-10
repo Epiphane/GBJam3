@@ -116,7 +116,7 @@
 			"class": "com.gbjam.game_components.collision.EnemyCollisionComponent",
 		},
 		"physics": {
-			"class": "com.gbjam.game_components.physics.PlayerPhysicsComponent"
+			"class": "com.gbjam.game_components.physics.CharacterPhysicsComponent"
 		},
 		"input": {
 			"class": "com.gbjam.game_components.input.AIInputComponent"
