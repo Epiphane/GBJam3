@@ -38,6 +38,14 @@ public class GeneratorComponent {
 		template = _template;
 	}
 	
+	public void setTemplate(int i) {
+		// Override me!
+	}
+	
+	public int getTemplate() { 
+		return 0; 
+	}
+	
 	public void setSoundToPlay(int _soundToPlay) {
 		soundToPlay = _soundToPlay;
 	}
