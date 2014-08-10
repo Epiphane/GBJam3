@@ -111,21 +111,25 @@ public class DynamicCollisionComponent extends CollisionComponent {
 			// BUTT
 			if (polygonContainsPoints(collideGon, bottomRight, bottomLeft)) {
 				stomped(entity, collider);
-			}
-			
-			// LEFT
-			if (polygonContainsPoints(collideGon, leftBottom, leftTop)) {
-				bumpedWithLeftSide(entity, collider);
+				continue;
 			}
 			
 			// TOP
 			if (polygonContainsPoints(collideGon, topLeft, topRight)) {
 				bangedHeadOn(entity, collider);
+				continue;
+			}
+			
+			// LEFT
+			if (polygonContainsPoints(collideGon, leftBottom, leftTop)) {
+				bumpedWithLeftSide(entity, collider);
+				continue;
 			}
 			
 			// RIGHT
 			if (polygonContainsPoints(collideGon, rightTop, rightBottom)) {
 				bumpedWithRightSide(entity, collider);
+				continue;
 			}
 			
 		}

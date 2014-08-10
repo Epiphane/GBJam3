@@ -2,6 +2,7 @@ package com.gbjam;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.game_components.collision.CollisionComponent;
 import com.gbjam.game_components.generator.GeneratorComponent;
@@ -95,10 +96,10 @@ public class Entity {
 
 	public void update(float delta, ArrayList<Entity> entities) {
 		// Update according to input
-		if (input != null)
-			input.update(this);
 		if (status != null)
 			status.update(this);
+		if (input != null)
+			input.update(this);
 
 		// Then game logic
 		if (physics != null)
@@ -221,14 +222,22 @@ public class Entity {
 
 	public void inflictStatus(StatusType status, int extent) {
 		if(this.status != null) {
-			if(status == StatusType.HURT && attributes != null) {
+			switch(status) {
+			case HURT:
 				int health = attributes.getAttribute(AttribType.HEALTH) - extent;
 				attributes.setAttribute(AttribType.HEALTH, health);
-				this.status.setStatus(StatusType.HURT, true);
-				if(health <= 0)
-					this.status.setStatus(StatusType.DEAD, true);
+				break;
+			case KNOCKBACK:
+				setDX(3 * extent);
+				setDY(dy + 2);
+				break;
 			}
 		}
+		
+		if(attributes != null && attributes.getAttribute(AttribType.HEALTH) <= 0)
+			this.status.setStatus(StatusType.DEAD, true);
+		
+		this.status.setStatus(status, true);
 	}
 	
 	public boolean is(StatusType _status) {
@@ -242,11 +251,19 @@ public class Entity {
 	}
 
 	public int getAttribute(AttribType attrib) {
-		return attributes.getAttribute(attrib);
+		if(attributes != null)
+			return attributes.getAttribute(attrib);
+		else {
+			Gdx.app.log("WARNING", "Getting attribute " + attrib + ", but I have no AttributeComponent!");
+			return 0;
+		}
 	}
 
 	public void setAttribute(AttribType attrib, int val) {
-		attributes.setAttribute(attrib, val);
+		if(attributes != null)
+			attributes.setAttribute(attrib, val);
+		else
+			Gdx.app.log("WARNING", "Setting attribute " + attrib + ", but I have no AttributeComponent!");
 	}
 
 	public int getLifespan() {

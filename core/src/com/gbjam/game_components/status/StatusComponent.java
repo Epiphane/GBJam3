@@ -1,13 +1,15 @@
 package com.gbjam.game_components.status;
 
 import com.gbjam.Entity;
+import com.gbjam.game_components.status.AttributeComponent.AttribType;
 
 public class StatusComponent {
 	public enum StatusType {
 		HURT,
 		RECOIL,
 		ALIVE,
-		DEAD
+		DEAD, 
+		KNOCKBACK
 	}
 	
 	public int statusTicks[];
@@ -19,6 +21,7 @@ public class StatusComponent {
 		statusTicks[StatusType.HURT.ordinal()] = 75;
 		statusTicks[StatusType.RECOIL.ordinal()] = 15;
 		statusTicks[StatusType.DEAD.ordinal()] = -1;
+		statusTicks[StatusType.KNOCKBACK.ordinal()] = -1;
 
 		statusTicks[StatusType.ALIVE.ordinal()] = -1;
 		statuses[StatusType.ALIVE.ordinal()] = -1;
@@ -41,6 +44,11 @@ public class StatusComponent {
 		
 		if(statuses[StatusType.ALIVE.ordinal()] == 0)
 			statuses[StatusType.DEAD.ordinal()] = -1;
+		
+		if(statuses[StatusType.KNOCKBACK.ordinal()] != 0 && object.getOnGround() && statuses[StatusType.KNOCKBACK.ordinal()] != statusTicks[StatusType.KNOCKBACK.ordinal()])
+			statuses[StatusType.KNOCKBACK.ordinal()] = 0;
+		if(statuses[StatusType.KNOCKBACK.ordinal()] == statusTicks[StatusType.KNOCKBACK.ordinal()])
+			statuses[StatusType.KNOCKBACK.ordinal()] --;
 	}
 	
 	public void setStatus(StatusType status, boolean state) {
