@@ -30,6 +30,13 @@ public class WalkingCollisionComponent extends DynamicCollisionComponent {
 	@Override
 	protected boolean bangedHeadOn(Entity me, Entity other) {
 		if (other.getCollisionComponent().type == ColliderType.PLATFORM) {
+			float diff = me.getX() % 16 - 10;
+			if (Math.abs(diff) < 0.5) {
+				// Close enough.  Let 'em by.
+				me.setX(me.getX() - diff);
+				return false;
+			}
+			
 			me.setDY(0);
 			return true;
 		}

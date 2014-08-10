@@ -16,6 +16,7 @@ public class PlayerCollisionComponent extends WalkingCollisionComponent {
 		return super.stomped(me, stompedGuy);
 	}
 	
+	@Override
 	public void update(Entity me, ArrayList<Entity> entities) {
 		super.update(me, entities);
 

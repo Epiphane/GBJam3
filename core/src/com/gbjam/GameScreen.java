@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
+import com.gbjam.utility.PointM;
 
 public class GameScreen implements Screen {
 	public static Entity player;
@@ -61,8 +62,8 @@ public class GameScreen implements Screen {
 		
 		// Main Character
 		player = EntityFactory.generate("player", this);
-		player.setX(50);
-		player.setY(8);
+		player.setX(1*16);
+		player.setY(1*16);
 		addEntity(player);
 
 		Entity dragon = EntityFactory.generate("dragon", this);
@@ -70,13 +71,16 @@ public class GameScreen implements Screen {
 		dragon.setY(50);
 		addEntity(dragon);
 		
-		TiledMap map = new TmxMapLoader().load("maps/boss.tmx");
+		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
+		
+		MapGenerator.initSection(map, 2, 2, 6, 13, new PointM((int) player.getX() / 16, (int) player.getY() / 16));
+		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
-		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 8);
-		GraphicsService.setMapHeight(((Integer) map.getProperties().get("height")) * 8);
+		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);
+		GraphicsService.setMapHeight(((Integer) map.getProperties().get("height")) * 16);
 
 		Entity platform = EntityFactory.generate("platform", this);
-		for(MapObject object : map.getLayers().get(1).getObjects()) {
+		for(MapObject object : map.getLayers().get("Walls").getObjects()) {
 			if(object instanceof PolygonMapObject) {
 				platform.setPolygon(((PolygonMapObject) object).getPolygon());
 				platform.setX(Float.parseFloat(object.getProperties().get("x").toString()));

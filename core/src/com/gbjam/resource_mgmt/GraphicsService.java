@@ -28,7 +28,7 @@ public class GraphicsService {
 		camera.update();
 		
 		mapWidth = 160;
-		mapHeight = 144;
+		mapHeight = 256;
 
 		shapeRenderer = new ShapeRenderer(20);
 		shapeRenderer.setColor(1, 0, 0, 1);
