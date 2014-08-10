@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
 		slime.setY(8);
 		addEntity(slime);
 		
-		TiledMap map = new TmxMapLoader().load("maps/test_big.tmx");
+		TiledMap map = new TmxMapLoader().load("maps/test.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 
 		Entity platform = EntityFactory.generate("platform", this);
