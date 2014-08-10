@@ -92,7 +92,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": -1 }
+			{ "type": "ALIVE", "tick": 5 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -134,44 +134,33 @@
 	},
 	{
 		"class": "entity",
-		"colliderType": "BOSS",
-		"type": "dragon",
-		"polygon": [ 41, 0, 53, 0, 63, 20, 63, 94, 40, 91, 26, 81, 2, 27 ],
-		"graphicOffset": { "x": -2, "y": 0 },
+		"colliderType": "ENEMY_BULLET",
+		"type": "enemyFire",
 		"graphics": {
-			"class": "com.gbjam.game_components.graphics.DragonGraphicsComponent"
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},
 		"collision": {
-			"class": "com.gbjam.game_components.collision.BigEnemyCollisionComponent",
+			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
 		},
 		"physics": {
-			"class": "com.gbjam.game_components.physics.PhysicsComponent"
-		},
-		"input": {
-			"class": "com.gbjam.game_components.input.DragonInputComponent"
+			"class": "com.gbjam.game_components.physics.FirePhysicsComponent"
 		},
 		"status": {
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "RECOIL", "tick": 1 }
+			{ "type": "ALIVE", "tick": -1 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 150 },
-			{ "type": "ATTACK", "val": 50 }
+			{ "type": "ATTACK", "val": 1 }
 		],
-		"generator": {
-			"class": "com.gbjam.game_components.generator.DragonGeneratorComponent",
-			"soundName": "FIRE_SOUND",
-			"offset": {
-				"x": 47,
-				"y": 45
-			}
-		},
-		"template": "enemyBullet"
+		"entity": {
+			"dx": -1,
+			"dy": -1
+		}
 	},
 	{
 		"class": "entity",
@@ -198,5 +187,46 @@
 		"entity": {
 			"dx": -5
 		}
+	},
+	{
+		"class": "entity",
+		"colliderType": "BOSS",
+		"type": "dragon",
+		"polygon": [ 41, 0, 53, 0, 63, 20, 63, 94, 40, 91, 26, 81, 2, 27 ],
+		"graphicOffset": { "x": -2, "y": 0 },
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.DragonGraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.BigEnemyCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.PhysicsComponent"
+		},
+		"input": {
+			"class": "com.gbjam.game_components.input.DragonInputComponent"
+		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"statusTicks": [
+			{ "type": "RECOIL", "tick": 1 }
+		],
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "HEALTH", "val": 750 },
+			{ "type": "ATTACK", "val": 50 }
+		],
+		"generator": {
+			"class": "com.gbjam.game_components.generator.DragonGeneratorComponent",
+			"soundName": "FIRE_SOUND",
+			"offset": {
+				"x": 47,
+				"y": 45
+			}
+		},
+		"template": "enemyBullet"
 	}
 ]

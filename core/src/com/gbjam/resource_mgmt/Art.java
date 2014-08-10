@@ -48,7 +48,7 @@ public class Art {
 			return Art.slime;
 		else if(type.equals("bullet") || type.equals("enemyBullet"))
 			return Art.bullet;
-		else if(type.equals("fire"))
+		else if(type.equals("fire") || type.equals("enemyFire"))
 			return Art.fire;
 		else if(type.equals("dragon"))
 			return Art.dragon;
