@@ -1,10 +1,16 @@
 package com.gbjam.game_components.collision;
 
 import com.gbjam.Entity;
+import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 
 public class EnemyCollisionComponent extends WalkingCollisionComponent {
+	public void init(ColliderType _type) {
+		super.init(_type);
+		filter[ColliderType.PLAYER.ordinal()] = true;
+	}
+	
 	protected boolean bumpedWithLeftSide(Entity me, Entity collider) {
 		// HAH. DIE, PLAYER SCUM
 		if(!collider.is(StatusType.HURT) && collider.getCollisionComponent().type == ColliderType.PLAYER) {

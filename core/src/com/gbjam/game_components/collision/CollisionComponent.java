@@ -26,6 +26,7 @@ public class CollisionComponent {
 		ENEMY,
 		PLAYER,
 		POWERUP,
+		BOSS,
 		BULLET
 	}
 	
@@ -46,8 +47,17 @@ public class CollisionComponent {
 		if(GBJam3.DEBUG) {
 			Polygon polygon = entity.getPolygon();
 			float v[] = polygon.getTransformedVertices();
-			float vertices[] = new float[] { v[0], v[1], v[4], v[5] };
-			GraphicsService.drawRect(vertices);
+			for(int i = 0; i < v.length; i += 2) {
+				float vertices[];
+				if(i < v.length - 2)
+					vertices = new float[] { v[i], v[i + 1], v[i + 2], v[i + 3] };
+				else
+					vertices = new float[] { v[i], v[i + 1], v[0], v[1] };
+				
+				GraphicsService.drawLine(vertices);
+			}
+			//float vertices[] = new float[] { v[0], v[1], v[4], v[5] };
+			//GraphicsService.drawRect(vertices);
 		}
 		
 		// do nothing, liek i said

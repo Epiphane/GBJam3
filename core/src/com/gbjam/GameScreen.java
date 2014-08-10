@@ -63,9 +63,14 @@ public class GameScreen implements Screen {
 		player.setY(8);
 		addEntity(player);
 
+		Entity dragon = EntityFactory.generate("dragon", this);
+		dragon.setX(90);
+		dragon.setY(40);
+		addEntity(dragon);
+
 		Entity slime = EntityFactory.generate("slime", this);
-		slime.setX(130);
-		slime.setY(8);
+		slime.setX(90);
+		slime.setY(40);
 		addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/boss.tmx");

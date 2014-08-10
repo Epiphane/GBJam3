@@ -76,5 +76,9 @@ public class GraphicsService {
 		batch.end();
 		shapeRenderer.end();
 	}
+
+	public static void drawLine(float[] vertices) {
+		shapeRenderer.line(vertices[0], vertices[1], vertices[2], vertices[3]);
+	}
 }
 
