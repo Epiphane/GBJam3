@@ -17,7 +17,7 @@ public class GBJam3 extends Game {
 	public static final int GAME_HEIGHT = 144;
 	
 	@Override
-	public void create() {
+	public void create() { 
 		try {
 			Art.load();
 			Sounds.load();

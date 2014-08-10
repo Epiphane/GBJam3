@@ -28,8 +28,8 @@ public class GraphicsService {
 		camera.setToOrtho(false, GBJam3.GAME_WIDTH, GBJam3.GAME_HEIGHT);
 		camera.update();
 		
-		mapWidth = 160;
-		mapHeight = 256;
+		mapWidth = 1600;
+		mapHeight = 16*14;
 
 		shapeRenderer = new ShapeRenderer(20);
 		shapeRenderer.setColor(1, 0, 0, 1);
