@@ -17,7 +17,8 @@ import com.gbjam.utility.Utility;
 
 public class MapGenerator {
 	public static void initSection(TiledMap map, int baseX, int baseY, 
-			int chunkSizeWidth, int chunkSizeHeight) {
+			int chunkSizeWidth, int chunkSizeHeight,
+			PointM playerPos) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 		cell.setTile(new StaticTiledMapTile(Art.platform.textures[0][0]));
@@ -28,7 +29,9 @@ public class MapGenerator {
 		MapObjects objects = wallLayer.getObjects();
 		
 		boolean[][] occupiedCells = new boolean[chunkSizeWidth][chunkSizeHeight];
-
+		occupiedCells[playerPos.x][playerPos.y] = true;
+		occupiedCells[playerPos.x][playerPos.y + 1] = true;
+		
 		for (int platformSize = 5; platformSize > 2; platformSize --) {
 
 			boolean doneWithSize = false;

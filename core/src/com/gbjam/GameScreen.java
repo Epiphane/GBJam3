@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
+import com.gbjam.utility.PointM;
 
 public class GameScreen implements Screen {
 	public static Entity player;
@@ -60,7 +61,7 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity player = EntityFactory.generate("player", this);
+		player = EntityFactory.generate("player", this);
 		player.setX(1*16);
 		player.setY(1*16);
 		addEntity(player);
@@ -72,7 +73,7 @@ public class GameScreen implements Screen {
 		
 		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
 		
-		MapGenerator.initSection(map, 1, 1, 7, 14);
+		MapGenerator.initSection(map, 2, 2, 6, 13, new PointM((int) player.getX() / 16, (int) player.getY() / 16));
 		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);

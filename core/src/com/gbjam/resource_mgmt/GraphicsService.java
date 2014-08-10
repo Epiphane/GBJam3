@@ -88,8 +88,6 @@ public class GraphicsService {
 		camera.position.x = x;
 		camera.position.y = y;
 		
-		System.out.println("Camera pos: " + x + ", " + y);
-		
 		if(camera.position.x < GBJam3.GAME_WIDTH / 2)
 			camera.position.x = GBJam3.GAME_WIDTH / 2;
 		if(camera.position.x > mapWidth - GBJam3.GAME_WIDTH / 2)

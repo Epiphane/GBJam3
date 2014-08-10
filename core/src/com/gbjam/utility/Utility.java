@@ -58,7 +58,8 @@ public class Utility {
 	/** Generate random number in [min, max) */
 	public static int random(int min, int max) {
 		if (gen == null) {
-			gen = new Random(SEED);
+//			gen = new Random(SEED);
+			gen = new Random();
 		}
 		
 		return gen.nextInt(max - min) + min;
