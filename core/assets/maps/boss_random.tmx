@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="16" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="butts" tilewidth="16" tileheight="16">
+  <image source="../bg/test_tiles.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Foreground" width="10" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYCQSMxGBR9WNqoOpIwYDAGlPAR8=
+  </data>
+ </layer>
+ <objectgroup name="Walls" width="10" height="16">
+  <object x="0" y="16">
+   <polygon points="0,0 160,0 160,-16 0,-16"/>
+  </object>
+  <object x="0" y="256">
+   <polygon points="0,0 160,0 160,-16 0,-16"/>
+  </object>
+  <object x="0" y="240">
+   <polygon points="0,0 0,-224 16,-224 16,0"/>
+  </object>
+ </objectgroup>
+</map>

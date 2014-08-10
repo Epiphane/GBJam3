@@ -28,7 +28,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "RECOIL", "tick": 3 }
+			{ "type": "RECOIL", "tick": 15 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -40,14 +40,14 @@
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
 		},
 		"generator": {
-			"class": "com.gbjam.game_components.generator.FireGeneratorComponent",
+			"class": "com.gbjam.game_components.generator.ShotgunGeneratorComponent",
 			"soundName": "FIRE_SOUND",
 			"offset": {
 				"x": -5,
 				"y": 4
 			}
 		},
-		"template": "fire"
+		"template": "bullet"
 	},
 	{
 		"class": "entity",

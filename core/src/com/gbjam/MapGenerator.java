@@ -16,9 +16,8 @@ import com.gbjam.utility.PointM;
 import com.gbjam.utility.Utility;
 
 public class MapGenerator {
-	private static int chunkSizeWidth = 100, chunkSizeHeight = 90;
-
-	public static void initSection(TiledMap map, int baseX, int baseY) {
+	public static void initSection(TiledMap map, int baseX, int baseY, 
+			int chunkSizeWidth, int chunkSizeHeight) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 		cell.setTile(new StaticTiledMapTile(Art.platform.textures[0][0]));
@@ -30,21 +29,21 @@ public class MapGenerator {
 		
 		boolean[][] occupiedCells = new boolean[chunkSizeWidth][chunkSizeHeight];
 
-		for (int platformSize = 8; platformSize > 2; platformSize --) {
+		for (int platformSize = 5; platformSize > 2; platformSize --) {
 
 			boolean doneWithSize = false;
 			while (!doneWithSize) {
 				ArrayList<PointM> platformOffsets = new ArrayList<PointM>();
 				PointM currPosition = new PointM(0, 0);
 
-				int currDirection = Utility.random(0, 4) * 2;
+				int currDirection = Utility.random(0, 2) * 4 + 2;
 
 				for (int tilesMade = 0; tilesMade < Utility.random(2, platformSize); tilesMade++) {
 					if (platformOffsets.indexOf(currPosition) == -1)
 						platformOffsets.add(currPosition.clone());
 					
-					int whereToGo = Utility.random(0, 4);
-					// 0-1, stay same direction (do nothing)
+					int whereToGo = Utility.random(0, 12);
+					// 0-3, stay same direction (do nothing)
 					// 2, turn left
 					if (whereToGo == 2) {
 						currDirection = Utility.keepInRange(currDirection - 2, 8);
@@ -55,8 +54,6 @@ public class MapGenerator {
 						currDirection = Utility.keepInRange(currDirection + 2, 8);
 					}
 					
-					System.out.println("Directino is now " + currDirection);
-
 					// Change the position of the point
 					currPosition.addPoint(Utility.pointMFromDir(currDirection));
 				}
@@ -105,17 +102,5 @@ public class MapGenerator {
 				} // end "x" for loop
 			}
 		}
-
-		
-		
-		
-
-//		MapProperties props = coolNewObject.getProperties();
-//		props.put("x", 20*8);
-//		props.put("y", 16*8);
-//		objects.add(coolNewObject);
-//
-//		drawingLayer.setCell(20, 16, cell);
-//		drawingLayer.setCell(21, 16, cell);
 	}
 }

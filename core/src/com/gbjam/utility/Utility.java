@@ -52,7 +52,7 @@ public class Utility {
 		return -1;
 	}
 	
-	private static final long SEED = 37;
+	private static final long SEED = 69;
 	private static Random gen;
 	
 	/** Generate random number in [min, max) */
@@ -87,7 +87,7 @@ public class Utility {
 		int height = occupiedCells[0].length; // returns the height, mmkay?
 		int width = occupiedCells.length;
 
-		for (int ndxY = iy - 2; ndxY < iy + 4; ndxY++) {
+		for (int ndxY = iy - 2; ndxY < iy + 3; ndxY++) {
 			for (int ndxX = ix - 1; ndxX < ix + 2; ndxX++) {
 				if (ndxY >= 0 && ndxY < height && ndxX >= 0 && ndxX < width) {
 					occupiedCells[ndxX][ndxY] = true;

@@ -28,7 +28,7 @@ public class GraphicsService {
 		camera.update();
 		
 		mapWidth = 160;
-		mapHeight = 144;
+		mapHeight = 256;
 
 		shapeRenderer = new ShapeRenderer(20);
 		shapeRenderer.setColor(1, 0, 0, 1);
@@ -87,6 +87,8 @@ public class GraphicsService {
 	public static void setCamera(float x, float y) {
 		camera.position.x = x;
 		camera.position.y = y;
+		
+		System.out.println("Camera pos: " + x + ", " + y);
 		
 		if(camera.position.x < GBJam3.GAME_WIDTH / 2)
 			camera.position.x = GBJam3.GAME_WIDTH / 2;
