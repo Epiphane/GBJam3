@@ -24,6 +24,7 @@ public class CollisionComponent {
 	public enum ColliderType {
 		PLATFORM,
 		ENEMY,
+		ENEMY_BULLET,
 		PLAYER,
 		POWERUP,
 		BOSS,

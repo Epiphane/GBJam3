@@ -15,6 +15,8 @@ import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
 
 public class GameScreen implements Screen {
+	public static Entity player;
+	
 	private ArrayList<Entity> entities, newEntities;
 	
 	private class ExitCommand implements Command {
@@ -31,7 +33,7 @@ public class GameScreen implements Screen {
 		// Add new entities to list of entities to compute
 		// (To avoid Concurrent Modification)
 		while(newEntities.size() > 0) {
-			entities.add(0, newEntities.remove(0));
+			entities.add(newEntities.remove(0));
 		}
 		
 		ArrayList<Entity> toRemove = new ArrayList<Entity>();
@@ -58,23 +60,20 @@ public class GameScreen implements Screen {
 		newEntities = new ArrayList<Entity>();
 		
 		// Main Character
-		Entity player = EntityFactory.generate("player", this);
+		player = EntityFactory.generate("player", this);
 		player.setX(50);
 		player.setY(8);
 		addEntity(player);
 
 		Entity dragon = EntityFactory.generate("dragon", this);
-		dragon.setX(90);
-		dragon.setY(40);
+		dragon.setX(96);
+		dragon.setY(50);
 		addEntity(dragon);
-
-		Entity slime = EntityFactory.generate("slime", this);
-		slime.setX(90);
-		slime.setY(40);
-		addEntity(slime);
 		
 		TiledMap map = new TmxMapLoader().load("maps/boss.tmx");
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
+		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 8);
+		GraphicsService.setMapHeight(((Integer) map.getProperties().get("height")) * 8);
 
 		Entity platform = EntityFactory.generate("platform", this);
 		for(MapObject object : map.getLayers().get(1).getObjects()) {

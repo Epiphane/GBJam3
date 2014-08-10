@@ -12,9 +12,9 @@ import com.gbjam.utility.Point;
 public class GraphicsComponent {
 	private TextureRegion[][] textures;
 	/** Which frame the sprite is on. */
-	private int frame = 0;
+	protected int frame = 0;
 	/** Which 'state' the sprite is in - changes on direction change / hurt or not, etc */
-	private int state = 0;
+	protected int state = 0;
 	protected int ticksSinceLastFrame = 0;
 	
 	/** How many frames make up each state of the player */

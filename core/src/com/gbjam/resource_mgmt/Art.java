@@ -11,7 +11,7 @@ public class Art {
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 8, 8, 2, 2, 2, 2, 2, 2);
-		dragon = new AnimationSheet("dragon.png", 4);
+		dragon = new AnimationSheet("dragon.png", 4, 1);
 		slime = new AnimationSheet("slime.png", 1, 1);
 		bullet = new AnimationSheet("weapon/bullet.png", 1);
 		fire = new AnimationSheet("weapon/fire.png", 1);
@@ -46,7 +46,7 @@ public class Art {
 			return Art.character;
 		else if(type.equals("slime"))
 			return Art.slime;
-		else if(type.equals("bullet"))
+		else if(type.equals("bullet") || type.equals("enemyBullet"))
 			return Art.bullet;
 		else if(type.equals("fire"))
 			return Art.fire;

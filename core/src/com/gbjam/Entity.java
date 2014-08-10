@@ -24,6 +24,9 @@ public class Entity {
 	private AttributeComponent attributes;
 	private InputComponent input;
 	private GeneratorComponent generator;
+	
+	/** For graphics */
+	private boolean facingRight;
 
 	/** Physics-related values */
 	private Polygon polygon;
@@ -41,8 +44,6 @@ public class Entity {
 	private boolean onGround;
 	
 	private boolean initialized;
-	
-	private int lifespan;
 	
 	public Entity() {
 	}
@@ -64,7 +65,6 @@ public class Entity {
 					size.getW(), size.getH(), 0, size.getH() });
 		}
 	
-		setLifespan(-1); // immortal
 		initialized = true;
 	}
 	
@@ -85,7 +85,6 @@ public class Entity {
 		newEntity.dy = dy;
 		newEntity.generate = generate;
 		newEntity.genTime = genTime;
-		newEntity.lifespan = lifespan;
 		if(polygon != null) {
 			newEntity.polygon = new Polygon(polygon.getVertices());
 			newEntity.polygon.setPosition(x, y);
@@ -266,11 +265,11 @@ public class Entity {
 			Gdx.app.log("WARNING", "Setting attribute " + attrib + ", but I have no AttributeComponent!");
 	}
 
-	public int getLifespan() {
-		return lifespan;
+	public boolean getFacingRight() {
+		return facingRight;
 	}
 
-	public void setLifespan(int lifespan) {
-		this.lifespan = lifespan;
+	public void setFacingRight(boolean faceRight) {
+		this.facingRight = faceRight;
 	}
 }

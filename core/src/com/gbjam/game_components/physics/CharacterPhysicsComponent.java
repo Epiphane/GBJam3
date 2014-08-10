@@ -19,5 +19,12 @@ public class CharacterPhysicsComponent extends PhysicsComponent {
 		
 		object.setX(object.getX() + object.getDX());
 		object.setY(object.getY() + object.getDY());
+		
+		if(object.getDX() > 0 && !object.getFacingRight()) {
+			object.setFacingRight(true);
+		}
+		if(object.getDX() < 0 && object.getFacingRight()) {
+			object.setFacingRight(false);
+		}
 	}
 }

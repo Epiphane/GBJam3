@@ -1,10 +1,17 @@
 package com.gbjam.game_components.physics;
 
-import com.badlogic.gdx.Gdx;
 import com.gbjam.Entity;
 
 public class PhysicsComponent {
-	public void update(Entity object) {
-		Gdx.app.log("ERROR", "Physics not implemented!");
+	public void update(Entity object) {		
+		object.setX(object.getX() + object.getDX());
+		object.setY(object.getY() + object.getDY());
+		
+		if(object.getDX() > 0 && !object.getFacingRight()) {
+			object.setFacingRight(true);
+		}
+		if(object.getDX() < 0 && object.getFacingRight()) {
+			object.setFacingRight(false);
+		}
 	}
 }

@@ -43,7 +43,7 @@
 			"class": "com.gbjam.game_components.generator.FireGeneratorComponent",
 			"soundName": "FIRE_SOUND",
 			"offset": {
-				"x": 11,
+				"x": -5,
 				"y": 4
 			}
 		},
@@ -92,7 +92,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": 15 }
+			{ "type": "ALIVE", "tick": -1 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -139,13 +139,49 @@
 		"polygon": [ 41, 0, 53, 0, 63, 20, 63, 94, 40, 91, 26, 81, 2, 27 ],
 		"graphicOffset": { "x": -2, "y": 0 },
 		"graphics": {
-			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+			"class": "com.gbjam.game_components.graphics.DragonGraphicsComponent"
 		},
 		"collision": {
 			"class": "com.gbjam.game_components.collision.BigEnemyCollisionComponent",
 		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.PhysicsComponent"
+		},
 		"input": {
 			"class": "com.gbjam.game_components.input.DragonInputComponent"
+		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"statusTicks": [
+			{ "type": "RECOIL", "tick": 1 }
+		],
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "HEALTH", "val": 150 },
+			{ "type": "ATTACK", "val": 50 }
+		],
+		"generator": {
+			"class": "com.gbjam.game_components.generator.DragonGeneratorComponent",
+			"soundName": "FIRE_SOUND",
+			"offset": {
+				"x": 47,
+				"y": 45
+			}
+		},
+		"template": "enemyBullet"
+	},
+	{
+		"class": "entity",
+		"colliderType": "ENEMY_BULLET",
+		"type": "enemyBullet",
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
 		},
 		"status": {
 			"class": "com.gbjam.game_components.status.StatusComponent"
@@ -154,8 +190,13 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 150 },
-			{ "type": "ATTACK", "val": 50 }
-		]
+			{ "type": "ATTACK", "val": 5 }
+		],
+		"physics": {
+			"class": "com.gbjam.game_components.physics.BulletPhysicsComponent"
+		},
+		"entity": {
+			"dx": -5
+		}
 	}
 ]

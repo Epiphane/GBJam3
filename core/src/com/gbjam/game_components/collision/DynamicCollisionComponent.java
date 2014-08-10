@@ -68,6 +68,9 @@ public class DynamicCollisionComponent extends CollisionComponent {
 		Point rightBottom = new Point(v[4] + smidge, v[1]);
 		
 		for (Entity collider : entities) {
+			if (!filter[collider.getCollisionComponent().type.ordinal()])
+				continue;
+			
 			if (entity == collider || collider.getCollisionComponent() == null)
 				continue;
 			
