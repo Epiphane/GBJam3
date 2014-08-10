@@ -1,7 +1,7 @@
 package com.gbjam.game_components.collision;
 
+import com.badlogic.gdx.math.Polygon;
 import com.gbjam.Entity;
-import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 
@@ -13,7 +13,8 @@ public class BulletCollisionComponent extends DynamicCollisionComponent {
 		filter[ColliderType.BOSS.ordinal()] = true;
 	}
 	
-	protected void collideAnyDir(Entity me, Entity collider) {
+	@Override
+	protected void collideAnyDir(Polygon myPolygon, Entity me, Entity collider) {
 		if(collider.getCollisionComponent().type == ColliderType.ENEMY ||
 				collider.getCollisionComponent().type == ColliderType.BOSS) {
 			collider.inflictStatus(StatusType.HURT, me.getAttribute(AttribType.ATTACK));

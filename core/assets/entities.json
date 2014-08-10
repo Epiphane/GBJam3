@@ -137,7 +137,7 @@
 		"colliderType": "BOSS",
 		"type": "dragon",
 		"polygon": [ 41, 0, 53, 0, 63, 20, 63, 94, 40, 91, 26, 81, 2, 27 ],
-		"graphicOffset": { "x": 2, "y": 0 },
+		"graphicOffset": { "x": -2, "y": 0 },
 		"graphics": {
 			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},

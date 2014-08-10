@@ -2,7 +2,6 @@ package com.gbjam.game_components.collision;
 
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.Entity;
-import com.gbjam.game_components.collision.CollisionComponent.ColliderType;
 import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 
@@ -12,10 +11,5 @@ public class BigEnemyCollisionComponent extends EnemyCollisionComponent {
 			collider.inflictStatus(StatusType.HURT, me.getAttribute(AttribType.ATTACK));
 			collider.inflictStatus(StatusType.KNOCKBACK, -1);
 		}
-	}
-	
-	protected void stomped(Entity me, Entity stompedGuy) {
-		// override me!
-		System.out.println("hit butt");
 	}
 }

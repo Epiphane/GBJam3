@@ -70,6 +70,9 @@ public class EntityFactory {
 		for(EntityInfo entityInfo : entityInfos) {
 			if(entityInfo.graphics != null)
 				entityInfo.graphics.init(Art.getArt(entityInfo.type));
+			if(entityInfo.graphicOffset != null)
+				entityInfo.graphics.setTextureOffset(entityInfo.graphicOffset);
+			
 			if(entityInfo.collision != null)
 				entityInfo.collision.init(entityInfo.colliderType);
 			

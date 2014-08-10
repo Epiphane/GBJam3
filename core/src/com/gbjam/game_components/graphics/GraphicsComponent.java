@@ -38,7 +38,7 @@ public class GraphicsComponent {
 	}
 	
 	public void render(Entity object) {
-		GraphicsService.draw(textures[frame][state], object.getX() - textureOffset.getX(), object.getY() - textureOffset.getY());
+		GraphicsService.draw(textures[frame][state], object.getX(), object.getY());
 		ticksSinceLastFrame++;
 	}
 	
