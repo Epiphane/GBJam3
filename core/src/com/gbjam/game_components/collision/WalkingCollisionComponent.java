@@ -18,17 +18,21 @@ public class WalkingCollisionComponent extends DynamicCollisionComponent {
 	}
 
 	@Override
-	protected void stomped(Entity me, Entity other) {
+	protected boolean stomped(Entity me, Entity other) {
 		if (other.getCollisionComponent().type == ColliderType.PLATFORM) {
 			me.setOnGround(true);
 			me.setDY(0);
+			return true;
 		}
+		return false;
 	}
 	
 	@Override
-	protected void bangedHeadOn(Entity me, Entity other) {
+	protected boolean bangedHeadOn(Entity me, Entity other) {
 		if (other.getCollisionComponent().type == ColliderType.PLATFORM) {
 			me.setDY(0);
+			return true;
 		}
+		return false;
 	}
 }

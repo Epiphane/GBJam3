@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import com.gbjam.Entity;
 import com.gbjam.utility.Point;
 
@@ -110,26 +109,26 @@ public class DynamicCollisionComponent extends CollisionComponent {
 			
 			// BUTT
 			if (polygonContainsPoints(collideGon, bottomRight, bottomLeft)) {
-				stomped(entity, collider);
-				continue;
+				if(stomped(entity, collider))
+					continue;
 			}
 			
 			// TOP
 			if (polygonContainsPoints(collideGon, topLeft, topRight)) {
-				bangedHeadOn(entity, collider);
-				continue;
+				if(bangedHeadOn(entity, collider))
+					continue;
 			}
 			
 			// LEFT
 			if (polygonContainsPoints(collideGon, leftBottom, leftTop)) {
-				bumpedWithLeftSide(entity, collider);
-				continue;
+				if(bumpedWithLeftSide(entity, collider))
+					continue;
 			}
 			
 			// RIGHT
 			if (polygonContainsPoints(collideGon, rightTop, rightBottom)) {
-				bumpedWithRightSide(entity, collider);
-				continue;
+				if(bumpedWithRightSide(entity, collider))
+					continue;
 			}
 			
 		}
@@ -141,26 +140,30 @@ public class DynamicCollisionComponent extends CollisionComponent {
 	}
 	
 	
-	protected void stomped(Entity me, Entity stompedGuy) {
+	protected boolean stomped(Entity me, Entity stompedGuy) {
 		// override me!
 //		System.out.println("hit butt");
+		return false;
 	}
 	
-	protected void bumpedWithRightSide(Entity me, Entity collider) {
+	protected boolean bumpedWithRightSide(Entity me, Entity collider) {
 		// override me!
 		blockedRight = true;
 //		System.out.println("hit right");
+		return true;
 	}
 
-	protected void bangedHeadOn(Entity me, Entity collider) {
+	protected boolean bangedHeadOn(Entity me, Entity collider) {
 		// override me!
 //		System.out.println("hit head");
+		return false;
 	}
 
-	protected void bumpedWithLeftSide(Entity me, Entity collider) {
+	protected boolean bumpedWithLeftSide(Entity me, Entity collider) {
 		// override me!
 		blockedLeft = true;
 //		System.out.println("head left");
+		return true;
 	}
 	
 	protected void collideAnyDir(Entity me, Entity collider) {
