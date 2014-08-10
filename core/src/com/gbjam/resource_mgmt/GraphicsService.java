@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.gbjam.GBJam3;
 import com.gbjam.MapRenderer;
 
@@ -64,9 +65,9 @@ public class GraphicsService {
 		shapeRenderer.begin(ShapeType.Line);
 	}
 	
-	public static void draw(TextureRegion texture, int x, int y) {
-		if(texture != null) {
-			batch.draw(texture, x, y);
+	public static void draw(Texture healthbar, float x, float y) {
+		if(healthbar != null) {
+			batch.draw(healthbar, x, y);
 		}
 	}
 	

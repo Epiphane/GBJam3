@@ -40,11 +40,11 @@
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
 		},
 		"generator": {
-			"class": "com.gbjam.game_components.generator.ShotgunGeneratorComponent",
-			"soundName": "FIRE_SOUND",
+			"class": "com.gbjam.game_components.generator.WeaponGeneratorComponent",
+			"soundName": "GUN_SOUND",
 			"offset": {
-				"x": -5,
-				"y": 4
+				"x": 10,
+				"y": 7
 			}
 		},
 		"template": "bullet"
@@ -83,7 +83,7 @@
 			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},
 		"collision": {
-			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
+			"class": "com.gbjam.game_components.collision.FireCollisionComponent",
 		},
 		"physics": {
 			"class": "com.gbjam.game_components.physics.FirePhysicsComponent"
@@ -140,7 +140,7 @@
 			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
 		},
 		"collision": {
-			"class": "com.gbjam.game_components.collision.BulletCollisionComponent",
+			"class": "com.gbjam.game_components.collision.FireCollisionComponent",
 		},
 		"physics": {
 			"class": "com.gbjam.game_components.physics.FirePhysicsComponent"
@@ -155,7 +155,7 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "ATTACK", "val": 1 }
+			{ "type": "ATTACK", "val": 2 }
 		],
 		"entity": {
 			"dx": -1,
@@ -216,7 +216,7 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 750 },
+			{ "type": "HEALTH", "val": 1500 },
 			{ "type": "ATTACK", "val": 50 }
 		],
 		"generator": {

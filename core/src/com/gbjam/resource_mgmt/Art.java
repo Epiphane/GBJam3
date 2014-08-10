@@ -10,7 +10,7 @@ public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire;
 	
-	public static Texture healthbar, health;
+	public static Texture healthbar, health, weapons[];
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 8, 8, 2, 2, 2, 2, 2, 2);
@@ -24,6 +24,10 @@ public class Art {
 		
 		healthbar = new Texture(Gdx.files.internal("healthbar.png"));
 		health = new Texture(Gdx.files.internal("health.png"));
+		weapons = new Texture[3];
+		weapons[0] = new Texture(Gdx.files.internal("weapon/ui/machine.png"));
+		weapons[1] = new Texture(Gdx.files.internal("weapon/ui/fire.png"));
+		weapons[2] = new Texture(Gdx.files.internal("weapon/ui/shotgun.png"));
 	}
 
 	/**
