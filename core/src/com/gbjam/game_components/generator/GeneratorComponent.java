@@ -29,7 +29,7 @@ public class GeneratorComponent {
 
 	public void setWorld(GameScreen _world) {
 		world = _world;
-		if(template.getGeneratorComponent() != null) {
+		if(template != null && template.getGeneratorComponent() != null) {
 			template.getGeneratorComponent().setWorld(_world);
 		}
 	}

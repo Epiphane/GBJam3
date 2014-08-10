@@ -10,7 +10,9 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
+import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.utility.PointM;
@@ -31,6 +33,8 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		GraphicsService.begin();
 		
+		float offsetY = GraphicsService.getCamera().position.y;
+		
 		// Add new entities to list of entities to compute
 		// (To avoid Concurrent Modification)
 		while(newEntities.size() > 0) {
@@ -50,6 +54,12 @@ public class GameScreen implements Screen {
 		for(Entity e : toRemove) {
 			entities.remove(e);
 		}
+		
+		GraphicsService.draw(Art.healthbar, 0, 64 + offsetY);
+		for(int i = 0; i < 30 && i * 3.5f < player.getAttribute(AttribType.HEALTH); i ++)
+			GraphicsService.draw(Art.health, 14 + i * 5, 66 + offsetY);
+
+		GraphicsService.draw(Art.weapons[player.getGeneratorComponent().getTemplate()], 0, 52 + offsetY);
 		
 		GraphicsService.end();
 	}

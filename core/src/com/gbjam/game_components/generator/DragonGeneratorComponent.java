@@ -5,6 +5,7 @@ import com.gbjam.GameScreen;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.RandomizerService;
+import com.gbjam.utility.Point;
 
 public class DragonGeneratorComponent extends MultiGeneratorComponent {
 	@Override
@@ -19,14 +20,8 @@ public class DragonGeneratorComponent extends MultiGeneratorComponent {
 
 	public void setTemplate(int i) {
 		super.setTemplate(i);
-	}
-
-	@Override
-	public void update(Entity other) {
-		super.update(other);
 
 		if(currentTemplate == 0) {
-			other.getStatusComponent().statusTicks[StatusType.RECOIL.ordinal()] = 3;
 			if (GameScreen.player != null) {
 				float distX = GameScreen.player.getX() - template.getX();
 				template.setDX(distX / 20);
@@ -34,7 +29,20 @@ public class DragonGeneratorComponent extends MultiGeneratorComponent {
 				if(distY < -0.2f)
 					template.setDY(distY / 20);
 			}
+			
+			setOffset(new Point(0, 42));
 		}
+		else {
+			setOffset(new Point(47, 45));
+		}
+	}
+
+	@Override
+	public void update(Entity other) {
+		super.update(other);
+		
+		if(currentTemplate == 0)
+			other.getStatusComponent().statusTicks[StatusType.RECOIL.ordinal()] = 3;
 		else
 			other.getStatusComponent().statusTicks[StatusType.RECOIL.ordinal()] = 1;
 
