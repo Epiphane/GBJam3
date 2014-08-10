@@ -10,7 +10,9 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.gbjam.game_components.status.AttributeComponent.AttribType;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
+import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.utility.PointM;
@@ -50,6 +52,10 @@ public class GameScreen implements Screen {
 		for(Entity e : toRemove) {
 			entities.remove(e);
 		}
+		
+		GraphicsService.draw(Art.healthbar, 0, 136);
+		for(int i = 0; i < 30 && i * 3.5f < player.getAttribute(AttribType.HEALTH); i ++)
+			GraphicsService.draw(Art.health, 14 + i * 5, 138);
 		
 		GraphicsService.end();
 	}

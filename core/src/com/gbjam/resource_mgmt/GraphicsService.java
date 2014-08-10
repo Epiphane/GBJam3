@@ -4,11 +4,11 @@ package com.gbjam.resource_mgmt;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Polygon;
 import com.gbjam.GBJam3;
 import com.gbjam.MapRenderer;
 
@@ -71,6 +71,12 @@ public class GraphicsService {
 	}
 	
 	public static void draw(TextureRegion texture, float x, float y) {
+		if(texture != null) {
+			batch.draw(texture, x, y);
+		}
+	}
+	
+	public static void draw(Texture texture, int x, int y) {
 		if(texture != null) {
 			batch.draw(texture, x, y);
 		}

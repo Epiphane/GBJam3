@@ -2,12 +2,15 @@ package com.gbjam.resource_mgmt;
 
 import java.io.IOException;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire;
+	
+	public static Texture healthbar, health;
 	
 	static public void load() throws IOException {
 		character = new AnimationSheet("knight.png", 8, 8, 2, 2, 2, 2, 2, 2);
@@ -18,6 +21,9 @@ public class Art {
 		platform = new AnimationSheet("platform.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
+		
+		healthbar = new Texture(Gdx.files.internal("healthbar.png"));
+		health = new Texture(Gdx.files.internal("health.png"));
 	}
 
 	/**
