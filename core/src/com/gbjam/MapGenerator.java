@@ -12,13 +12,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Polygon;
 import com.gbjam.resource_mgmt.Art;
+import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.utility.PointM;
 import com.gbjam.utility.Utility;
 
 public class MapGenerator {
 	public static void initSection(TiledMap map, int baseX, int baseY, 
 			int chunkSizeWidth, int chunkSizeHeight,
-			PointM playerPos) {
+			PointM playerPos, GameScreen world) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 		cell.setTile(new StaticTiledMapTile(Art.dungeonBrix.textures[0][0]));
@@ -71,7 +72,7 @@ public class MapGenerator {
 						for (int tilesChecked = 0; tilesChecked < platformOffsets.size(); tilesChecked++) {
 							PointM pointToCheck = platformOffsets.get(tilesChecked).clone();
 							pointToCheck.addPoint(x, y);
-							if (!Utility.pointInBounds(pointToCheck, 0, chunkSizeWidth, 0, chunkSizeHeight) || 
+							if (!Utility.pointInBounds(pointToCheck, baseX, chunkSizeWidth, baseY, chunkSizeHeight) || 
 									occupiedCells[(int) pointToCheck.x][(int) pointToCheck.y]) {
 								foundHome = false;
 								break;
@@ -82,10 +83,25 @@ public class MapGenerator {
 							doneWithSize = false;  // this breaks us out of the 'x' and 'y' loop and keeps us IN the 'generating platforms for this level' while loop
 							
 							// Put our cool new platform into the array
+							int horizLength = 0, lastY = 0;;
 							for (int tilesPlaced = 0; tilesPlaced < platformOffsets.size(); tilesPlaced++) {
 								// Occupy the two tiles above and below you lel
 								PointM pointToAdd = platformOffsets.get(tilesPlaced).clone();
 								pointToAdd.addPoint(x, y);
+								if(lastY != pointToAdd.y) {
+									horizLength = 1;
+									lastY = pointToAdd.y;
+								}
+								else {
+									horizLength ++;
+								}
+								
+								if(horizLength > 2) {
+									Entity newEnemy = EntityFactory.getRandomEnemy(2, world);
+									newEnemy.setX(pointToAdd.x * 16);
+									newEnemy.setY(pointToAdd.y * 16 + 16);
+									world.addEntity(newEnemy);
+								}
 								
 								Utility.reserveSpace(occupiedCells, pointToAdd.x, pointToAdd.y);
 

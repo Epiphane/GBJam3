@@ -73,7 +73,9 @@ public class Entity {
 	public Entity clone() {
 		Entity newEntity = new Entity();
 		newEntity.init(graphics, collision, physics, input, status, attributes, generator);
-		
+
+		if(input != null) // Clone one for myself
+			input = input.clone();
 		if(status != null) // Clone one for myself
 			status = status.clone();
 		if(attributes != null)

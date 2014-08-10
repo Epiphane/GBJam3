@@ -32,7 +32,8 @@ public class GameScreen implements Screen {
 	
 	public void render(float delta) {
 		GraphicsService.begin();
-		
+
+		float offsetX = GraphicsService.getCamera().position.x;
 		float offsetY = GraphicsService.getCamera().position.y;
 		
 		// Add new entities to list of entities to compute
@@ -55,11 +56,11 @@ public class GameScreen implements Screen {
 			entities.remove(e);
 		}
 		
-		GraphicsService.draw(Art.healthbar, 0, 64 + offsetY);
+		GraphicsService.draw(Art.healthbar, offsetX - 80, 64 + offsetY);
 		for(int i = 0; i < 30 && i * 3.5f < player.getAttribute(AttribType.HEALTH); i ++)
-			GraphicsService.draw(Art.health, 14 + i * 5, 66 + offsetY);
+			GraphicsService.draw(Art.health, offsetX - 66 + i * 5, 66 + offsetY);
 
-		GraphicsService.draw(Art.weapons[player.getGeneratorComponent().getTemplate()], 0, 52 + offsetY);
+		GraphicsService.draw(Art.weapons[player.getGeneratorComponent().getTemplate()], offsetX - 80, 52 + offsetY);
 		
 		GraphicsService.end();
 	}
@@ -75,15 +76,10 @@ public class GameScreen implements Screen {
 		player.setX(1*16);
 		player.setY(1*16);
 		addEntity(player);
-
-		Entity dragon = EntityFactory.generate("dragon", this);
-		dragon.setX(96);
-		dragon.setY(50);
-		addEntity(dragon);
 		
 		TiledMap map = new TmxMapLoader().load("maps/corridor.tmx");
 		
-		MapGenerator.initSection(map, 2, 2, 6, 13, new PointM((int) player.getX() / 16, (int) player.getY() / 16));
+		MapGenerator.initSection(map, 1, 3, 25, 12, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
 		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);
