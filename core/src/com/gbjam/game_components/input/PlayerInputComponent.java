@@ -60,7 +60,7 @@ public class PlayerInputComponent extends InputComponent {
 		player.setGenerate(shoot);
 		
 		if (jumping && player.getCanJump()) {
-			player.setDY(5);
+			player.setDY(15);
 		}
 	}
 }

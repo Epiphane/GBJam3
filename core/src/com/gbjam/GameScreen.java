@@ -70,9 +70,9 @@ public class GameScreen implements Screen {
 		dragon.setY(50);
 		addEntity(dragon);
 		
-		TiledMap map = new TmxMapLoader().load("maps/test_rando.tmx");
+		TiledMap map = new TmxMapLoader().load("maps/new_random.tmx");
 		
-		MapGenerator.initMap(map);
+		MapGenerator.initSection(map, 0, 10);
 		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 8);
