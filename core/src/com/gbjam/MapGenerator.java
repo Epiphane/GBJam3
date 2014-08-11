@@ -19,7 +19,7 @@ import com.gbjam.utility.Utility;
 public class MapGenerator {
 	public static void initSection(TiledMap map, int baseX, int baseY, 
 			int chunkSizeWidth, int chunkSizeHeight,
-			PointM playerPos, GameScreen world, boolean reserveSpaceForDoor) {
+			PointM playerPos, GameScreen world, boolean isBossLevel) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cells[][] = new TiledMapTileLayer.Cell[4][2];
 		for (int x = 0; x < cells.length; x++) {
@@ -42,7 +42,7 @@ public class MapGenerator {
 		occupiedCells[playerPos.x + 2][playerPos.y] = true;
 		occupiedCells[playerPos.x + 2][playerPos.y + 1] = true;
 		
-		if (reserveSpaceForDoor) {
+		if (!isBossLevel) {
 			for (int ox = -5; ox < 1; ox++) {
 				for (int oy = -5; oy < 1; oy++) {
 					Utility.setCoordsToWhat(occupiedCells, chunkSizeWidth + ox, chunkSizeHeight + oy, true);
@@ -86,8 +86,17 @@ public class MapGenerator {
 					for (int y = 0; y < chunkSizeHeight && doneWithSize; y++) {
 						// Go through each of the points of the platform and see if they fit
 						boolean foundHome = true;
-						int randomX = Utility.random(0, chunkSizeWidth);
-						int randomY = Utility.random(0, chunkSizeHeight);
+						
+						int randomX, randomY;
+						
+						if (isBossLevel) {
+							randomX = Utility.random(0, chunkSizeWidth);
+							randomY = Utility.random(0, chunkSizeHeight);
+						}
+						else {
+							randomX = x;
+							randomY = y;
+						}
 						for (int tilesChecked = 0; tilesChecked < platformOffsets.size(); tilesChecked++) {
 							PointM pointToCheck = platformOffsets.get(tilesChecked).clone();
 							pointToCheck.addPoint(randomX, randomY);
