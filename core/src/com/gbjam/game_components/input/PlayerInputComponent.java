@@ -64,7 +64,7 @@ public class PlayerInputComponent extends InputComponent {
 	
 	public void update(Entity player) {
 		if(!player.is(StatusType.KNOCKBACK))
-			player.setDX(movement.getX() * 2);
+			player.setDX(movement.getX() * 2.2f);
 		
 		player.setGenerate(shoot);
 		
