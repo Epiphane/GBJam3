@@ -58,10 +58,11 @@ public class WeaponGeneratorComponent extends MultiGeneratorComponent {
 			offset = new Point(10 + (other.getFacingRight() ? 5 : -5), 7); 
 			break;
 		}
-		
-		if((other.getDX() > 0) != (template.getDX() > 0) && other.getDX() != 0) {
-			template.setDX(template.getDX() * -1);
-		}
+
+		for(int i = 0; i < 3; i ++)
+			if((other.getDX() > 0) != (entities[i].getDX() > 0) && other.getDX() != 0) {
+					entities[i].setDX(entities[i].getDX() * -1);
+			}
 		
 		template.setX(other.getX());
 		template.setY(other.getY());

@@ -44,6 +44,8 @@ public class Sounds {
 
 	static public void dispose() {
 		gunSound.dispose();
+		machineGunSound.dispose();
+		fireSound.dispose();
 	}
 
 	public static int getSound(String soundName) {

@@ -10,7 +10,7 @@ import com.gbjam.resource_mgmt.GraphicsService;
 import com.gbjam.utility.Point;
 
 public class GraphicsComponent {
-	private TextureRegion[][] textures;
+	protected TextureRegion[][] textures;
 	/** Which frame the sprite is on. */
 	protected int frame = 0;
 	/** Which 'state' the sprite is in - changes on direction change / hurt or not, etc */
@@ -18,9 +18,9 @@ public class GraphicsComponent {
 	protected int ticksSinceLastFrame = 0;
 	
 	/** How many frames make up each state of the player */
-	private int[] numFrames;
+	protected int[] numFrames;
 	
-	private Point textureOffset;
+	protected Point textureOffset;
 	
 	/** This is just for EntityFactory */
 	public GraphicsComponent() {
@@ -31,6 +31,10 @@ public class GraphicsComponent {
 		textures = sheet.textures;
 		numFrames = sheet.numFrames;
 		setTextureOffset(new Point(0, 0));
+	}
+	
+	public GraphicsComponent clone() {
+		return this;
 	}
 	
 	public Point getTextureSize() {

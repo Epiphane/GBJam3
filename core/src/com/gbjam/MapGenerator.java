@@ -104,11 +104,18 @@ public class MapGenerator {
 									horizLength ++;
 								}
 								
-								if(horizLength > 2) {
-									Entity newEnemy = EntityFactory.getRandomEnemy(2, world);
-									newEnemy.setX(pointToAdd.x * 16);
-									newEnemy.setY(pointToAdd.y * 16 + 16);
-									world.addEntity(newEnemy);
+								if(horizLength > 1 && tilesPlaced < platformOffsets.size() - 1) {
+									PointM nextPoint = platformOffsets.get(tilesPlaced).clone();
+									nextPoint.addPoint(x, y);
+									
+									if(lastY == nextPoint.y){ 
+										Entity newEnemy = EntityFactory.getRandomEnemy(((float) (x + Utility.random(0,  10)) / chunkSizeWidth) * 5, world);
+										if(newEnemy != null) {
+											newEnemy.setX(pointToAdd.x * 16);
+											newEnemy.setY(pointToAdd.y * 16 + 16);
+											world.addEntity(newEnemy);											
+										}
+									}
 								}
 								
 								Utility.reserveSpace(occupiedCells, pointToAdd.x, pointToAdd.y);
@@ -128,6 +135,7 @@ public class MapGenerator {
 								if (platformOffsets.indexOf(above) != -1) {
 									textureY = 1;
 								}
+
 								
 								drawingLayer.setCell(pointToAdd.x, pointToAdd.y, cells[textureX][textureY]);
 							}

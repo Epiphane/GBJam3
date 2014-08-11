@@ -42,8 +42,9 @@ public class StatusComponent {
 			if(statuses[i] > 0)
 				statuses[i] --;
 		
-		if(statuses[StatusType.ALIVE.ordinal()] == 0)
+		if(statuses[StatusType.ALIVE.ordinal()] == 0) {
 			statuses[StatusType.DEAD.ordinal()] = -1;
+		}
 		
 		if(statuses[StatusType.KNOCKBACK.ordinal()] != 0 && object.getOnGround() && statuses[StatusType.KNOCKBACK.ordinal()] != statusTicks[StatusType.KNOCKBACK.ordinal()])
 			statuses[StatusType.KNOCKBACK.ordinal()] = 0;

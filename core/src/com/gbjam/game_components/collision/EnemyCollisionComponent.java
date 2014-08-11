@@ -13,6 +13,7 @@ public class EnemyCollisionComponent extends WalkingCollisionComponent {
 	public void init(ColliderType _type) {
 		super.init(_type);
 		filter[ColliderType.PLAYER.ordinal()] = true;
+		filter[ColliderType.ENEMY.ordinal()] = false;
 	}
 	
 	@Override
@@ -37,6 +38,9 @@ public class EnemyCollisionComponent extends WalkingCollisionComponent {
 		Point rightTop = new Point(v[4] + smidge, v[5]);
 		Point rightBottom = new Point(v[4] + smidge, v[1]);
 		
+		boolean hangingRight = false;
+		boolean hangingLeft = false;
+		
 		for (Entity collider : entities) {
 			if (!filter[collider.getCollisionComponent().type.ordinal()])
 				continue;
@@ -49,9 +53,8 @@ public class EnemyCollisionComponent extends WalkingCollisionComponent {
 			// BUTT
 			if (polygonContainsPoints(collideGon, bottomRight, bottomLeft)) {
 				if(collider.getCollisionComponent().type == ColliderType.PLATFORM) {
-					if(collideGon.contains(bottomRight.getX(), bottomRight.getY()) != collideGon.contains(bottomLeft.getX(), bottomLeft.getY())) {
-						blockedRight = blockedLeft = true;
-					}
+					hangingRight |= collideGon.contains(bottomRight.getX(), bottomRight.getY());
+					hangingLeft |= collideGon.contains(bottomLeft.getX(), bottomLeft.getY());
 				}
 				
 				if(stomped(entity, collider))
@@ -76,6 +79,11 @@ public class EnemyCollisionComponent extends WalkingCollisionComponent {
 					continue;
 			}
 			
+		}
+		
+		if(hangingRight != hangingLeft) {
+			blockedRight = !hangingRight;
+			blockedLeft = !hangingLeft;
 		}
 	}
 	

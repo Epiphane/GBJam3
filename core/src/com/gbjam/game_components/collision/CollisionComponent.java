@@ -44,6 +44,28 @@ public class CollisionComponent {
 		filter[ColliderType.PLATFORM.ordinal()] = true;
 	}
 	
+	public CollisionComponent clone() {
+		CollisionComponent newComponent;
+		try {
+			newComponent = this.getClass().newInstance();
+			
+			newComponent.blockedLeft = blockedLeft;
+			newComponent.blockedRight = blockedRight;
+			newComponent.type = type;
+			newComponent.filter = filter;
+			
+			return newComponent;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public void update(Entity entity, ArrayList<Entity>entities) {
 		if(GBJam3.DEBUG) {
 			Polygon polygon = entity.getPolygon();

@@ -130,6 +130,7 @@ public class EntityFactory {
 					if(e.statusTicks != null)
 						for(StatusTick statusTick : e.statusTicks) {
 							e.entity.getStatusComponent().statusTicks[statusTick.type.ordinal()] = statusTick.tick;
+							e.entity.getStatusComponent().setStatus(StatusType.ALIVE, true);
 						}
 					if(e.attribs != null)
 						for(Attrib attrib : e.attribs) {
@@ -147,12 +148,19 @@ public class EntityFactory {
 		return null;
 	}
 	
-	public static Entity getRandomEnemy(int maxDifficulty, GameScreen world) {
+	public static Entity getRandomEnemy(float difficulty, GameScreen world) {
 		ArrayList<String> enemies = new ArrayList<String>();
 		
-		enemies.add("slime");
-		
-		int newEnemy = Utility.random(0, enemies.size());
-		return generate(enemies.get(newEnemy), world);
+		if(difficulty >= 1) {
+			enemies.add("slime");
+			
+			if(difficulty >= 2)	
+				enemies.add("darkknight");
+			
+			int newEnemy = Utility.random(0, enemies.size());
+			return generate(enemies.get(newEnemy), world);
+		}
+		else
+			return null;
 	}
 }
