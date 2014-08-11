@@ -92,13 +92,13 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": 5 }
+			{ "type": "ALIVE", "tick": 25 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "ATTACK", "val": 1 }
+			{ "type": "ATTACK", "val": 2 }
 		],
 		"entity": {
 			"dx": 1
@@ -110,7 +110,7 @@
 		"type": "slime",
 		"polygon": [ 1, 0, 1, 12, 15, 12, 15, 0 ],
 		"graphics": {
-			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+			"class": "com.gbjam.game_components.graphics.WalkingGraphicsComponent"
 		},
 		"collision": {
 			"class": "com.gbjam.game_components.collision.EnemyCollisionComponent",
@@ -149,7 +149,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": -1 }
+			{ "type": "ALIVE", "tick": 15 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -228,5 +228,45 @@
 			}
 		},
 		"template": "enemyBullet"
+	},
+	{
+		"class": "entity",
+		"colliderType": "ENEMY",
+		"type": "darkknight",
+		"polygon": [ 6, 0, 6, 20, 16, 20, 16, 0 ],
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.WalkingGraphicsComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.EnemyCollisionComponent",
+		},
+		"physics": {
+			"class": "com.gbjam.game_components.physics.CharacterPhysicsComponent"
+		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"statusTicks": [
+			{ "type": "RECOIL", "tick": 15 }
+		],
+		"attributes": {
+			"class": "com.gbjam.game_components.status.AttributeComponent"
+		},
+		"attribs": [
+			{ "type": "HEALTH", "val": 50 },
+			{ "type": "ATTACK", "val": 15 }
+		],
+		"input": {
+			"class": "com.gbjam.game_components.input.KnightInputComponent"
+		},
+		"generator": {
+			"class": "com.gbjam.game_components.generator.GeneratorComponent",
+			"soundName": "GUN_SOUND",
+			"offset": {
+				"x": 10,
+				"y": 7
+			}
+		},
+		"template": "bullet"
 	}
 ]

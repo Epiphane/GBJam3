@@ -4,9 +4,9 @@ import com.gbjam.Entity;
 import com.gbjam.game_components.status.StatusComponent.StatusType;
 
 public class PlayerGraphicsComponent extends GraphicsComponent {
-	private static final int TICKS_PER_WALK = 7;
-	private static final int TICKS_PER_IDLE = 14;
-	private static final int TICKS_PER_HURT = 5;
+	protected static final int TICKS_PER_WALK = 7;
+	protected static final int TICKS_PER_IDLE = 14;
+	protected static final int TICKS_PER_HURT = 5;
 
 	@Override
 	public void render(Entity object) {
@@ -15,8 +15,9 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 
 		if(object.is(StatusType.HURT)) {
 			setState(3, (int) object.getDX());
-			if (this.ticksSinceLastFrame >= TICKS_PER_HURT) 
+			if (this.ticksSinceLastFrame >= TICKS_PER_HURT) {
 				incrementFrame();
+			}
 		}
 		else {
 			if (object.getDX() == 0) {
@@ -39,6 +40,19 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 				setState(2, (int) object.getDX());
 				incrementFrame();
 			}
-		}	
+		}
+	}
+	
+	public GraphicsComponent clone() {
+		PlayerGraphicsComponent newComponent = new PlayerGraphicsComponent();
+		
+		newComponent.ticksSinceLastFrame = ticksSinceLastFrame;
+		newComponent.textures = textures;
+		newComponent.frame = frame;
+		newComponent.state = state;
+		newComponent.numFrames = numFrames;
+		newComponent.textureOffset = textureOffset;
+		
+		return newComponent;
 	}
 }
