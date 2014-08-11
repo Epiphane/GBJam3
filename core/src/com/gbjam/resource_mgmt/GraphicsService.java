@@ -44,6 +44,9 @@ public class GraphicsService {
 	}
 	
 	public static void loadMapRenderer(MapRenderer _renderer) {
+		if(batch != null)
+			batch.dispose();
+		
 		renderer = _renderer;
 		if(renderer != null) {
 			batch = (SpriteBatch) renderer.getSpriteBatch();

@@ -21,7 +21,7 @@ public class DoorCollisionComponent extends DynamicCollisionComponent {
 	protected void collideAnyDir(Polygon myPolygon, Entity entity,
 			Entity collider) {
 		if (collider.getCollisionComponent().type == ColliderType.PLAYER) {
-			GameScreen.goToBoss();
+			GameScreen.sharedScreen.goToBoss();
 		}
 		
 	}
