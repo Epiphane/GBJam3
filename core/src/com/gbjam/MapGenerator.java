@@ -104,12 +104,13 @@ public class MapGenerator {
 									horizLength ++;
 								}
 								
-								if(horizLength > 1 && tilesPlaced < platformOffsets.size() - 1) {
-									PointM nextPoint = platformOffsets.get(tilesPlaced).clone();
-									nextPoint.addPoint(x, y);
+								if(horizLength > 0 && tilesPlaced < platformOffsets.size() - 1) {
+									
+									PointM nextPoint = platformOffsets.get(tilesPlaced + 1).clone();
+									nextPoint.addPoint(randomX, randomY);
 									
 									if(lastY == nextPoint.y){ 
-										Entity newEnemy = EntityFactory.getRandomEnemy(((float) (x + Utility.random(0,  10)) / chunkSizeWidth) * 5, world);
+										Entity newEnemy = EntityFactory.getRandomEnemy(((float) (x + Utility.random(0,  10)) / chunkSizeWidth) * 30, world);
 										if(newEnemy != null) {
 											newEnemy.setX(pointToAdd.x * 16);
 											newEnemy.setY(pointToAdd.y * 16 + 16);

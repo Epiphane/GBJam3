@@ -84,6 +84,8 @@ public class Entity {
 			status = status.clone();
 		if(attributes != null)
 			attributes = attributes.clone();
+		if(generator != null)
+			generator = generator.clone();
 
 		newEntity.x = x;
 		newEntity.y = y;

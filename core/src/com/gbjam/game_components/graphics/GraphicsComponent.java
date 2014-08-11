@@ -63,7 +63,7 @@ public class GraphicsComponent {
 	 * Sets animation based on general state, and direction.
 	 * Preserves direction if only state is sent and direction == 0
 	 */
-	public void setState(int state, int direction) {
+	public void setState(int state, float direction) {
 		if(direction == 0) {
 			direction = this.state % 2 == 1 ? 1 : -1;
 		}
@@ -77,7 +77,8 @@ public class GraphicsComponent {
 				this.ticksSinceLastFrame = 0;
 				this.frame = 0;
 			}
-			this.state = state * 2 + direction;
+			
+			this.state = (int) (state * 2 + direction);
 		}
 	}
 

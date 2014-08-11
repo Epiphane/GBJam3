@@ -12,17 +12,13 @@ public class WalkingGraphicsComponent extends GraphicsComponent {
 		// Do check here to see what state the entity is in (hurt, moving, star-power, whatever)
 		super.render(object);
 		
-		if (object.getDX() == 0) {
-			setState(0, (int) object.getDX());
-			ticksSinceLastFrame = 0;
-		}
-		else if (object.getDX() > 0) {
-			setState(0, (int) object.getDX());
+		if (object.getDX() > 0) {
+			setState(0, object.getDX());
 			if (this.ticksSinceLastFrame >= TICKS_PER_WALK)
 				incrementFrame();
 		}
 		else if (object.getDX() < 0) {
-			setState(0, (int) object.getDX());
+			setState(0, object.getDX());
 			if (this.ticksSinceLastFrame >= TICKS_PER_WALK) 
 				incrementFrame();
 		}

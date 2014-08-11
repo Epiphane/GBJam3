@@ -151,12 +151,13 @@ public class EntityFactory {
 	public static Entity getRandomEnemy(float difficulty, GameScreen world) {
 		ArrayList<String> enemies = new ArrayList<String>();
 		
-		if(difficulty >= 1) {
+		if(difficulty >= 3 && difficulty < 6)
 			enemies.add("slime");
 			
-			if(difficulty >= 2)	
-				enemies.add("darkknight");
+		if(difficulty >= 6)	
+			enemies.add("darkknight");
 			
+		if(enemies.size() > 0) {
 			int newEnemy = Utility.random(0, enemies.size());
 			return generate(enemies.get(newEnemy), world);
 		}
