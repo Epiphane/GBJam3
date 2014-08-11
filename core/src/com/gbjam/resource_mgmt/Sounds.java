@@ -16,11 +16,14 @@ public class Sounds {
 
 	static private Sound gunSound, fireSound, machineGunSound, healSound;
 	static private Music music, musicIntro;
+	static private Music boss;
 	public static int[] weapons;
 
 	static public void load() throws IOException {
 		musicIntro = Gdx.audio.newMusic(Gdx.files.internal("sounds/songIntro.mp3"));
 		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/songLoop.mp3"));
+		
+		boss = Gdx.audio.newMusic(Gdx.files.internal("sounds/BOSS.mp3"));
 		
 		gunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
 		machineGunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
@@ -44,6 +47,13 @@ public class Sounds {
 	static public void startMusic() {
 		musicIntro.play();
 		musicIntro.setOnCompletionListener(new IntroListener());
+	}
+	
+	static public void startBossMusic() {
+		music.stop();
+		musicIntro.stop();
+		
+		boss.play();
 	}
 
 	static public void playSound(int soundID) {

@@ -145,7 +145,8 @@ public class GameScreen implements Screen {
 		addEntity(dragon);
 		
 		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
-		MapGenerator.initSection(map, 1, 3, 6, 14, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
+Sounds.startBossMusic();
+		MapGenerator.initSection(map, 1, 3, 6, 14, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this, true);
 
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);
