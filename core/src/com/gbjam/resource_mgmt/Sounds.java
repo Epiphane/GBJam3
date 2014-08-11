@@ -41,6 +41,7 @@ public class Sounds {
 		public void onCompletion(Music mus) {
 			mus.stop();
 			music.play();
+			music.setLooping(true);
 		}
 	}
 	
@@ -54,6 +55,7 @@ public class Sounds {
 		musicIntro.stop();
 		
 		boss.play();
+		boss.setLooping(true);
 	}
 
 	static public void playSound(int soundID) {
