@@ -91,7 +91,7 @@ public class GameScreen implements Screen {
 		player.setY(1*16);
 		addEntity(player);
 		
-		MapGenerator.initSection(map, 1, 3, 98, 11, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
+		MapGenerator.initSection(map, 1, 3, 98, 11, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this, true);
 		
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);

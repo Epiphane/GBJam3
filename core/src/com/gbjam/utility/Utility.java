@@ -97,13 +97,11 @@ public class Utility {
 		}
 	}
 	
-	public static boolean get(boolean[][] cells, int x, int y) {
+	public static void setCoordsToWhat(boolean[][] cells, int x, int y, boolean what) {
 		int height = cells[0].length;
 		int width = cells.length;
 		
 		if (x >= 0 && x < width && y >= 0 && y < height)
-			return cells[x][y];
-		
-		return false;
+			cells[x][y] = what;
 	}
 }

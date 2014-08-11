@@ -19,7 +19,7 @@ import com.gbjam.utility.Utility;
 public class MapGenerator {
 	public static void initSection(TiledMap map, int baseX, int baseY, 
 			int chunkSizeWidth, int chunkSizeHeight,
-			PointM playerPos, GameScreen world) {
+			PointM playerPos, GameScreen world, boolean reserveSpaceForDoor) {
 		// We can reuse this cell over and over to set up the drawable portion of the map
 		TiledMapTileLayer.Cell cells[][] = new TiledMapTileLayer.Cell[4][2];
 		for (int x = 0; x < cells.length; x++) {
@@ -37,6 +37,18 @@ public class MapGenerator {
 		boolean[][] occupiedCells = new boolean[chunkSizeWidth][chunkSizeHeight];
 		occupiedCells[playerPos.x][playerPos.y] = true;
 		occupiedCells[playerPos.x][playerPos.y + 1] = true;
+		occupiedCells[playerPos.x + 1][playerPos.y] = true;
+		occupiedCells[playerPos.x + 1][playerPos.y + 1] = true;
+		occupiedCells[playerPos.x + 2][playerPos.y] = true;
+		occupiedCells[playerPos.x + 2][playerPos.y + 1] = true;
+		
+		if (reserveSpaceForDoor) {
+			for (int ox = -5; ox < 1; ox++) {
+				for (int oy = -5; oy < 1; oy++) {
+					Utility.setCoordsToWhat(occupiedCells, chunkSizeWidth + ox, chunkSizeHeight + oy, true);
+				}
+			}
+		}
 		
 		for (int platformSize = 5; platformSize > 2; platformSize --) {
 
