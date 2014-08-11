@@ -10,6 +10,7 @@ public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
 	public static AnimationSheet fly, bullet, fire, darkknight;
 	public static AnimationSheet dungeonBrix;
+	public static AnimationSheet door;
 	
 	public static Texture healthbar, health, weapons[];
 	
@@ -23,6 +24,8 @@ public class Art {
 		darkknight = new AnimationSheet("darkknight.png", 2, 2);
 		
 		dungeonBrix = new AnimationSheet("bg/brick_bg.png", 6, 6, 6);
+		
+		door = new AnimationSheet("bg/end_door.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
 		
@@ -68,6 +71,8 @@ public class Art {
 			return Art.dragon;
 		else if(type.equals("darkknight"))
 			return Art.darkknight;
+		else if(type.equals("door"))
+			return Art.door;
 		else
 			return Art.fly;
 	}

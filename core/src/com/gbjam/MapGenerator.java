@@ -146,4 +146,21 @@ public class MapGenerator {
 			}
 		}
 	}
+	
+	/**
+	 * Make a ending door at the bottom right corner
+	 */
+	public static void initDoor(TiledMap map, int baseX, int baseY, 
+			int chunkSizeWidth, int chunkSizeHeight) {
+		// We can reuse this cell over and over to set up the drawable portion of the map
+		TiledMapTileLayer.Cell doorCell = new TiledMapTileLayer.Cell();
+		doorCell.setTile(new StaticTiledMapTile(Art.door.textures[0][0]));
+
+		TiledMapTileLayer drawingLayer = (TiledMapTileLayer) map.getLayers()
+				.get("Foreground");
+		MapLayer wallLayer = map.getLayers().get("Walls");
+		MapObjects objects = wallLayer.getObjects();
+		
+		drawingLayer.setCell(2, 2, doorCell);
+	}
 }

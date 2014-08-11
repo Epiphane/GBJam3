@@ -268,5 +268,16 @@
 			}
 		},
 		"template": "enemyBullet"
+	},
+	{
+		"class": "entity",
+		"colliderType": "DOOR",
+		"type": "door",
+		"collision": {
+			"class": "com.gbjam.game_components.collision.DoorCollisionComponent"
+		},
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.DragonGraphicsComponent"
+		},
 	}
 ]
