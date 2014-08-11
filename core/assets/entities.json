@@ -267,6 +267,6 @@
 				"y": 7
 			}
 		},
-		"template": "bullet"
+		"template": "enemyBullet"
 	}
 ]

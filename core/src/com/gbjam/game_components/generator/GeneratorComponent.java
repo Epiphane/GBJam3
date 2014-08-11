@@ -71,6 +71,7 @@ public class GeneratorComponent {
 		if(soundToPlay != Sounds.NO_SOUND) {
 			Sounds.playSound(soundToPlay);
 		}
+		System.out.println(template.getX());
 		Entity clone = template.clone();
 			
 		clone.setX(clone.getX() + offset.getX());

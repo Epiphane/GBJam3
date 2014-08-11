@@ -16,9 +16,20 @@ public class AIInputComponent extends InputComponent {
 	}
 	
 	public InputComponent clone() {
-		AIInputComponent newComponent = new AIInputComponent();
+		AIInputComponent newComponent;
+		try {
+			newComponent = this.getClass().newInstance();
+			
+			return newComponent;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return newComponent;
+		return null;
 	}
 	
 	public void update(Entity object) {

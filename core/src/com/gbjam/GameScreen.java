@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
 	
 	public void render(float delta) {
 		GraphicsService.begin();
-
+		
 		float offsetX = GraphicsService.getCamera().position.x;
 		float offsetY = GraphicsService.getCamera().position.y;
 		
