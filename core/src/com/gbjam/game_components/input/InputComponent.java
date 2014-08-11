@@ -11,4 +11,9 @@ public class InputComponent {
 	public InputComponent clone() {
 		return this;
 	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
 }

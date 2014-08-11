@@ -34,7 +34,7 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 100 }
+			{ "type": "HEALTH", "val": 20 }
 		],
 		"input": {
 			"class": "com.gbjam.game_components.input.PlayerInputComponent"
@@ -92,7 +92,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": 25 }
+			{ "type": "ALIVE", "tick": 50 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -129,7 +129,8 @@
 		},
 		"attribs": [
 			{ "type": "HEALTH", "val": 25 },
-			{ "type": "ATTACK", "val": 10 }
+			{ "type": "ATTACK", "val": 10 },
+			{ "type": "HEART", "val": 1 }
 		]
 	},
 	{
@@ -149,7 +150,7 @@
 			"class": "com.gbjam.game_components.status.StatusComponent"
 		},
 		"statusTicks": [
-			{ "type": "ALIVE", "tick": 15 }
+			{ "type": "ALIVE", "tick": 30 }
 		],
 		"attributes": {
 			"class": "com.gbjam.game_components.status.AttributeComponent"
@@ -216,7 +217,7 @@
 			"class": "com.gbjam.game_components.status.AttributeComponent"
 		},
 		"attribs": [
-			{ "type": "HEALTH", "val": 1500 },
+			{ "type": "HEALTH", "val": 1100 },
 			{ "type": "ATTACK", "val": 50 }
 		],
 		"generator": {
@@ -254,7 +255,8 @@
 		},
 		"attribs": [
 			{ "type": "HEALTH", "val": 50 },
-			{ "type": "ATTACK", "val": 15 }
+			{ "type": "ATTACK", "val": 15 },
+			{ "type": "HEART", "val": 2 }
 		],
 		"input": {
 			"class": "com.gbjam.game_components.input.KnightInputComponent"
@@ -279,5 +281,22 @@
 		"graphics": {
 			"class": "com.gbjam.game_components.graphics.DragonGraphicsComponent"
 		},
+	},
+	{
+		"class": "entity",
+		"colliderType": "POWERUP",
+		"type": "heart",
+		"input": {
+			"class": "com.gbjam.game_components.input.HeartInputComponent"
+		},
+		"collision": {
+			"class": "com.gbjam.game_components.collision.HeartCollisionComponent"
+		},
+		"status": {
+			"class": "com.gbjam.game_components.status.StatusComponent"
+		},
+		"graphics": {
+			"class": "com.gbjam.game_components.graphics.GraphicsComponent"
+		}
 	}
 ]

@@ -11,7 +11,7 @@ public class KnightInputComponent extends AIInputComponent {
 		float dx = Math.abs(GameScreen.player.getX() - object.getX());
 		float dy = Math.abs(GameScreen.player.getY() - object.getY());
 		
-		object.setGenerate(dy < 16 && dx < 128);
+		object.setGenerate(dy < 16 && dx < 48);
 		
 		if(object.generate()) {
 			if(GameScreen.player.getX() > object.getX()) {

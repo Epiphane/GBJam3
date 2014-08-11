@@ -10,14 +10,16 @@ public class Sounds {
 	public static final int GUN_SOUND = 1;
 	public static final int FIRE_SOUND = 2;
 	public static final int MACH_GUN_SOUND = 3;
+	public static final int HEAL_SOUND = 4;
 
-	static private Sound gunSound, fireSound, machineGunSound;
+	static private Sound gunSound, fireSound, machineGunSound, healSound;
 	public static int[] weapons;
 
 	static public void load() throws IOException {
 		gunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
 		machineGunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
-		fireSound = Gdx.audio.newSound(Gdx.files.internal("sounds/fire.wav"));
+		fireSound = Gdx.audio.newSound(Gdx.files.internal("sounds/fire.mp3"));
+		healSound = Gdx.audio.newSound(Gdx.files.internal("sounds/heal.mp3"));
 		
 		weapons = new int[3];
 		weapons[0] = MACH_GUN_SOUND;
@@ -36,6 +38,9 @@ public class Sounds {
 		case MACH_GUN_SOUND:
 			machineGunSound.play();
 			break;
+		case HEAL_SOUND:
+			healSound.play();
+			break;
 		default:
 			// no sound
 			break;
@@ -46,6 +51,7 @@ public class Sounds {
 		gunSound.dispose();
 		machineGunSound.dispose();
 		fireSound.dispose();
+		healSound.dispose();
 	}
 
 	public static int getSound(String soundName) {
