@@ -19,6 +19,7 @@ import com.gbjam.utility.PointM;
 
 public class GameScreen implements Screen {
 	public static Entity player;
+	public static GameScreen sharedScreen;
 	
 	private ArrayList<Entity> entities, newEntities;
 	
@@ -67,17 +68,28 @@ public class GameScreen implements Screen {
 
 	public void show() {
 		InputService.setKeyCallback(Keys.ESCAPE, new ExitCommand());
+
+		TiledMap map = new TmxMapLoader().load("maps/corridor.tmx");
 		
 		entities = new ArrayList<Entity>();
 		newEntities = new ArrayList<Entity>();
 		
+		Entity endDoor = EntityFactory.generate("door", this);
+
+		for(MapObject object : map.getLayers().get("Door").getObjects()) {
+			if(object instanceof PolygonMapObject) {
+				endDoor.setPolygon(((PolygonMapObject) object).getPolygon());
+				endDoor.setX(Float.parseFloat(object.getProperties().get("x").toString()));
+				endDoor.setY(Float.parseFloat(object.getProperties().get("y").toString()));
+				addEntity(endDoor);
+			}
+		}
+		
 		// Main Character
 		player = EntityFactory.generate("player", this);
-		player.setX(1*16);
+		player.setX(90*16);
 		player.setY(1*16);
 		addEntity(player);
-		
-		TiledMap map = new TmxMapLoader().load("maps/corridor.tmx");
 		
 		MapGenerator.initSection(map, 1, 3, 98, 11, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
 		
@@ -94,8 +106,29 @@ public class GameScreen implements Screen {
 				addEntity(platform.clone());
 			}
 		}
+		
+		sharedScreen = this;
 	}
 
+	public static void goToBoss() {
+
+		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
+
+		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
+		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);
+		GraphicsService.setMapHeight(((Integer) map.getProperties().get("height")) * 16);
+
+		Entity platform = EntityFactory.generate("platform", GameScreen.sharedScreen);
+		for(MapObject object : map.getLayers().get("Walls").getObjects()) {
+			if(object instanceof PolygonMapObject) {
+				platform.setPolygon(((PolygonMapObject) object).getPolygon());
+				platform.setX(Float.parseFloat(object.getProperties().get("x").toString()));
+				platform.setY(Float.parseFloat(object.getProperties().get("y").toString()));
+				GameScreen.sharedScreen.addEntity(platform.clone());
+			}
+		}
+	}
+	
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
