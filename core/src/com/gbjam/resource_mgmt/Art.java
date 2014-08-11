@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Art {
 	public static AnimationSheet character, platform, slime, dragon;
-	public static AnimationSheet fly, bullet, fire, darkknight;
+	public static AnimationSheet fly, bullet, fire, darkknight, heart;
 	public static AnimationSheet dungeonBrix;
 	public static AnimationSheet door;
 	
@@ -22,6 +22,7 @@ public class Art {
 		fire = new AnimationSheet("weapon/fire.png", 1);
 		platform = new AnimationSheet("bg/platform.png", 4, 4);
 		darkknight = new AnimationSheet("darkknight.png", 2, 2);
+		heart = new AnimationSheet("heart.png", 1);
 		
 		dungeonBrix = new AnimationSheet("bg/brick_bg.png", 6, 6, 6);
 		
@@ -69,6 +70,8 @@ public class Art {
 			return Art.fire;
 		else if(type.equals("dragon"))
 			return Art.dragon;
+		else if(type.equals("heart"))
+			return Art.heart;
 		else if(type.equals("darkknight"))
 			return Art.darkknight;
 		else if(type.equals("door"))

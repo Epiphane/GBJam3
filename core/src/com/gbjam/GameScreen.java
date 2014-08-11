@@ -61,6 +61,13 @@ public class GameScreen implements Screen {
 		}
 		
 		for(Entity e : toRemove) {
+			if(e.getAttribute(AttribType.HEART) > 0) {
+				Entity heart = EntityFactory.generate("heart", this);
+				heart.setX(e.getX() + 4);
+				heart.setY(e.getY() + 4);
+				addEntity(heart);
+			}
+			
 			entities.remove(e);
 		}
 		
@@ -94,7 +101,7 @@ public class GameScreen implements Screen {
 		
 		// Main Character
 		player = EntityFactory.generate("player", this);
-		player.setX(90*16);
+		player.setX(1*16);
 		player.setY(1*16);
 		addEntity(player);
 		
@@ -124,10 +131,15 @@ public class GameScreen implements Screen {
 	public void initBoss() {
 		entities = new ArrayList<Entity>();
 		newEntities = new ArrayList<Entity>();
-		
+
 		player.setX(2*16);
-		player.setY(1*16);
 		addEntity(player);
+
+		// Main Character
+		Entity dragon = EntityFactory.generate("dragon", this);
+		dragon.setX(98);
+		dragon.setY(30);
+		addEntity(dragon);
 		
 		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
 		MapGenerator.initSection(map, 1, 3, 6, 14, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);

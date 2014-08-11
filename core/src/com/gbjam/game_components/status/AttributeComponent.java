@@ -3,7 +3,7 @@ package com.gbjam.game_components.status;
 
 public class AttributeComponent {
 	public enum AttribType {
-		HEALTH, ATTACK
+		HEALTH, ATTACK, HEART
 	}
 	
 	private int attributes[];
