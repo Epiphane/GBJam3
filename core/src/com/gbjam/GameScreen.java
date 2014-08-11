@@ -15,6 +15,7 @@ import com.gbjam.game_components.status.StatusComponent.StatusType;
 import com.gbjam.resource_mgmt.Art;
 import com.gbjam.resource_mgmt.EntityFactory;
 import com.gbjam.resource_mgmt.GraphicsService;
+import com.gbjam.resource_mgmt.Sounds;
 import com.gbjam.utility.PointM;
 
 public class GameScreen implements Screen {
@@ -122,6 +123,8 @@ public class GameScreen implements Screen {
 		}
 		
 		sharedScreen = this;
+		
+		Sounds.startMusic();
 	}
 
 	public void goToBoss() {

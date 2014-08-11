@@ -3,6 +3,8 @@ package com.gbjam.resource_mgmt;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import com.badlogic.gdx.audio.Sound;
 
 public class Sounds {
@@ -13,9 +15,13 @@ public class Sounds {
 	public static final int HEAL_SOUND = 4;
 
 	static private Sound gunSound, fireSound, machineGunSound, healSound;
+	static private Music music, musicIntro;
 	public static int[] weapons;
 
 	static public void load() throws IOException {
+		musicIntro = Gdx.audio.newMusic(Gdx.files.internal("sounds/songIntro.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/songLoop.mp3"));
+		
 		gunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
 		machineGunSound = Gdx.audio.newSound(Gdx.files.internal("sounds/machine.mp3"));
 		fireSound = Gdx.audio.newSound(Gdx.files.internal("sounds/fire.mp3"));
@@ -25,6 +31,19 @@ public class Sounds {
 		weapons[0] = MACH_GUN_SOUND;
 		weapons[1] = FIRE_SOUND;
 		weapons[2] = GUN_SOUND;
+	}
+	
+	private static class IntroListener implements OnCompletionListener {
+		@Override
+		public void onCompletion(Music mus) {
+			mus.stop();
+			music.play();
+		}
+	}
+	
+	static public void startMusic() {
+		musicIntro.play();
+		musicIntro.setOnCompletionListener(new IntroListener());
 	}
 
 	static public void playSound(int soundID) {
