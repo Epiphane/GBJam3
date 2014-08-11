@@ -58,20 +58,49 @@ public class GeneratorComponent {
 		return offset;
 	}
 	
+	public GeneratorComponent clone() {
+		GeneratorComponent newComponent;
+		try {
+			newComponent = this.getClass().newInstance();
+			
+			newComponent.template = this.template.clone();
+			newComponent.world = this.world;
+			newComponent.soundToPlay = this.soundToPlay;
+			newComponent.soundName = this.soundName;
+			newComponent.offset = this.offset;
+			
+			return newComponent;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void update(Entity other) {
 		if(other.generate()) {
 			if(!other.is(StatusType.RECOIL)) {
+				if((other.getDX() > 0) != (template.getDX() > 0) && other.getDX() != 0) {
+						template.setDX(template.getDX() * -1);
+				}
+				
 				generate(other);
 				other.setStatus(StatusType.RECOIL, true);
 			}
 		}
+		
+		template.setX(other.getX());
+		template.setY(other.getY());
 	}
 	
 	public void generate(Entity other) {
 		if(soundToPlay != Sounds.NO_SOUND) {
 			Sounds.playSound(soundToPlay);
 		}
-		System.out.println(template.getX());
+		
 		Entity clone = template.clone();
 			
 		clone.setX(clone.getX() + offset.getX());
