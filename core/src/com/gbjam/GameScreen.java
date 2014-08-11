@@ -20,6 +20,7 @@ import com.gbjam.utility.PointM;
 public class GameScreen implements Screen {
 	public static Entity player;
 	public static GameScreen sharedScreen;
+	private boolean goToBoss;
 	
 	private ArrayList<Entity> entities, newEntities;
 	
@@ -32,6 +33,12 @@ public class GameScreen implements Screen {
 	}
 	
 	public void render(float delta) {
+		if(goToBoss) {
+			initBoss();
+			goToBoss = false;
+			return;
+		}
+		
 		GraphicsService.begin();
 		
 		float offsetX = GraphicsService.getCamera().position.x;
@@ -110,9 +117,20 @@ public class GameScreen implements Screen {
 		sharedScreen = this;
 	}
 
-	public static void goToBoss() {
-
+	public void goToBoss() {
+		goToBoss = true;
+	}
+	
+	public void initBoss() {
+		entities = new ArrayList<Entity>();
+		newEntities = new ArrayList<Entity>();
+		
+		player.setX(2*16);
+		player.setY(1*16);
+		addEntity(player);
+		
 		TiledMap map = new TmxMapLoader().load("maps/boss_random.tmx");
+		MapGenerator.initSection(map, 1, 3, 6, 14, new PointM((int) player.getX() / 16, (int) player.getY() / 16), this);
 
 		GraphicsService.loadMapRenderer(new MapRenderer(map, 1));
 		GraphicsService.setMapWidth(((Integer) map.getProperties().get("width")) * 16);
