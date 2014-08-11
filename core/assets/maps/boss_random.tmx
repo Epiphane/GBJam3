@@ -3,9 +3,12 @@
  <tileset firstgid="1" name="butts" tilewidth="16" tileheight="16">
   <image source="../bg/test_tiles.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="5" name="bricks" tilewidth="16" tileheight="16">
+  <image source="../bg/brick_bg.png" width="96" height="48"/>
+ </tileset>
  <layer name="Foreground" width="10" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYCQSMxGBR9WNqoOpIwYDAGlPAR8=
+   eJzjYGBg4ARiLiDmwMPmA2JWIGYDYnY8bBEg5gZiHiDmxcMGmSkIxEJALIyHPWovgk/IXhifkL0wPrq9xPhDhEh/cDDgT08wNgASVweV
   </data>
  </layer>
  <objectgroup name="Walls" width="10" height="16">

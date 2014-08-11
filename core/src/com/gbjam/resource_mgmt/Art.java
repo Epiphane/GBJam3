@@ -12,6 +12,8 @@ public class Art {
 	public static AnimationSheet dungeonBrix;
 	public static AnimationSheet door;
 	
+	public static Texture endScreen;
+	
 	public static Texture healthbar, health, weapons[];
 	
 	static public void load() throws IOException {
@@ -29,6 +31,8 @@ public class Art {
 		door = new AnimationSheet("bg/end_door.png", 1);
 		
 		fly = new AnimationSheet("fly.png", 2, 2);
+		
+		endScreen = new Texture(Gdx.files.internal("bg/end_screen.png"));
 		
 		healthbar = new Texture(Gdx.files.internal("healthbar.png"));
 		health = new Texture(Gdx.files.internal("health.png"));
